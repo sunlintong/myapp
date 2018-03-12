@@ -29,7 +29,7 @@ func (rc *RegisterController) Post() {
 	user.RegisterTime = time.Now().Unix()
 
 	//输入不完整
-	if name == "" || password == "" || userType == ""{		
+	if user.Ileagel() {		
 		rc.TplName = "inputInvalid.tpl"
 		glog.Infof("a user register wrong,his info :%v",user)
 	//用户名重复
@@ -40,8 +40,8 @@ func (rc *RegisterController) Post() {
 	}else if err := db.CreateUser(user); err != nil {
 		glog.Errorln(err)
 	}else{
-		glog.Infof("a user register success,his info :%v",user)
-		rc.TplName = "signupSuccess.tpl"
-	}	
+		glog.Infof("a user register success,his info :%v", user)
+		rc.Redirect("/main", 302)
+	}
 }
 

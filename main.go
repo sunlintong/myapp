@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
 	_ "myapp/routers"
+
+	"github.com/astaxie/beego"
 	//	"myapp/test"
 )
 
@@ -13,5 +14,7 @@ func main() {
 	//	test.TestStartContainer()
 	//	test.TestStopContainer()
 	//	test.TestStopAllContainers()
+	
+	//	StaticDir[] = "assets"
 	beego.Run()
 }

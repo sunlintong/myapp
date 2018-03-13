@@ -104,14 +104,12 @@
             <tbody>
 			
 			<script>
-			$.getJSON("/user-data", function(users){
+			$.getJSON("/user/data", function(users){
 				$.each(users, function(key, user){
-					document.write(
 					"<tr><td>"+key+"</td><td>"+user[0]+"</td><td>"+user[1]+"</td><td>"+user[2]+"</td></tr>"
-					);
 				})
 			})
-			</script>
+			</script>	
 						
 		
             

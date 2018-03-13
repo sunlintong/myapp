@@ -16,6 +16,8 @@ func init() {
 		beego.AppConfig.String("mysqldatabase") + "?charset=utf8"
 
 	orm.RegisterDataBase("default", "mysql", sql, 30)
+	orm.RegisterModel(new(User), new(Log))
+	orm.RunSyncdb("default", false, true)
 }
 
 var (

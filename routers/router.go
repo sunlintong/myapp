@@ -11,5 +11,6 @@ func init() {
 	beego.Router("/admin-index", &controllers.AdminIndexController{})
 
 
-	beego.Router("/user-data", &controllers.UserDataController{}, "get:GetUsers")
+	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")
+	beego.Router("/user/log", &controllers.UserLogController{}, "get:GetUserLog")
 }

@@ -2,23 +2,17 @@ package db
 
 import (
 	"github.com/astaxie/beego/orm"
-	"time"
 )
 
 // 用户的数据库表
 type User struct {
-	ID           int    `orm"column(id);pk;auto"`
+	ID           int    `orm:"column(id);pk;auto"`
 	Name         string `orm:"column(name)"`
 	Password     string `orm:"column(password)"`
 	UserType     string `orm:"column(userType)"`
 	RegisterTime int64  `orm:"column(register_time)"`
 }
 
-// 创建表User
-func init() {
-	orm.RegisterModel(new(User))
-	orm.RunSyncdb("default", false, true)
-}
 
 func (u *User) Ileagel() bool {
 	return u.Name == "" || u.Password == "" || u.UserType == ""
@@ -66,7 +60,3 @@ func GetAllUsers() ([]*User, error) {
 	return users, nil
 }
 
-// GetTime ...
-func (u *User) GetTime() string {
-	return time.Unix(u.RegisterTime, 0).Format("2006-01-02 15:04:05")
-}

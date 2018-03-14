@@ -1,4 +1,4 @@
-package modles
+package local
 
 import (
 	"github.com/docker/docker/api/types"

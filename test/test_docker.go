@@ -1,7 +1,7 @@
 package test
 
 import (
-	"myapp/modles"
+	"myapp/modles/local"
 	"github.com/golang/glog"
 	"fmt"
 	"os"
@@ -11,7 +11,7 @@ import (
 //测试modles中的GetImages()
 func TestGetImages() {
 	fmt.Println("-------------测试GetImages(),本机镜像列表如下：------------")
-	images, err := modles.GetImages()
+	images, err := local.GetImages()
 	if err != nil {
 		glog.Infoln(err)
 	}
@@ -24,7 +24,7 @@ func TestGetImages() {
 //测试modles中的GetContainers()
 func TestGetRunningContainers() {
 	fmt.Println("-------测试GetContainers(),本机正在运行的容器列表如下：---------")
-	containers, err := modles.GetRunningContainers()
+	containers, err := local.GetRunningContainers()
 	if err != nil {
 		glog.Infoln(err)
 	}
@@ -37,7 +37,7 @@ func TestGetRunningContainers() {
 //测试modles中的PullImage()
 func TestPullImage() {
 	fmt.Println("-------测试PullImage()----------------------------------------")
-	out, err := modles.PullImage("alpine")
+	out, err := local.PullImage("alpine")
 	if err != nil {
 		glog.Infoln(err)
 	}
@@ -51,7 +51,7 @@ func TestPullImage() {
 // 测试modle中的StartContainer
 func TestStartContainer() {
 	fmt.Println("-------测试StartContainer()----------------------------------------")
-	err := modles.StartContainer("6b65ebe15a1e")
+	err := local.StartContainer("6b65ebe15a1e")
 	if err != nil {
 		glog.Infoln(err)
 	}
@@ -61,7 +61,7 @@ func TestStartContainer() {
 // 测试modle中的StopContainer
 func TestStopContainer() {
 	fmt.Println("-------测试StopContainer()----------------------------------------")
-	err := modles.StopContainer("167ffa211dfa")
+	err := local.StopContainer("167ffa211dfa")
 	if err != nil {
 		glog.Infoln(err)
 	}
@@ -71,7 +71,7 @@ func TestStopContainer() {
 // 测试StopAllContainers
 func TestStopAllContainers() {
 	fmt.Println("-----------测试StopAllContainers--------------------------------")
-	err := modles.StopAllContainers()
+	err := local.StopAllContainers()
 	if err != nil {
 		glog.Infoln(err)
 	}

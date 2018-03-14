@@ -1,4 +1,4 @@
-package modles
+package local
 
 import (
 	"github.com/docker/docker/client"
@@ -20,12 +20,4 @@ func GetClient() *client.Client {
 		}
 	})
 	return globalClient
-}
-
-func GetRemoteClient(host string)(*client.Client) {
-	cli, err := client.NewClient(host, "1.24",nil,nil)
-	if err != nil {
-		panic(err)
-	}
-	return cli
 }

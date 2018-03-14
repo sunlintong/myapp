@@ -106,25 +106,14 @@
 			<script>
 			$.getJSON("/user/data", function(users){
 				$.each(users, function(key, user){
-					"<tr><td>"+key+"</td><td>"+user[0]+"</td><td>"+user[1]+"</td><td>"+user[2]+"</td></tr>"
+					document.write("<td>"+user[0]+"</td>")
 				})
 			})
 			</script>	
 						
 		
             
-            <tr><td>2</td><td>风清扬</td><td><a href="#">公司LOGO设计</a> </td><td><span class="am-badge am-badge-danger">+2</span></td>
-              <td>
-                <div class="am-dropdown" data-am-dropdown>
-                  <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                  <ul class="am-dropdown-content">
-                    <li><a href="#">1. 编辑</a></li>
-                    <li><a href="#">2. 下载</a></li>
-                    <li><a href="#">3. 删除</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
+            <tr><td>2</td><td>风清扬</td><td><a href="#">公司LOGO设计</a> </td><td><span class="am-badge am-badge-danger">+2</span></td></tr>
             <tr><td>3</td><td>詹姆斯</td><td><a href="#">开发一款业务数据软件</a></td><td><span class="am-badge am-badge-warning">+10</span></td>
               <td>
                 <div class="am-dropdown" data-am-dropdown>

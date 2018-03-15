@@ -23,16 +23,15 @@ func (ic *ImageController) GetAllImages() {
 	}
 	_ = db.InsertLog(l)
 
-	var ret [][5]string
+	var ret [][4]string
 	for _, image := range images {
-		var data [5]string
-		data[0] = fmt.Sprint(image.VirtualSize)
+		var data [4]string
 		for _, rt := range image.RepoTags {
-			data[1] += rt
+			data[0] += rt
 		}
-		data[2] = image.ID
-		data[3] = ic.GetTimeString(image.Created)
-		data[4] = fmt.Sprint(image.Size)
+		data[1] = image.ID
+		data[2] = ic.GetTimeString(image.Created)
+		data[3] = fmt.Sprint(float32(image.Size)/1024) + " MB"
 		ret = append(ret, data)
 	}
 

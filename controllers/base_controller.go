@@ -5,10 +5,12 @@ import (
 	"crypto/md5"
 	"github.com/astaxie/beego"
 	"time"
+	"myapp/types"
 )
 
 type BaseController struct {
 	beego.Controller
+	User types.User
 }
 
 // 密码加密函数，将密码加盐再MD5

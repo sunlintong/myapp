@@ -11,7 +11,7 @@ type ContainerController struct {
 	BaseController
 }
 
-func (cc *ContainerController) GetAllContainers() {
+func (cc *ContainerController) GetAllContainers() {	
 	containers, err := local.GetRunningContainers()
 	l := new(db.Log)
 	l.Name = "unknown"

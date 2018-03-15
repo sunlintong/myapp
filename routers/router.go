@@ -13,4 +13,6 @@ func init() {
 
 	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")
 	beego.Router("/user/log", &controllers.UserLogController{}, "get:GetUserLog")
+
+	beego.Router("/container", &controllers.ContainerController{}, "get:GetAllContainers")
 }

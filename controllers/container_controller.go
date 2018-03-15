@@ -26,7 +26,9 @@ func (cc *ContainerController) GetAllContainers() {
 	for _, container := range containers {
 		var data [4]string
 		data[0] = container.ID
-		data[1] = container.Names[0]
+		for _, str := range container.Names {
+			data[1] += str
+		}
 		data[2] = container.Image
 		data[3] = container.Status
 		ret = append(ret, data)

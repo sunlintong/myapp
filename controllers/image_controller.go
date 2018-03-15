@@ -21,19 +21,18 @@ func (ic *ImageController) GetAllImages() {
 	}else {
 		l.Log = "get all images succeed"
 	}
+	_ = db.InsertLog(l)
 
 	var ret [][5]string
 	for _, image := range images {
 		var data [5]string
-		for _, rd := range image.RepoDigests {
-			data[0] += rd
-		}
+		data[0] = fmt.Sprint(image.VirtualSize)
 		for _, rt := range image.RepoTags {
 			data[1] += rt
 		}
 		data[2] = image.ID
 		data[3] = ic.GetTimeString(image.Created)
-		data[4] = string(image.Size)
+		data[4] = fmt.Sprint(image.Size)
 		ret = append(ret, data)
 	}
 

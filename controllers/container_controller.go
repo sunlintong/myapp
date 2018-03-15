@@ -21,16 +21,22 @@ func (cc *ContainerController) GetAllContainers() {
 	}else {
 		l.Log = "get all containers succeed"
 	}
-
-	var ret [][4]string
+	_ = db.InsertLog(l)
+	
+	var ret [][7]string
 	for _, container := range containers {
-		var data [4]string
+		var data [7]string
 		data[0] = container.ID
+		data[1] = container.Image
+		data[2] = container.Command
+		data[3] = cc.GetTimeString(container.Created)
+		data[4] = container.Status
+		data[5] = fmt.Sprint(container.Ports)
 		for _, str := range container.Names {
-			data[1] += str
+			data[6] += str
 		}
-		data[2] = container.Image
-		data[3] = container.Status
+
+		
 		ret = append(ret, data)
 	}
 

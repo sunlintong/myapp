@@ -9,6 +9,7 @@ import (
 func init() {
 	beego.Router("/register", &controllers.RegisterController{})
 	beego.Router("/admin-index", &controllers.AdminIndexController{})
+	beego.Router("/admin-image", &controllers.AdminImageController{})
 
 
 	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")

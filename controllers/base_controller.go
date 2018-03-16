@@ -21,6 +21,7 @@ func (bc *BaseController) Encode(password string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
+// 将unix时间戳格式化为字符串
 func (bc *BaseController) GetTimeString(now int64) string {
 	return time.Unix(now, 0).Format("2006-01-02 15:04:05")
 }

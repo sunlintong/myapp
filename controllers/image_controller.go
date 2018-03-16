@@ -11,6 +11,10 @@ type ImageController struct {
 	BaseController
 }
 
+func (ic BaseController) Get() {
+	ic.TplName = "image.html"
+}
+
 func (ic *ImageController) GetAllImages() {
 	l := new(db.Log)
 	l.Name = "Unknown"

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"myapp/modles/db"
 	"github.com/golang/glog"
 	"time"
@@ -35,6 +36,7 @@ func (udc *UserDataController) GetUserData() {
 		data[1] = user.UserType
 		data[2] = udc.GetTimeString(user.RegisterTime)
 		ret = append(ret, data)
+		fmt.Println(user.ID, data)
 	}
 
 	udc.Data["json"] = ret

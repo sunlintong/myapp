@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>myapp</title>
-  <meta name="description" content="这是一个 help 页面">
-  <meta name="keywords" content="help">
+  <meta name="description" content="这是一个 gallery 页面">
+  <meta name="keywords" content="gallery">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <link rel="icon" type="admin-image/png" href="assets/i/favicon.png">
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
@@ -85,46 +85,48 @@
   </div>
   <!-- sidebar end -->
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="admin-content-body">
-      <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf">
-          <strong class="am-text-primary am-text-lg">镜像管理</strong> /
-          <small>镜像列表</small>
+    <!-- content start -->
+    <div class="admin-content">
+      <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+          <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">容器管理</strong> /
+            <small>容器列表</small>
+          </div>
         </div>
-      </div>
-
-      <div class="am-g">
-        <div class="am-u-sm-12">
-          <table class="am-table am-table-bd am-table-striped admin-content-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>镜像仓库名：镜像标签</th>
-                <th>镜像ID</th>
-                <th>创建时间</th>
-                <th>镜像大小</th>
-                <th>管理</th>
-              </tr>
-            </thead>
-            <tbody id="imagelist">
-
-            </tbody>
-          </table>
+  
+        <div class="am-g">
+          <div class="am-u-sm-12">
+            <table class="am-table am-table-bd am-table-striped admin-content-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>容器ID</th>
+                  <th>源镜像</th>
+                  <th>CMD命令</th>
+                  <th>创建时间</th>
+                  <th>端口映射</th>
+                  <th>容器名</th>
+                </tr>
+              </thead>
+              <tbody id="containerlist">
+  
+              </tbody>
+            </table>
+          </div>
         </div>
+  
+        <hr/>
       </div>
-
-      <hr/>
+  
+      <footer class="admin-content-footer">
+        <hr>
+        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+      </footer>
+  
     </div>
+    <!-- content end -->
 
-    <footer class="admin-content-footer">
-      <hr>
-      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
-    </footer>
-
-  </div>
-  <!-- content end -->
 
 </div>
 
@@ -151,24 +153,25 @@
 
 
 
-
 <script>
-  $.getJSON("/image", function (data) {
+  $.getJSON("/container", function (data) {
     var items = [];
     var htmltext = "";
-    $.each(data, function (key, image) {
+    $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + image[0] + '</td>' +
-        '<td>' + '<a href="#">' + image[1] + '</a>' + '</td>' +
-        '<td>' + image[2] + '</td>' +
-        '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
+        '<td>' + container[0] + '</td>' +
+        '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
+        '<td>' + container[2] + '</td>' +
+        '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
+        '<td>' + container[4] + '</td>' +
+        '<td>' + container[5] + '</td>' +
         '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
         '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
         '<span class="am-icon-cog">' + '</span>' + 
         '<span class="am-icon-caret-down">' + '</span>' + 
         '</button>' + '</td>' + '</tr>';
     })
-    document.getElementById("imagelist").innerHTML = htmltext;
+    document.getElementById("containerlist").innerHTML = htmltext;
   })
 </script>

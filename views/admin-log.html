@@ -142,10 +142,10 @@
     $.getJSON("/user/log", function (data) {
       var htmltext = "";
       $.each(data, function (key, log) {
-        htmltext = htmltext + '<tr>'
+        htmltext = htmltext + '<br>'
           '<span class="am-text-success">' + log[0] + '</span>' +
           '<span class="am-text-danger">' + log[1] + '</span>' +
-          '<span class="am-text-success">' + log[2] + '</span>' + '</tr>';
+          '<span class="am-text-success">' + log[2] + '</span>' + '</br>';
       })
       document.getElementById("loglist").innerHTML = htmltext;
     })

@@ -102,11 +102,13 @@
                 <tr>
                   <th>ID</th>
                   <th>容器ID</th>
-                  <th>源镜像</th>
+                  <th>源镜像ID</th>
                   <th>CMD命令</th>
                   <th>创建时间</th>
+                  <th>状态</th>
                   <th>端口映射</th>
                   <th>容器名</th>
+                  <th>管理</th>                
                 </tr>
               </thead>
               <tbody id="containerlist">
@@ -166,6 +168,7 @@
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
+        '<td>' + container[6] + '</td>' +
         '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
         '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
         '<span class="am-icon-cog">' + '</span>' + 

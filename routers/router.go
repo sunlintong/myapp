@@ -7,14 +7,17 @@ import (
 )
 
 func init() {
-	// 页面路由
+	// 登录注册 路由
 	beego.Router("/register", &controllers.RegisterController{})
+
+	// admin页面 路由
 	beego.Router("/admin-index", &controllers.AdminIndexController{})
 	beego.Router("/admin-image", &controllers.AdminImageController{})
 	beego.Router("/admin-container", &controllers.AdminContainerController{})
+	beego.Router("/admin-log", &controllers.AdminLogController{})
+	
 
-
-	// 用户api路由
+	// api 路由
 	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")
 	beego.Router("/user/log", &controllers.UserLogController{}, "get:GetUserLog")
 

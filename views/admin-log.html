@@ -92,13 +92,9 @@
         <div class="am-fl"><strong class="am-text-primary am-text-lg">系统日志</strong> / <small>日志列表</small></div>
       </div>
 
-      <hr/>
-
       <div class="am-g error-log">
         <div class="am-u-sm-12 am-u-sm-centered">
         <pre class="am-pre-scrollable">
-
-
           </thead>
           <tbody id="loglist">
           </tbody>
@@ -143,7 +139,6 @@
 
 <script>
     $.getJSON("/user/log", function (data) {
-      var items = [];
       var htmltext = "";
       $.each(data, function (key, log) {
         htmltext = htmltext + 

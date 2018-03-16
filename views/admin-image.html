@@ -154,7 +154,6 @@
 
 <script>
   $.getJSON("/image", function (data) {
-    var items = [];
     var htmltext = "";
     $.each(data, function (key, image) {
       htmltext = htmltext + "<tr>" +

@@ -96,9 +96,7 @@
           <div class="am-u-sm-12">
             <table class="am-table am-table-bd am-table-striped admin-content-table">
 
-              <tbody id="loglist">
-  
-              </tbody>
+
             </table>
           </div>
         </div>
@@ -110,9 +108,14 @@
         <div class="am-u-sm-12 am-u-sm-centered">
 
         <pre class="am-pre-scrollable">
-
+          
+            <tbody id="loglist">
+  
+              </tbody>
 
         </pre>
+
+
           <p>这里是静态页面展示，使用时结合代码高亮插件</p>
         </div>
       </div>
@@ -154,10 +157,10 @@
     $.getJSON("/user/log", function (data) {
       var htmltext = "";
       $.each(data, function (key, log) {
-        htmltext = htmltext + 
+        htmltext = htmltext + <tr>
           '<span class="am-text-success">' + log[0] + '</span>' +
           '<span class="am-text-danger">' + log[1] + '</span>' +
-          log[2];
+          log[2] + </tr>;
       })
       document.getElementById("loglist").innerHTML = htmltext;
     })

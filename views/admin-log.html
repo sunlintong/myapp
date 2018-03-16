@@ -100,6 +100,7 @@
                       <th>ID</th>
                       <th>镜像仓库名：镜像标签</th>
                       <th>镜像ID</th>
+
                     </tr>
                   </thead>
                 <tbody id="loglist">
@@ -147,10 +148,11 @@
     $.getJSON("/user/log", function (data) {
       var htmltext = "";
       $.each(data, function (key, log) {
-        htmltext = htmltext +
+        htmltext = htmltext + '<tr>'
           '<span class="am-text-success">' + log[0] + '</span>' +
           '<span class="am-text-danger">' + log[1] + '</span>' +
-          log[2] ;
+          '<td>' + log[2] + '</td>' +
+          '</tr>';
       })
       document.getElementById("loglist").innerHTML = htmltext;
     })

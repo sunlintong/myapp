@@ -31,12 +31,15 @@ func (cc *ContainerController) GetAllContainers() {
 		data[2] = container.Command
 		data[3] = cc.GetTimeString(container.Created)
 		data[4] = container.Status
-		data[5] = fmt.Sprint(container.Ports)
+		if container.Ports == nil {
+			data[5] = "未添加"
+		} else {
+			data[5] = fmt.Sprint(container.Ports)
+		}
 		for _, str := range container.Names {
 			data[6] += str
 		}
-
-		
+	
 		ret = append(ret, data)
 	}
 

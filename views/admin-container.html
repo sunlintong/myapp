@@ -170,8 +170,14 @@
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' +
         '<td>' +
-        '<button class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止容器" 
-        '</button>' + '</td>' + '</tr>';
+        '<button id ="stop" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '</button>' + '</td>' + 
+        '<button id ="start" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '</button>' + '</td>' +
+        '<button id ="remove" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '</button>' + '</td>' +    
+        '</tr>';
+
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })

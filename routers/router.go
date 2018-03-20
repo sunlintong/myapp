@@ -21,7 +21,12 @@ func init() {
 	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")
 	beego.Router("/user/log", &controllers.UserLogController{}, "get:GetUserLog")
 
-	// docker api 路由
+	// container 路由
 	beego.Router("/container", &controllers.ContainerController{}, "get:GetAllContainers")
+	beego.Router("/operationcontainer", &controllers.ContainerController{}, "post:OperationContainer")
+
+	// image 路由
 	beego.Router("/image", &controllers.ImageController{}, "get:GetAllImages")
+
+	
 }

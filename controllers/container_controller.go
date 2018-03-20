@@ -86,7 +86,7 @@ func (cc *ContainerController) OperationContainer() {
 	}
 
 	if err == nil {
-		l.Log = fmt.Sprintf("s% container event handle success", req.Event_Type)
+		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)
 	}else {
 		l.Log = err.Error()
 	}

@@ -40,7 +40,7 @@ func (cc *ContainerController) GetAllContainers() {
 	var ret [][7]string
 	for _, container := range containers {
 		var data [7]string
-		data[0] = string([]byte(container.ID)[:20])
+		data[0] = container.ID
 		data[1] = container.Image
 		data[2] = container.Command
 		data[3] = cc.GetTimeString(container.Created)
@@ -85,13 +85,14 @@ func (cc *ContainerController) OperationContainer() {
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
 	}
 
-	if err == nil {
-		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)
-	}else {
+	if err != nil {
 		l.Log = err.Error()
+		db.InsertLog(l)
+		cc.BadRequest(err)
+	}else {
+		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)
+		db.InsertLog(l)
+		cc.Success(l)
 	}
-	db.InsertLog(l)
-	cc.Success(l)
-	return
 
 }

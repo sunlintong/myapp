@@ -169,16 +169,32 @@
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' +
-        '<hr/>' +
-        '<button id ="stop" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<hr/>' + "容器管理：" +
+        '<button onclick="handleStop(container[0])" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
-        '<button id ="start" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '<button onclick="handleStart(container[0])" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
-        '<button id ="remove" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '<button onclick="handleRemove(container[0])" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +
         '</tr>';
-
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
+
+  function handleStop(id)
+  {
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/operationcontainer",
+      contentType:'application/json',
+      data: JSON.stringify({
+        container_id: id,
+        event_type: "stop"
+      }),
+      success: function(data){
+        console.log(data)
+      }
+    })
+  };
 </script>

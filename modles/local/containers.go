@@ -34,14 +34,6 @@ func StartContainer(container_id string) error {
 }
 
 
-// 根据container_id停止一个容器
-// 对应命令docker dtop
-func StopContainer(container_id string) error {
-	cli := GetClient()
-	err := cli.ContainerStop(context.Background(), container_id, nil)
-	return err
-}
-
 
 // 停止所有运行中的容器
 func StopAllContainers() error{

@@ -156,6 +156,8 @@
 
 
 <script>
+  function getContainers()
+  {
   $.getJSON("/container", function (data) {
     var items = [];
     var htmltext = "";
@@ -177,4 +179,5 @@
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
+  }
 </script>

@@ -157,7 +157,6 @@
 
 <script>
   function getContainers()
-  {
   $.getJSON("/container", function (data) {
     var items = [];
     var htmltext = "";
@@ -173,11 +172,8 @@
         '<td>' + container[6] + '</td>' +
         '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
         '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
-        '<span class="am-icon-cog">' + '</span>' + 
-        '<span class="am-icon-caret-down">' + '</span>' + 
         '</button>' + '</td>' + '</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
-  }
 </script>

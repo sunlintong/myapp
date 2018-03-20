@@ -16,13 +16,3 @@ func PullImage(imageName string, ims ...string ) (io.ReadCloser, error) {
 //	defer out.Close()
 	return out, err
 }
-
-// 获取镜像列表
-// 对应命令docker images
-func GetImages() ([]types.ImageSummary, error) {
-	cli := GetClient()
-	images, err := cli.ImageList(context.Background(), types.ImageListOptions{})
-	return images, err
-}
-
-

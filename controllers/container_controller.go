@@ -12,7 +12,7 @@ type ContainerController struct {
 }
 
 func (cc *ContainerController) GetAllContainers() {	
-	containers, err := local.GetRunningContainers()
+	containers, err := local.GetAllContainers()
 	l := new(db.Log)
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()

@@ -102,7 +102,7 @@
                 <tr>
                   <th>ID</th>
                   <th>容器ID（只显示前20位）</th>
-                  <th>源镜像ID</th>
+                  <th>源镜像</th>
                   <th>CMD命令</th>
                   <th>创建时间</th>
                   <th>状态</th>
@@ -169,8 +169,8 @@
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' +
-        '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
-        '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
+        '<td>' +
+        '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + "停止容器" 
         '</button>' + '</td>' + '</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;

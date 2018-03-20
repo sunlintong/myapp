@@ -96,8 +96,8 @@
 
       <div class="am-g error-log">
         <div class="am-u-sm-12 am-u-sm-centered">
-            <p id="loglist">
-            </p>
+            <pre class="am-pre-scrollable" id="loglist">
+            </pre>
         </div>
       </div>
   
@@ -141,9 +141,9 @@
       var htmltext = "";
       $.each(data, function (key, log) {
         htmltext = htmltext + 
-          '<span class="am-text-success">' + log[0] + '</span>' +
-          '<span class="am-text-danger">' + log[1] + '</span>' +
-          '<span class="am-text-success">' + log[2] + '</span>';
+          '<p>' + '<span class="am-text-success">' + log[0] + '&nbsp;&nbsp'+ '</span>' +
+          '<span class="am-text-danger">' + log[1] + '&nbsp;&nbsp' + '</span>' +
+          log[2] + '</p>';
       })
       document.getElementById("loglist").innerHTML = htmltext;
     })

@@ -13,7 +13,7 @@ type UserLogController struct {
 func (ulc *UserLogController) GetUserLog() {
 	// 生成log
 	l := new(db.Log)
-	l.Time = time.Now().Unix() 
+	l.Time = time.Now().Unix()
 	l.Name = "admin"
 	l.Log = "see user's log"
 	err := db.InsertLog(l)
@@ -29,9 +29,9 @@ func (ulc *UserLogController) GetUserLog() {
 	var ret [][3] string
 	for _, log := range logs {
 		var data [3]string
-		data[0] = ulc.GetTimeString(log.Time)
-		data[1] = log.Name
-		data[2] = log.Log
+		data[0] = "[" + ulc.GetTimeString(log.Time) + "]"
+		data[1] = "[" + log.Name + "]"
+		data[2] = "---" + log.Log
 		ret = append(ret, data)
 	}
 	ulc.Data["json"] = ret

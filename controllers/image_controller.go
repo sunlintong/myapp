@@ -31,9 +31,9 @@ func (ic *ImageController) GetAllImages() {
 	for _, image := range images {
 		var data [4]string
 		for _, rt := range image.RepoTags {
-			data[0] += rt
+			data[0] += "[tag1]: " + rt + "\n"
 		}
-		data[1] = image.ID
+		data[1] = string([]byte(image.ID)[:20])
 		data[2] = ic.GetTimeString(image.Created)
 		data[3] = fmt.Sprintf("%.2f", float64(image.Size)/1000000) + " MB"
 		ret = append(ret, data)

@@ -175,16 +175,14 @@
         '<tr>' + "容器管理：" +
         '<button onclick="handleStop(key)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
-        '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '<button onclick="handleStart(key)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
-        '<button onclick="handleRemove()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '<button onclick="handleRemove(key)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +'</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
-
-alert(document.getElementById().innerHTML)
-
+  
   function handleStop(key)
   {
     cid=document.getElementById(ary[key]).innerHTML

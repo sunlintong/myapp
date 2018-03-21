@@ -157,19 +157,18 @@
 
 <script>
   $.getJSON("/container", function (data) {
-    var items = [];
     var htmltext = "";
     $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td id="key">' + container[0] + '</td>' +
+        '<td id=key>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>';
-        cid=document.getElementById("key")
+        cid=document.getElementById(key)
         alert(cid)
         htmltext = htmltext + "<tr>" +
         "容器管理：" +

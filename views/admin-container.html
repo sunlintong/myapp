@@ -162,7 +162,7 @@
   $.getJSON("/container", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
-      len = data.length
+      len = 0
       ary[len]=container[0]
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
@@ -180,6 +180,7 @@
         '</button>' +
         '<button onclick="handleRemove(len)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +'</tr>';
+      len = len + 1
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })

@@ -160,18 +160,18 @@
     var items = [];
     var htmltext = "";
     $.each(data, function (key, container) {
-      tdid = key
-      cid = document.getElementById("tdid")
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td id=tdid>' + container[0] + '</td>' +
+        '<td id=key>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
-        '<td>' + container[6] + '</td>' +
-        '<hr/>' + "容器管理：" +
+        '<td>' + container[6] + '</td>' + '</tr>';
+        cid=document.getElementById(key)
+        htmltext = htmltext + "<tr>" +
+        "容器管理：" +
         '<button onclick="handleStop(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
         '<button onclick="handleStart(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
@@ -182,6 +182,7 @@
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
+
 
   function handleStop(cid)
   {

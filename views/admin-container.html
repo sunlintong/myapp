@@ -156,12 +156,16 @@
 
 
 <script>
+
+  var ary = new Array(100);
+
   $.getJSON("/container", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
+      ary[key]=container[0]
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td id=' + key + '>' + container[0] + '</td>' +
+        '<td id=' + ary[key] + '>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
@@ -169,19 +173,22 @@
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>' + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(' + container[0] + ')" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(key)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
-        '<button onclick="handleStart(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
-        '<button onclick="handleRemove(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '<button onclick="handleRemove()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +'</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
 
+alert(document.getElementById().innerHTML)
 
-  function handleStop(cid)
+  function handleStop(key)
   {
+    cid=document.getElementById(ary[key]).innerHTML
+    alert(ary[key],cid)
     $.ajax({
       type:"POST",
       dataType:"json",

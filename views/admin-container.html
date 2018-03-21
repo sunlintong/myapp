@@ -170,10 +170,9 @@
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
-        '<td>' + container[6] + '</td>' + '</tr>';
-        htmltext = htmltext + 
+        '<td>' + container[6] + '</td>' + '</tr>' + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(this)" data-fuck-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
         '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
@@ -183,10 +182,9 @@
     document.getElementById("containerlist").innerHTML = htmltext;
   })
 
-  function handleStop(fuck)
+  function handleStop(stop)
   {
-    cid=fuck.getAttribute("data-fuck-cid")
-    alert(cid)
+    cid=fuck.getAttribute("data-stop-cid")
     $.ajax({
       type:"POST",
       dataType:"json",

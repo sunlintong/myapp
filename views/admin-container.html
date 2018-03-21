@@ -160,10 +160,11 @@
     var items = [];
     var htmltext = "";
     $.each(data, function (key, container) {
-      cid = container[0]
+      tdid = key
+      cid = document.getElementById("tdid")
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + container[0] + '</td>' +
+        '<td id=tdid>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +

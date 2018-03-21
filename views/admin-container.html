@@ -164,18 +164,16 @@
     $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td data-cid=' + container[0] + '>' + container[0] + '</td>' +
+        '<td>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>';
-        cid=getAttribute('data-cid')
-        alert(cid)
         htmltext = htmltext + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(this)" data-fuck-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
         '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
@@ -185,8 +183,10 @@
     document.getElementById("containerlist").innerHTML = htmltext;
   })
 
-  function handleStop(cid)
+  function handleStop(fuck)
   {
+    cid=fuck.getAttribute("data-fuck-cid")
+    alert(cid)
     $.ajax({
       type:"POST",
       dataType:"json",

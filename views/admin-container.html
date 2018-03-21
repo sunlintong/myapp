@@ -161,18 +161,15 @@
     $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td id=' + container[0] + '>' + container[0] + '</td>' +
+        '<td id=' + key + '>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
-        '<td>' + container[6] + '</td>' + '</tr>';
-        cid = document.getElementById(container[0]).innerHTML
-        alert(cid)
-        htmltext = htmltext + 
-        '</tr>' + "容器管理：" +
-        '<button onclick="handleStop(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<td>' + container[6] + '</td>' + '</tr>' + 
+        '<tr>' + "容器管理：" +
+        '<button onclick=' + handleStop(container[0]) +' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
         '<button onclick="handleStart(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +

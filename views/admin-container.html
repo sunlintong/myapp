@@ -162,18 +162,20 @@
   $.getJSON("/container", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
-      alert(container)
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + container[0] + '</td>' +
+        '<td data-cid=' + container[0] + '>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
-        '<td>' + container[6] + '</td>' + '</tr>' + 
+        '<td>' + container[6] + '</td>' + '</tr>';
+        cid=plant.getAttribute('data-cid')
+        alert(cid)
+        htmltext = htmltext + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(container)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(cid)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
         '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
@@ -183,7 +185,7 @@
     document.getElementById("containerlist").innerHTML = htmltext;
   })
 
-  function handleStop(container)
+  function handleStop(cid)
   {
     $.ajax({
       type:"POST",
@@ -191,7 +193,7 @@
       url:"/operationcontainer",
       contentType:'application/json',
       data: JSON.stringify({
-        container_id: container[0],
+        container_id: cid,
         event_type: "stop"
       }),
       success: function(data){

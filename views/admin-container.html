@@ -157,13 +157,13 @@
 
 <script>
 
-  var ary = new Array(100);
+  var ary = new Array();
 
   $.getJSON("/container", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
-      len = 0
-      ary[len]=container[0]
+      len =ary.length-1
+      ary.push(container[0])
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
         '<td id=' + ary[len] + '>' + container[0] + '</td>' +
@@ -180,7 +180,8 @@
         '</button>' +
         '<button onclick="handleRemove(len)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +'</tr>';
-      len = len + 1
+
+
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })

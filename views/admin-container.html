@@ -162,11 +162,10 @@
   $.getJSON("/container", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
-      len =ary.length-1
-      ary.push(container[0])
+      alert(container)
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td id=' + ary[len] + '>' + container[0] + '</td>' +
+        '<td>' + container[0] + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
@@ -174,29 +173,25 @@
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>' + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(len)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(container)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
         '</button>' +
-        '<button onclick="handleStart(len)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '<button onclick="handleStart()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
         '</button>' +
-        '<button onclick="handleRemove(len)" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '<button onclick="handleRemove()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
         '</button>' +'</tr>';
-
-
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
 
-  function handleStop(len)
+  function handleStop(container)
   {
-    cid=document.getElementById(ary[len]).innerHTML
-    alert(ary[len],cid)
     $.ajax({
       type:"POST",
       dataType:"json",
       url:"/operationcontainer",
       contentType:'application/json',
       data: JSON.stringify({
-        container_id: cid,
+        container_id: container[0],
         event_type: "stop"
       }),
       success: function(data){

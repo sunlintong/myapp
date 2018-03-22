@@ -12,8 +12,10 @@ import (
 const (
 	stopEvent   = "stop"   // 停止容器
 	startEvent  = "start"  // 启动容器
+	killEvent   = "kill"   //强制终止容器
 	removeEvent = "remove" // 删除容器
 	runEvent    = "run"    // 运行一个新的容器
+
 )
 
 type ContainerController struct {
@@ -79,10 +81,11 @@ func (cc *ContainerController) OperationContainer() {
 		err = local.StopContainer(req.Container_ID)
 	case startEvent:
 		err = local.StartContainer(req.Container_ID)
-	case removeEvent:
+	case killEvent:
 		err = local.KillContainer(req.Container_ID)
-	case runEvent:
+	case removeEvent:
 		err = local.RemoveContainer(req.Container_ID)
+	case runEvent:
 
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
@@ -92,7 +95,7 @@ func (cc *ContainerController) OperationContainer() {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		cc.BadRequest(err)
-	}else {
+	} else {
 		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)
 		db.InsertLog(l)
 		cc.Success(l)

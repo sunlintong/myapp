@@ -82,9 +82,13 @@ func (cc *ContainerController) OperationContainer() {
 	case startEvent:
 		err = local.StartContainer(req.Container_ID)
 	case killEvent:
+		fmt.Println("##########", req)
 		err = local.KillContainer(req.Container_ID)
+		fmt.Println("##########", err)
 	case removeEvent:
+		fmt.Println("##########", req)
 		err = local.RemoveContainer(req.Container_ID)
+		fmt.Println("##########", req)
 	case runEvent:
 
 	default:

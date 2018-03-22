@@ -100,7 +100,7 @@ func (cc *ContainerController) OperationContainer() {
 	}
 
 	if err != nil {
-		l.Log = fmt.Sprint(req, err)
+		l.Log = "[" + req.Container_ID + "]" + "[" + req.Event_Type + "]" + err.Error()
 		db.InsertLog(l)
 		cc.BadRequest(err)
 	} else {

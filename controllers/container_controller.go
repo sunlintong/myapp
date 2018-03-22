@@ -78,9 +78,13 @@ func (cc *ContainerController) OperationContainer() {
 	// 事件的逻辑处理部分
 	switch req.Event_Type {
 	case stopEvent:
+		fmt.Println("##########", req)
 		err = local.StopContainer(req.Container_ID)
+		fmt.Println("##########", err)
 	case startEvent:
+		fmt.Println("##########", req)
 		err = local.StartContainer(req.Container_ID)
+		fmt.Println("##########", err)
 	case killEvent:
 		fmt.Println("##########", req)
 		err = local.KillContainer(req.Container_ID)
@@ -88,7 +92,7 @@ func (cc *ContainerController) OperationContainer() {
 	case removeEvent:
 		fmt.Println("##########", req)
 		err = local.RemoveContainer(req.Container_ID)
-		fmt.Println("##########", req)
+		fmt.Println("##########", err)
 	case runEvent:
 
 	default:

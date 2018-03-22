@@ -98,9 +98,10 @@ func (cc *ContainerController) OperationContainer() {
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
 	}
+	fmt.Printf("#########req:v%,,,,err：%v", req, err)
 
 	if err != nil {
-		l.Log = fmt.Sprintf("req:%v,,,,err：%v", req, err)
+		l.Log = fmt.Sprintf("req:v%,,,,err：%v", req, err)
 		db.InsertLog(l)
 		cc.BadRequest(err)
 	} else {

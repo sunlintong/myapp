@@ -100,7 +100,7 @@ func (cc *ContainerController) OperationContainer() {
 	}
 
 	if err != nil {
-		l.Log = err.Error()
+		l.Log = fmt.Sprintf("req:%v,,,,err：%v", req, err)
 		db.InsertLog(l)
 		cc.BadRequest(err)
 	} else {

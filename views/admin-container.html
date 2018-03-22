@@ -224,7 +224,6 @@
     function handleKill(kill)
   {
     cid=kill.getAttribute("data-kill-cid")
-    alert(cid)
     $.ajax({
       type:"POST",
       dataType:"json",
@@ -243,7 +242,6 @@
     function handleRemove(remove)
   {
     cid=remove.getAttribute("data-remove-cid")
-    alert(cid)
     $.ajax({
       type:"POST",
       dataType:"json",

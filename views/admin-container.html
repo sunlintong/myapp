@@ -172,12 +172,15 @@
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>' + 
         '<tr>' + "容器管理：" +
-        '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止" + 
+        '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止（stop）" + 
         '</button>' +
-        '<button onclick="handleStart(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动" + 
+        '<button onclick="handleStart(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动（start）" + 
         '</button>' +
-        '<button onclick="handleRemove()" class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
-        '</button>' +'</tr>';
+        '<button onclick="handleKill(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制终止（kill）" + 
+        '</button>' +
+        '<button onclick="handleRemove(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除（remove）" + 
+        '</button>' +
+        '</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
@@ -211,6 +214,42 @@
       data: JSON.stringify({
         container_id: cid,
         event_type: "start"
+      }),
+      success: function(data){
+        console.log(data)
+      }
+    })
+  }
+
+    function handleKill(kill)
+  {
+    cid=kill.getAttribute("data-kill-cid")
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/api/container/operate",
+      contentType:'application/json',
+      data: JSON.stringify({
+        container_id: cid,
+        event_type: "kill"
+      }),
+      success: function(data){
+        console.log(data)
+      }
+    })
+  }
+
+    function handleRemove(remove)
+  {
+    cid=remove.getAttribute("data-remove-cid")
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/api/container/operate",
+      contentType:'application/json',
+      data: JSON.stringify({
+        container_id: cid,
+        event_type: "remove"
       }),
       success: function(data){
         console.log(data)

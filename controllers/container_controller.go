@@ -80,7 +80,9 @@ func (cc *ContainerController) OperationContainer() {
 	case startEvent:
 		err = local.StartContainer(req.Container_ID)
 	case removeEvent:
+		err = local.KillContainer(req.Container_ID)
 	case runEvent:
+		err = local.RemoveContainer(req.Container_ID)
 
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)

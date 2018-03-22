@@ -197,7 +197,7 @@
 
 
 <script>
-  $.getJSON("/user/data", function (data) {
+  $.getJSON("/api/user", function (data) {
     var items = [];
     var htmltext = "";
     $.each(data, function (key, user) {

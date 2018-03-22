@@ -40,7 +40,7 @@ func (cc *ContainerController) GetAllContainers() {
 	var ret [][7]string
 	for _, container := range containers {
 		var data [7]string
-		data[0] = container.ID
+		data[0] = fmt.Sprint([]byte(container.ID)[:20])
 		data[1] = container.Image
 		data[2] = container.Command
 		data[3] = cc.GetTimeString(container.Created)
@@ -78,6 +78,7 @@ func (cc *ContainerController) OperationContainer() {
 	case stopEvent:
 		err = local.StopContainer(req.Container_ID)
 	case startEvent:
+		err = local.StartContainer(req.Container_ID)
 	case removeEvent:
 	case runEvent:
 

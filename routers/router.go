@@ -18,15 +18,15 @@ func init() {
 	
 
 	// api 路由
-	beego.Router("/user/data", &controllers.UserDataController{}, "get:GetUserData")
-	beego.Router("/user/log", &controllers.UserLogController{}, "get:GetUserLog")
+	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")
+	beego.Router("/api/log", &controllers.UserLogController{}, "get:GetUserLog")
 
 	// container 路由
-	beego.Router("/container", &controllers.ContainerController{}, "get:GetAllContainers")
-	beego.Router("/operationcontainer", &controllers.ContainerController{}, "post:OperationContainer")
+	beego.Router("/api/container", &controllers.ContainerController{}, "get:GetAllContainers")
+	beego.Router("/api/container/operate", &controllers.ContainerController{}, "post:OperationContainer")
 
 	// image 路由
-	beego.Router("/image", &controllers.ImageController{}, "get:GetAllImages")
+	beego.Router("/api/image", &controllers.ImageController{}, "get:GetAllImages")
 
 	
 }

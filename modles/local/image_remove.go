@@ -17,7 +17,7 @@ func ForceRemoveImage(image_id string) ([]types.ImageDeleteResponseItem, error) 
 	cli := GetClient()
 	ctx := context.Background()
 	options := types.ImageRemoveOptions{}
-	options.Force = false
-	items, err := cli.ImageRemove(ctx, image_id, types.ImageRemoveOptions{})
+	options.Force = true
+	items, err := cli.ImageRemove(ctx, image_id, options)
 	return items, err
 }

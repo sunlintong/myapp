@@ -78,6 +78,12 @@ func (ic *ImageController) OperateImage() {
 	switch req.Event_Type {
 	case rmImage:
 		items, err := local.RemoveImage(req.Image_ID)
+		if err != nil {
+			l.Log = err.Error()
+			db.InsertLog(l)
+			ic.ServiceError(l)
+			return
+		}
 		for _, item := range items {
 			str += item.Deleted + ":" +item.Untagged
 			resp = append(resp, str)

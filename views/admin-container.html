@@ -199,10 +199,12 @@
       }),
       success: function(data){
         console.log(data)
-        alert(data)
-        alert(data[0])
-        alert(data[1])
-        alert(data[2])
+        var str=JSON.stringify(data)
+        alert(str)
+        alert(str[0])
+        alert(str[1])
+        alert(str[2])
+        alert(str[3])
       }
     })
   }

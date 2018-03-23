@@ -10,7 +10,8 @@ import (
 
 // 时间类型
 const (
-	rmImage = "remove"
+	Remove = "remove"
+	ForceRemove = "force"
 )
 
 type ImageRequest struct {
@@ -76,8 +77,23 @@ func (ic *ImageController) OperateImage() {
 	var str [3]string
 	// 事件的逻辑处理部分
 	switch req.Event_Type {
-	case rmImage:
+	case Remove:
 		items, err := local.RemoveImage(req.Image_ID)
+		if err != nil {
+			l.Log = err.Error()
+			db.InsertLog(l)
+			ic.ServiceError(l)
+			return
+		}
+		for _, item := range items {
+			str[0] = "DELETE："
+			str[1] = item.Deleted
+			str[2] = item.Untagged
+			resp = append(resp, str)
+		}
+
+	case ForceRemove:
+		items, err := local.ForceRemoveImage(req.Image_ID)
 		if err != nil {
 			l.Log = err.Error()
 			db.InsertLog(l)

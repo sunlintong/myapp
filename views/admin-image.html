@@ -162,8 +162,10 @@
         '<td>' + '<a href="#">' + image[1].slice(0,20) + '</a>' + '</td>' +
         '<td>' + image[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
-        '<td>' + '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
-        '</button>' + '</td>' + '</tr>'
+        '<td>' + 
+        '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + '</button>' + 
+        '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' + 
+        '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
   })
@@ -185,7 +187,29 @@
       },
       error: function(data){
         console.log(data)
-        alert(data.responseJSON.log)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
+
+  function handleForce(force) {
+    iid=force.getAttribute("data-force-iid")
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/api/image/operate",
+      contentType:'application/json',
+      data: JSON.stringify({
+        image_id: iid,
+        event_type: "force"
+      }),
+      success: function(data){
+        console.log(data)
+        alert(data)
+      },
+      error: function(data){
+        console.log(data)
+        alert(data.responseJSON.Log)
       }
     })
   }

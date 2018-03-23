@@ -249,7 +249,7 @@
       },
       error: function(data){
         console.log(data)
-        alert(data.Log)
+        alert(data.getResponseHeader(), data.responseJSON.Log)
       }
     })
   }

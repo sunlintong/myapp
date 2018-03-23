@@ -72,8 +72,8 @@ func (ic *ImageController) OperateImage() {
 		return
 	}
 
-	var resp [][2]string
-	var str [2]string
+	var resp [][3]string
+	var str [3]string
 	// 事件的逻辑处理部分
 	switch req.Event_Type {
 	case rmImage:
@@ -85,8 +85,9 @@ func (ic *ImageController) OperateImage() {
 			return
 		}
 		for _, item := range items {
-			str[0] = item.Deleted
-			str[1] = item.Untagged
+			str[0] = "DELETE："
+			str[1] = item.Deleted
+			str[2] = item.Untagged
 			resp = append(resp, str)
 		}
 

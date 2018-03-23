@@ -162,9 +162,26 @@
         '<td>' + '<a href="#">' + image[1].slice(0,20) + '</a>' + '</td>' +
         '<td>' + image[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
-        '<button onclick="handleStop(this)" data-stop-cid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
-        '</button>' + '</tr>'
+        '<td>' + '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '</button>' + '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
   })
+
+  function handleRemove(remove) {
+    iid=stop.getAttribute("data-remove-cid")
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/api/image/operate",
+      contentType:'application/json',
+      data: JSON.stringify({
+        image_id: cid,
+        event_type: "remove"
+      }),
+      success: function(data){
+        console.log(data)
+      }
+    })
+  }
 </script>

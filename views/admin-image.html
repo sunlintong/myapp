@@ -170,7 +170,6 @@
 
   function handleRemove(remove) {
     iid=remove.getAttribute("data-remove-iid")
-    alert(iid)
     $.ajax({
       type:"POST",
       dataType:"json",
@@ -182,6 +181,11 @@
       }),
       success: function(data){
         console.log(data)
+        alert(data)
+      },
+      error: function(data){
+        console.log(data)
+        alert(data.responseJSON)
       }
     })
   }

@@ -102,8 +102,7 @@ func (cc *ContainerController) OperationContainer() {
 
 	if err != nil {
 		l.Log = err.Error()
-		dberr := db.InsertLog(l)
-		fmt.Println(dberr)
+		db.InsertLog(l)
 		cc.ServiceError(l)
 	} else {
 		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)

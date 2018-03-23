@@ -6,7 +6,6 @@ import (
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
-	"github.com/docker/docker/api/types"
 )
 
 // 时间类型
@@ -83,7 +82,7 @@ func (ic *ImageController) OperateImage() {
 			str += item.Deleted + ":" +item.Untagged
 			resp = append(resp, str)
 		}
-			
+
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
 	}

@@ -159,14 +159,11 @@
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
         '<td>' + image[0] + '</td>' +
-        '<td>' + '<a href="#">' + image[1] + '</a>' + '</td>' +
+        '<td>' + '<a href="#">' + image[1].slice(0,20) + '</a>' + '</td>' +
         '<td>' + image[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
-        '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
-        '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
-        '<span class="am-icon-cog">' + '</span>' + 
-        '<span class="am-icon-caret-down">' + '</span>' + 
-        '</button>' + '</td>' + '</tr>';
+        '<button onclick="handleStop(this)" data-stop-cid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + 
+        '</button>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
   })

@@ -164,7 +164,7 @@
     $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + container[0] + '</td>' +
+        '<td>' + container[0].slice(0, 20) + '</td>' +
         '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
         '<td>' + container[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +

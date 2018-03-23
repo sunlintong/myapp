@@ -158,7 +158,7 @@
     $.each(data, function (key, image) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + image[0] + '</td>' +
+        '<td>' + image[0].slice(7,) + '</td>' +
         '<td>' + '<a href="#">' + image[1].slice(0,20) + '</a>' + '</td>' +
         '<td>' + image[2] + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +

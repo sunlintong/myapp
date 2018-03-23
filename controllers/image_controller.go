@@ -44,6 +44,7 @@ func (ic *ImageController) GetAllImages() {
 		for _, rt := range image.RepoTags {
 			var data [4]string
 			data[0] += rt
+			// 剪去前面的 "sha256:" 字符串
 			image.ID = string([]byte(image.ID)[7:])
 			data[1] = image.ID
 			data[2] = ic.GetTimeString(image.Created)
@@ -86,7 +87,7 @@ func (ic *ImageController) OperateImage() {
 		db.InsertLog(l)
 		ic.ServiceError(l)
 	} else {
-		l.Log = fmt.Sprintf("image event handle success,%s,%s", req.Image_ID, req.Event_Type)
+		l.Log = fmt.Sprintf("v%", resp)
 		db.InsertLog(l)
 		ic.Success(resp)
 	}

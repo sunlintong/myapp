@@ -8,14 +8,13 @@ import (
 	"time"
 )
 
-// 时间类型
+// 事件类型
 const (
 	stopEvent   = "stop"   // 停止容器
 	startEvent  = "start"  // 启动容器
 	killEvent   = "kill"   //强制终止容器
 	removeEvent = "remove" // 删除容器
 	runEvent    = "run"    // 运行一个新的容器
-
 )
 
 type ContainerController struct {
@@ -62,7 +61,7 @@ func (cc *ContainerController) GetAllContainers() {
 }
 
 // 处理容器操作的所有post请求 POST
-func (cc *ContainerController) OperationContainer() {
+func (cc *ContainerController) OperateContainer() {
 	var req ContainerRequest
 	l := new(db.Log)
 	l.Name = "unknown"

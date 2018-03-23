@@ -10,7 +10,7 @@ func init() {
 	// 登录注册 路由
 	beego.Router("/register", &controllers.RegisterController{})
 
-	// admin页面 路由
+	// 页面 路由
 	beego.Router("/admin-index", &controllers.AdminIndexController{})
 	beego.Router("/admin-image", &controllers.AdminImageController{})
 	beego.Router("/admin-container", &controllers.AdminContainerController{})
@@ -21,12 +21,10 @@ func init() {
 	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")
 	beego.Router("/api/log", &controllers.UserLogController{}, "get:GetUserLog")
 
-	// container 路由
 	beego.Router("/api/container", &controllers.ContainerController{}, "get:GetAllContainers")
-	beego.Router("/api/container/operate", &controllers.ContainerController{}, "post:OperationContainer")
+	beego.Router("/api/container/operate", &controllers.ContainerController{}, "post:OperateContainer")
 
-	// image 路由
 	beego.Router("/api/image", &controllers.ImageController{}, "get:GetAllImages")
-
+	beego.Router("/api/image/operate", &controllers.ImageController{}, "post:OperateImage")
 	
 }

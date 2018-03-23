@@ -236,7 +236,9 @@
       success: function(data){
         console.log(data)
       },
-      error: alert(data)
+      error: function(data){
+        alert(data)
+      }
     })
   }
 

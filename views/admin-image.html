@@ -111,8 +111,24 @@
             <tbody id="imagelist">
 
             </tbody>
+
+
           </table>
         </div>
+      </div>
+
+      <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf">
+          <strong class="am-text-primary am-text-lg">镜像管理</strong> /
+          <small>拉取镜像</small>
+        </div>
+        <form method="post" class="am-form">
+          <label for="imageName">镜像名:</label>
+          <input type="text" id="imageName">
+          <div class="am-cf">
+            <input type="submit" value="确认" class="am-btn am-btn-primary am-btn-sm am-fl">
+          </div>
+        </form>
       </div>
 
       <hr/>
@@ -164,7 +180,7 @@
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
         '<td>' + 
         '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + '</button>' + 
-        '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' + 
+        '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' + 
         '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;

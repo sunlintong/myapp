@@ -27,6 +27,7 @@ type ContainerRequest struct {
 	Event_Type   string `json:"event_type"`
 }
 
+// GetAllContainers HTTP GET
 func (cc *ContainerController) GetAllContainers() {
 	containers, err := local.GetAllContainers()
 	l := new(db.Log)
@@ -60,7 +61,7 @@ func (cc *ContainerController) GetAllContainers() {
 	cc.Finish()
 }
 
-// 处理容器操作的所有post请求
+// 处理容器操作的所有post请求 POST
 func (cc *ContainerController) OperationContainer() {
 	var req ContainerRequest
 	l := new(db.Log)
@@ -100,9 +101,9 @@ func (cc *ContainerController) OperationContainer() {
 	}
 
 	if err != nil {
-		l.Log = "[" + req.Container_ID + "]" + "[" + req.Event_Type + "]" + err.Error()
+		l.Log = err.Error()
 		db.InsertLog(l)
-		cc.BadRequest(err)
+		cc.ServiceError(l)
 	} else {
 		l.Log = fmt.Sprintf("container event handle success,%s,%s", req.Container_ID, req.Event_Type)
 		db.InsertLog(l)

@@ -4,7 +4,6 @@ import (
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"time"
-	"io"
 )
 
 type ImagePullController struct {

@@ -73,11 +73,17 @@ func (ic *ImageController) OperateImage() {
 		return
 	}
 
-	var resp []types.ImageDeleteResponseItem
+	var resp []string
+	var str string
 	// 事件的逻辑处理部分
 	switch req.Event_Type {
 	case rmImage:
-		resp, err = local.RemoveImage(req.Image_ID)
+		items, err := local.RemoveImage(req.Image_ID)
+		for _, item := range items {
+			str += item.Deleted + ":" +item.Untagged
+			resp = append(resp, str)
+		}
+			
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
 	}

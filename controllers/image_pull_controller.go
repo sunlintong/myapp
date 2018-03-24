@@ -42,6 +42,5 @@ func (ipc *ImagePullController) PullImage() {
 	out.Close()
 	l.Log = string(p)
 	db.InsertLog(l)
-	ipc.Success(l)
-	
+	ipc.Success(l)	
 }

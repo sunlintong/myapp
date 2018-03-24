@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"time"
@@ -33,13 +34,16 @@ func (ipc *ImagePullController) PullImage() {
 	}
 	var p []byte
 	_, err = out.Read(p)
+	defer out.Close()
+	fmt.Println("#############", p)
+
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		ipc.BadRequest(l)
 		return
 	}
-	out.Close()
+
 	l.Log = string(p)
 	db.InsertLog(l)
 	ipc.Success(l)	

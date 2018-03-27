@@ -22,6 +22,7 @@ func (ipc *ImagePullController) PullImage() {
 		l.Log = "you didn't input image name"
 		db.InsertLog(l)
 		ipc.BadRequest(l)
+		fmt.Println(imageName, l)
 		return
 	}
 
@@ -30,6 +31,7 @@ func (ipc *ImagePullController) PullImage() {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		ipc.BadRequest(l)
+		fmt.Println(imageName, l)
 		return
 	}
 	var p []byte
@@ -41,10 +43,12 @@ func (ipc *ImagePullController) PullImage() {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		ipc.BadRequest(l)
+		fmt.Println(imageName, l)
 		return
 	}
 
 	l.Log = string(p)
 	db.InsertLog(l)
+	fmt.Println(imageName, l)
 	ipc.Success(l)	
 }

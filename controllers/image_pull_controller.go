@@ -5,6 +5,7 @@ import (
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"time"
+	"io/ioutil"
 )
 
 type ImagePullController struct {
@@ -34,10 +35,10 @@ func (ipc *ImagePullController) PullImage() {
 		fmt.Println(imageName, l)
 		return
 	}
-	var p []byte
-	_, err = out.Read(p)
+
+	msg, err := ioutil.ReadAll(out)
 	defer out.Close()
-	fmt.Println("#############", p)
+	fmt.Println(msg)
 
 	if err != nil {
 		l.Log = err.Error()
@@ -47,7 +48,7 @@ func (ipc *ImagePullController) PullImage() {
 		return
 	}
 
-	l.Log = string(p)
+	l.Log = string(msg)
 	db.InsertLog(l)
 	fmt.Println(imageName, l)
 	ipc.Success(l)	

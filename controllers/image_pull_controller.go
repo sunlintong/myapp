@@ -17,6 +17,7 @@ func (ipc *ImagePullController) PullImage() {
 	l := new(db.Log)
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()
+	fmt.Println("dsdasfef", imageName)
 
 	if imageName == "" {
 		l.Log = "you didn't input image name"

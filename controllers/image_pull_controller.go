@@ -23,7 +23,6 @@ func (ipc *ImagePullController) PullImage() {
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()
 	err := json.Unmarshal(ipc.Ctx.Input.RequestBody, &req)
-	fmt.Println(ipc.Ctx.Input.RequestBody, req)
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)

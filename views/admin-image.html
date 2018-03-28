@@ -282,7 +282,7 @@
 
   function pullImage() {
     var imn = document.getElementById("inputValue").value
-    alert(imn)
+    alert("正在拉取",imn)
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -293,7 +293,7 @@
       }),
       success: function(data) {
         console.log(data)
-        alert("拉取镜像成功")
+        alert("拉取镜像成功!")
       },
       error: function(data) {
         console.log(data)

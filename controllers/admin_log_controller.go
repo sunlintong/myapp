@@ -1,8 +1,5 @@
 package controllers
 
-import (
-)
-
 // AdminController ...
 type AdminLogController struct {
 	BaseController

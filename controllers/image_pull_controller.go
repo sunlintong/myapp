@@ -23,7 +23,14 @@ func (ipc *ImagePullController) PullImage() {
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()
 	err := json.Unmarshal(ipc.Ctx.Input.RequestBody, &req)
-	ipc.CheckErr(err)
+	fmt.Println(ipc.Ctx.Input.RequestBody, req)
+	if err != nil {
+		l.Log = err.Error()
+		db.InsertLog(l)
+		ipc.CheckErr(err)
+		ipc.BadRequest(l)
+		return
+	}
 	imageName := req.imageName
 	if imageName == "" {
 		l.Log = "you didn't input image name"

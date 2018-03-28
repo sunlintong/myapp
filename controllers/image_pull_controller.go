@@ -47,8 +47,8 @@ func (ipc *ImagePullController) PullImage() {
 		fmt.Println(imageName, l)
 		return
 	}
-
-	l.Log = string(msg)
+	// 只保存前250
+	l.Log = string(msg[:250])
 	db.InsertLog(l)
 	fmt.Println(imageName, l)
 	ipc.Success(l)	

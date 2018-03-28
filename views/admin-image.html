@@ -179,7 +179,7 @@
           </div>
           <hr/>
           <div>
-            <form action="/api/image/pull" method="post" class="am-form">
+            <form onsubmit="return postImageName()" class="am-form">
               <label for="imageName">镜像名:</label>
               <input type="text" id="imageName" name="imageName" />
               <div class="am-cf">
@@ -198,7 +198,6 @@
       </footer>
 
     </div>
-    <!-- content end -->
 
   </div>
 
@@ -209,15 +208,7 @@
     <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
   </footer>
 
-  <!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-
-  <!--[if (gte IE 9)|!(IE)]><!-->
   <script src="assets/js/jquery.min.js"></script>
-  <!--<![endif]-->
   <script src="assets/js/amazeui.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
@@ -283,6 +274,23 @@
         alert(data)
       },
       error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
+
+  function postImageName() {
+    var imageName = document.getElementById("imageName")
+    $.ajax({
+      type: "POST",
+      url: "api/image/pull",
+      data: imageName,
+      success: function(data) {
+        console.log(data)
+        alert("拉取镜像成功")
+      },
+      error: function(data) {
         console.log(data)
         alert(data.responseJSON.Log)
       }

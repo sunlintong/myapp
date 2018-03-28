@@ -280,8 +280,8 @@
     })
   }
 
-  function postImageName(this) {
-    var imn = this.getElementById("imageName")
+  function postImageName(pull) {
+    var imn = pull.getElementById("imageName")
     alert(imageName)
     $.ajax({
       type: "POST",

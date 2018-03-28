@@ -13,8 +13,7 @@ type ImagePullController struct {
 }
 
 func (ipc *ImagePullController) PullImage() {
-	inputs := ipc.Input()
-	imageName := inputs.Get("imageName")
+	imageName := ipc.GetString("imageName")
 	l := new(db.Log)
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()

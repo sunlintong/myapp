@@ -179,7 +179,7 @@
           </div>
           <hr/>
           <div>
-            <form onsubmit="return postImageName()" class="am-form">
+            <form onsubmit="return postImageName(this)" class="am-form">
               <label for="imageName">镜像名:</label>
               <input type="text" id="imageName" name="imageName" />
               <div class="am-cf">
@@ -280,13 +280,17 @@
     })
   }
 
-  function postImageName() {
-    var imageName = document.getElementById("imageName")
+  function postImageName(this) {
+    var imn = this.getElementById("imageName")
     alert(imageName)
     $.ajax({
       type: "POST",
+      dataType: "json",
       url: "api/image/pull",
-      data: imageName,
+      contentType: 'application/json',
+      data: JSON.stringify({
+        imageName: imn
+      }),
       success: function(data) {
         console.log(data)
         alert("拉取镜像成功")

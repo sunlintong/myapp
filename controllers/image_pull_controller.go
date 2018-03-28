@@ -5,6 +5,7 @@ import (
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"time"
+	"encoding/json"
 	"io/ioutil"
 )
 
@@ -17,12 +18,13 @@ type ImagePullReq struct {
 }
 
 func (ipc *ImagePullController) PullImage() {
-	imageName := ipc.GetString("image_name")
+	var req ImagePullReq
 	l := new(db.Log)
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()
-	fmt.Println("dsdasfef", imageName)
-
+	err := json.Unmarshal(ipc.Ctx.Input.RequestBody, &req)
+	ipc.CheckErr(err)
+	imageName := req.imageName
 	if imageName == "" {
 		l.Log = "you didn't input image name"
 		err := db.InsertLog(l)

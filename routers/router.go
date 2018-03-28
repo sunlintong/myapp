@@ -11,11 +11,11 @@ func init() {
 	beego.Router("/register", &controllers.RegisterController{})
 
 	// 页面 路由
-	beego.Router("/admin/index", &controllers.AdminIndexController{})
-	beego.Router("/admin/image", &controllers.AdminImageController{})
-	beego.Router("/admin/container", &controllers.AdminContainerController{})
-	beego.Router("/admin/container/log", &controllers.AdminContainerLogController{})
-	beego.Router("/admin/log", &controllers.AdminLogController{})
+	beego.Router("/admin-index", &controllers.AdminIndexController{})
+	beego.Router("/admin-image", &controllers.AdminImageController{})
+	beego.Router("/admin-container", &controllers.AdminContainerController{})
+	beego.Router("/admin-container-log", &controllers.AdminContainerLogController{})
+	beego.Router("/admin-log", &controllers.AdminLogController{})
 
 	
 

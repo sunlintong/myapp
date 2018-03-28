@@ -12,8 +12,12 @@ type ImagePullController struct {
 	BaseController
 }
 
+type ImagePullReq struct {
+	imageName string `json:"image_name"`
+}
+
 func (ipc *ImagePullController) PullImage() {
-	imageName := ipc.GetString("imageName")
+	imageName := ipc.GetString("image_name")
 	l := new(db.Log)
 	l.Name = "unknown"
 	l.Time = time.Now().Unix()

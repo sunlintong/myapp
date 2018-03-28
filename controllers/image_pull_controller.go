@@ -14,7 +14,7 @@ type ImagePullController struct {
 }
 
 type ImagePullReq struct {
-	imageName string `json:"image_name"`
+	Image_Name string `json:"image_name"`
 }
 
 func (ipc *ImagePullController) PullImage() {
@@ -31,7 +31,7 @@ func (ipc *ImagePullController) PullImage() {
 		ipc.BadRequest(l)
 		return
 	}
-	imageName := req.imageName
+	imageName := req.Image_Name
 	if imageName == "" {
 		l.Log = "you didn't input image name"
 		err := db.InsertLog(l)

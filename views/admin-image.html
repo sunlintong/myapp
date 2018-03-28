@@ -259,7 +259,7 @@
   }
 
   function handleForce(force) {
-    iid = force.getAttribute("data-force-iid").innerHTML
+    iid = force.getAttribute("data-force-iid")
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -281,7 +281,7 @@
   }
 
   function pullImage() {
-    var imn = document.getElementById("inputValue").
+    var imn = document.getElementById("inputValue").innerHTML
     alert(imn)
     $.ajax({
       type: "POST",

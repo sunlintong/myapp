@@ -179,13 +179,13 @@
           </div>
           <hr/>
           <div>
-            <form onsubmit="return postImageName(this)" class="am-form">
               <label for="imageName">镜像名:</label>
-              <input type="text" id="imageName" name="imageName" />
+              <input type="text" id="inputValue" name="imageName" />
               <div class="am-cf">
-                <input type="submit" value="确认" class="am-btn am-btn-primary am-btn-sm am-fl">
+                <button onclick = "pullImage()" class="am-btn am-btn-primary am-btn-sm am-fl">确认
+                </button>
               </div>
-            </form>
+
           </div>
         </div>
 
@@ -280,8 +280,8 @@
     })
   }
 
-  function postImageName(pull) {
-    var imn = pull.getElementById("imageName")
+  function postImageName() {
+    var imn = document.getElementById("inputValue")
     alert(imn)
     $.ajax({
       type: "POST",

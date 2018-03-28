@@ -21,7 +21,8 @@ func (ipc *ImagePullController) PullImage() {
 
 	if imageName == "" {
 		l.Log = "you didn't input image name"
-		db.InsertLog(l)
+		err := db.InsertLog(l)
+		ipc.CheckErr(err)
 		ipc.BadRequest(l)
 		fmt.Println(imageName, l)
 		return
@@ -31,6 +32,7 @@ func (ipc *ImagePullController) PullImage() {
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
+		ipc.CheckErr(err)
 		ipc.BadRequest(l)
 		fmt.Println(imageName, l)
 		return
@@ -43,6 +45,7 @@ func (ipc *ImagePullController) PullImage() {
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
+		ipc.CheckErr(err)
 		ipc.BadRequest(l)
 		fmt.Println(imageName, l)
 		return
@@ -50,6 +53,7 @@ func (ipc *ImagePullController) PullImage() {
 	// 只保存前250
 	l.Log = string(msg[:250])
 	db.InsertLog(l)
+	ipc.CheckErr(err)
 	fmt.Println(imageName, l)
 	ipc.Success(l)	
 }

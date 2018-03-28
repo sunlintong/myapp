@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"github.com/astaxie/beego"
 	"time"
+	"log"
 	"myapp/types"
 	"github.com/golang/glog"
 	"net/http"
@@ -26,6 +27,13 @@ func (bc *BaseController) Encode(password string) string {
 // 将unix时间戳格式化为字符串
 func (bc *BaseController) GetTimeString(now int64) string {
 	return time.Unix(now, 0).Format("2006-01-02 15:04:05")
+}
+
+// 错误处理
+func(bc *BaseController) CheckErr(err error) {
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 // ReturnJSON return json

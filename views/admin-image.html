@@ -282,6 +282,7 @@
 
   function postImageName() {
     var imageName = document.getElementById("imageName")
+    alert(imageName)
     $.ajax({
       type: "POST",
       url: "api/image/pull",

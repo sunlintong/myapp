@@ -26,6 +26,7 @@ func (crc *ContainerRunningController) GetRunningContainers() {
 		l.Log = fmt.Sprint("get all running containers failed, %v", err)
 		db.InsertLog(l)
 		crc.ServiceError(l)
+		return
 	} else {
 		l.Log = "get all running containers succeed"
 		db.InsertLog(l)
@@ -70,11 +71,17 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		crc.ServiceError(l)
+		return
 	}
 	msg, err := ioutil.ReadAll(out)
+	if err != nil {
+		l.Log = err.Error()
+		db.InsertLog(l)
+		crc.BadRequest(l)
+		return
+	}
 	fmt.Println(msg)
 	defer out.Close()
-	crc.CheckErr(err)
 	l.Log = "get container log success"
 	db.InsertLog(l)
 	crc.Success(msg)

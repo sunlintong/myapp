@@ -75,14 +75,15 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		return
 	}
 	msg, err := ioutil.ReadAll(out)
+	str := string(msg)
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		crc.ServiceError(l)
 		return
 	}
-	fmt.Println("msg----", msg)
+	fmt.Println("msg----", str)
 	l.Log = "get container log success"
 	db.InsertLog(l)
-	crc.Success(msg)
+	crc.Success(str)
 }

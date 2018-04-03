@@ -107,8 +107,7 @@
                 <th>创建时间</th>
                 <th>状态</th>
                 <th>端口映射</th>
-                <th>容器名</th>
-                <th>管理</th>                
+                <th>容器名</th>               
               </tr>
             </thead>
             <tbody id="containerlist">
@@ -166,11 +165,32 @@
         '<td>' + container[5] + '</td>' +
         '<td>' + container[6] + '</td>' + '</tr>' + 
         '<tr>' + "容器管理：" +
-        '<button onclick="seeLog(this)" data-log-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "查看日志" + 
+        '<button onclick="getLog(this)" data-log-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "查看日志" + 
         '</button>' +
         '</tr>';
     })
     document.getElementById("containerlist").innerHTML = htmltext;
   })
+
+  function getLog(log) {
+    cid = log.getAttribute("data-log-cid")
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"/api/container/running",
+      contentType:'application/json',
+      data: JSON.stringify({
+        container_id: cid
+      }),
+      success: function(data){
+        console.log(data)
+        alert(data.Log)
+      },
+      error: function(data){
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
 
 </script>

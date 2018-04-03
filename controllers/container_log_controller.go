@@ -3,12 +3,18 @@ package controllers
 import (
 	"myapp/modles/local"
 	"myapp/modles/db"
+	"encoding/json"
 	"time"
 	"fmt"
+	"io/ioutil"
 )
 
 type ContainerRunningController struct {
 	BaseController
+}
+
+type ContainerLogRequest struct {
+	Container_ID string `json:"container_id`
 }
 
 func (crc *ContainerRunningController) GetRunningContainers() {
@@ -43,4 +49,33 @@ func (crc *ContainerRunningController) GetRunningContainers() {
 	crc.Data["json"] = ret
 	crc.ServeJSON()
 	crc.Finish()
+}
+
+func (crc *ContainerRunningController) GetContainerLog() {
+	var req ContainerLogRequest
+	l := new(db.Log)
+	l.Name = "unknown"
+	l.Time = time.Now().Unix()
+
+	err := json.Unmarshal(crc.Ctx.Input.RequestBody, &req)
+	if err != nil {
+		l.Log = err.Error()
+		db.InsertLog(l)
+		crc.BadRequest(l)
+		return
+	}
+
+	out, err := local.GetContainerLog(req.Container_ID)
+	if err != nil {
+		l.Log = err.Error()
+		db.InsertLog(l)
+		crc.ServiceError(l)
+	}
+	msg, err := ioutil.ReadAll(out)
+	fmt.Println(msg)
+	defer out.Close()
+	crc.CheckErr(err)
+	l.Log = "get container log success"
+	db.InsertLog(l)
+	crc.Success(msg)
 }

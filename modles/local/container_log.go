@@ -9,6 +9,9 @@ import (
 func GetContainerLog(container_id string) (io.ReadCloser, error) {
 	ctx := context.Background()
 	cli := GetClient()
-	out, err := cli.ContainerLogs(ctx, container_id, types.ContainerLogsOptions{})
+	// 设置为返回stdout的输出流
+	options := types.ContainerLogsOptions{}
+	options.ShowStdout = true
+	out, err := cli.ContainerLogs(ctx, container_id, options)
 	return out, err
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Amaze UI Admin 404 Examples</title>
+  <title>myapp 容器日志管理</title>
   <meta name="description" content="这是一个404页面">
   <meta name="keywords" content="404">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 
 <header class="am-topbar am-topbar-inverse admin-header">
   <div class="am-topbar-brand">
-    <strong>Amaze UI</strong> <small>后台管理模板</small>
+    <strong>myapp</strong> <small>docker 管理平台</small>
   </div>
 
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -88,38 +88,43 @@
   <div class="admin-content">
     <div class="admin-content-body">
       <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">404</strong> / <small>That’s an error</small></div>
+        <div class="am-fl am-cf">
+          <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
+          <small>正在运行的容器列表</small>
+        </div>
       </div>
-
-      <hr>
 
       <div class="am-g">
         <div class="am-u-sm-12">
-          <h2 class="am-text-center am-text-xxxl am-margin-top-lg">404. Not Found</h2>
-          <p class="am-text-center">没有找到你要的页面</p>
-        <pre class="page-404">
-          .----.
-       _.'__    `.
-   .--($)($$)---/#\
- .' @          /###\
- :         ,   #####
-  `-..__.-' _.-\###/
-        `;_:    `"'
-      .'"""""`.
-     /,  ya ,\\
-    //  404!  \\
-    `-._______.-'
-    ___`. | .'___
-   (______|______)
-        </pre>
+          <table class="am-table am-table-bd am-table-striped admin-content-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>容器ID（只显示前20位）</th>
+                <th>源镜像</th>
+                <th>CMD命令</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>端口映射</th>
+                <th>容器名</th>
+                <th>管理</th>                
+              </tr>
+            </thead>
+            <tbody id="containerlist">
+
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <hr/>
     </div>
 
     <footer class="admin-content-footer">
       <hr>
       <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
     </footer>
+
   </div>
   <!-- content end -->
 
@@ -145,3 +150,26 @@
 <script src="assets/js/app.js"></script>
 </body>
 </html>
+
+<script>
+    $.getJSON("/api/container/running", function (data) {
+    var htmltext = "";
+    $.each(data, function (key, container) {
+      htmltext = htmltext + "<tr>" +
+        '<td>' + key + '</td>' +
+        '<td>' + container[0].slice(0, 20) + '</td>' +
+        '<td>' + '<a href="#">' + container[1] + '</a>' + '</td>' +
+        '<td>' + container[2] + '</td>' +
+        '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
+        '<td>' + container[4] + '</td>' +
+        '<td>' + container[5] + '</td>' +
+        '<td>' + container[6] + '</td>' + '</tr>' + 
+        '<tr>' + "容器管理：" +
+        '<button onclick="seeLog(this)" data-log-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "查看日志" + 
+        '</button>' +
+        '</tr>';
+    })
+    document.getElementById("containerlist").innerHTML = htmltext;
+  })
+
+</script>

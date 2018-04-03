@@ -65,7 +65,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		crc.BadRequest(l)
 		return
 	}
-
+	fmt.Println("DFSRFETG", req)
 	out, err := local.GetContainerLog(req.Container_ID)
 	if err != nil {
 		l.Log = err.Error()
@@ -80,7 +80,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		crc.BadRequest(l)
 		return
 	}
-	fmt.Println(msg)
+	fmt.Println("msg----", msg)
 	defer out.Close()
 	l.Log = "get container log success"
 	db.InsertLog(l)

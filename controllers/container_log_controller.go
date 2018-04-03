@@ -17,11 +17,11 @@ func (crc *ContainerRunningController) GetRunningContainers() {
 	l.Name = "admin"
 	l.Time = time.Now().Unix()
 	if err != nil {
-		l.Log = fmt.Sprint("get all containers failed, %v", err)
+		l.Log = fmt.Sprint("get all running containers failed, %v", err)
 		db.InsertLog(l)
 		crc.ServiceError(l)
 	} else {
-		l.Log = "get all containers succeed"
+		l.Log = "get all running containers succeed"
 		db.InsertLog(l)
 	}
 

@@ -177,16 +177,25 @@
         </div>
         <hr/>
         <div>
-          <form>
-            <input type="checkbox" id="showstdout" value="ShowStdout" checked/>ShowStdout
-            <input type="checkbox" id="showstderr" value="ShowStderr" checked/>ShowStderr
-            <input type="checkbox" id="timestamps" value="Timestamps" />Timestamps
-            <input type="checkbox" id="details" value="Details" />Details
-            <div class="am-cf">
-              <button onclick="setLogOptions()" class="am-btn am-btn-primary am-btn-sm am-fl">提交设置
-              </button>
+          <fieldset>
+            <legend>请选择日志输出选项</legend>
+            <div>
+              <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
+              <label for="ShowStdout">ShowStdout</label>
             </div>
-          </form>
+            <div>
+              <input type="checkbox" id="showstderr" name="logoptions" value="ShowStderr" checked>
+              <label for="ShowStderr">ShowStderr</label>
+            </div>
+            <div>
+              <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps" checked>
+              <label for="Timestamps">Timestamps</label>
+            </div>
+            <div>
+              <input type="checkbox" id="details" name="logoptions" value="Details" checked>
+              <label for="Details">Details</label>
+            </div>
+          </fieldset>
 
         </div>
       </div>

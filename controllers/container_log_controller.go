@@ -73,7 +73,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		return
 	}
 	fmt.Println("req----", req)
-	options := types.ContainerLogsOptions{}
+	options := types.ContainerLogsOptions{ShowStderr: true}
 	out, err := local.GetContainerLog(req.Container_ID, options)
 	defer out.Close()
 	if err != nil {

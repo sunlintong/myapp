@@ -258,10 +258,6 @@
     var b = document.getElementById("showstderr").checked
     var c = document.getElementById("timestamps").checked
     var d = document.getElementById("details").checked
-    alert(a)
-    alert(b)
-    alert(c)
-    alert(d)
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",
@@ -270,6 +266,10 @@
       contentType: 'application/json',
       data: JSON.stringify({
         container_id: cid
+        showstdout: a
+        showstderr: b
+        timestamps: c
+        details: d
       }),
       success: function (data) {
         console.log(data)

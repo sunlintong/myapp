@@ -1,13 +1,14 @@
 package controllers
 
 import (
-	"github.com/docker/docker/api/types"
-	"myapp/modles/local"
-	"myapp/modles/db"
 	"encoding/json"
-	"time"
 	"fmt"
 	"io/ioutil"
+	"myapp/modles/db"
+	"myapp/modles/local"
+	"time"
+
+	"github.com/docker/docker/api/types"
 )
 
 type ContainerRunningController struct {
@@ -16,13 +17,13 @@ type ContainerRunningController struct {
 
 type ContainerLogRequest struct {
 	Container_ID string `json:"container_id`
+	ShowStdout   bool   `json:"showstdout"`
+	ShowStderr   bool   `json:"showstderr"`
+	Timestamps   bool   `json:"timestamps"`
+	Detail       bool   `jaon:"details"`
 }
 
-type LogOptionsRequest struct {
-	
-}
-
-// get 
+// get
 func (crc *ContainerRunningController) GetRunningContainers() {
 	containers, err := local.GetRunningContainers()
 	l := new(db.Log)
@@ -73,7 +74,11 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		return
 	}
 	fmt.Println("req----", req)
-	options := types.ContainerLogsOptions{ShowStderr: true}
+	options := types.ContainerLogsOptions{}
+	options.ShowStdout = req.ShowStdout
+	options.ShowStderr = req.ShowStderr
+	options.Timestamps = req.Timestamps
+	options.Details = req.Details
 	out, err := local.GetContainerLog(req.Container_ID, options)
 	defer out.Close()
 	if err != nil {

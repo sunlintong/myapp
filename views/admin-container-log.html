@@ -181,18 +181,18 @@
           <legend>请选择日志输出选项</legend>
           <div>
             <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
-            <label for="showStdout">ShowStdout</label>
+            <label for="showstdout">ShowStdout</label>
           </div>
           <div>
             <input type="checkbox" id="showstderr" name="logoptions" value="ShowStderr" checked>
-            <label for="showStderr">ShowStderr</label>
+            <label for="showstderr">ShowStderr</label>
           </div>
           <div>
-            <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps" checked>
+            <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps">
             <label for="timestamps">Timestamps</label>
           </div>
           <div>
-            <input type="checkbox" id="details" name="logoptions" value="Details" checked>
+            <input type="checkbox" id="details" name="logoptions" value="Details">
             <label for="details">Details</label>
           </div>
         </fieldset>
@@ -258,7 +258,10 @@
     var b = document.getElementById("showstderr").value
     var c = document.getElementById("timestamps").value
     var d = document.getElementById("details").value
-    alert(a, b, c, d)
+    alert(a)
+    alert(b)
+    alert(c)
+    alert(d)
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",

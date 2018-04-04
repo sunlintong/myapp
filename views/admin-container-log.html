@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,161 +13,218 @@
   <link rel="icon" type="image/png" href="assets/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="assets/css/amazeui.min.css" />
   <link rel="stylesheet" href="assets/css/admin.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
+
 <body>
-<!--[if lte IE 9]>
+  <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
   以获得更好的体验！</p>
 <![endif]-->
 
-<header class="am-topbar am-topbar-inverse admin-header">
-  <div class="am-topbar-brand">
-    <strong>myapp</strong> <small>docker 管理平台</small>
-  </div>
+  <header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+      <strong>myapp</strong>
+      <small>docker 管理平台</small>
+    </div>
 
-  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
+      <span class="am-sr-only">导航切换</span>
+      <span class="am-icon-bars"></span>
+    </button>
 
-  <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
-    <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-      <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
-      <li class="am-dropdown" data-am-dropdown>
-        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
-        </a>
-        <ul class="am-dropdown-content">
-          <li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
-          <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-          <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
-        </ul>
-      </li>
-      <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
-    </ul>
-  </div>
-</header>
-
-<div class="am-cf admin-main">
-  <!-- sidebar start -->
-  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-    <div class="am-offcanvas-bar admin-offcanvas-bar">
-        <ul class="am-list admin-sidebar-list">
-            <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
-            <li class="admin-parent">
-              <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 功能模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-              <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                <li><a href="admin-image.html"><span class="am-icon-puzzle-piece"></span> 镜像管理</a></li>
-                <li><a href="admin-container.html"><span class="am-icon-th"></span> 容器管理</a></li>
-                <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-                <li><a href="admin-container-log.html"><span class="am-icon-bug"></span> 容器日志</a></li>
-              </ul>
+      <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+        <li>
+          <a href="javascript:;">
+            <span class="am-icon-envelope-o"></span> 收件箱
+            <span class="am-badge am-badge-warning">5</span>
+          </a>
+        </li>
+        <li class="am-dropdown" data-am-dropdown>
+          <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            <span class="am-icon-users"></span> 管理员
+            <span class="am-icon-caret-down"></span>
+          </a>
+          <ul class="am-dropdown-content">
+            <li>
+              <a href="#">
+                <span class="am-icon-user"></span> 资料</a>
             </li>
-            <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
-            <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
-            <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+            <li>
+              <a href="#">
+                <span class="am-icon-cog"></span> 设置</a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="am-icon-power-off"></span> 退出</a>
+            </li>
           </ul>
+        </li>
+        <li class="am-hide-sm-only">
+          <a href="javascript:;" id="admin-fullscreen">
+            <span class="am-icon-arrows-alt"></span>
+            <span class="admin-fullText">开启全屏</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
 
-      <div class="am-panel am-panel-default admin-sidebar-panel">
-        <div class="am-panel-bd">
-          <p><span class="am-icon-bookmark"></span> 公告</p>
-          <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+  <div class="am-cf admin-main">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+      <div class="am-offcanvas-bar admin-offcanvas-bar">
+        <ul class="am-list admin-sidebar-list">
+          <li>
+            <a href="admin-index.html">
+              <span class="am-icon-home"></span> 首页</a>
+          </li>
+          <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
+              <span class="am-icon-file"></span> 功能模块
+              <span class="am-icon-angle-right am-fr am-margin-right"></span>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+              <li>
+                <a href="admin-image.html">
+                  <span class="am-icon-puzzle-piece"></span> 镜像管理</a>
+              </li>
+              <li>
+                <a href="admin-container.html">
+                  <span class="am-icon-th"></span> 容器管理</a>
+              </li>
+              <li>
+                <a href="admin-log.html">
+                  <span class="am-icon-calendar"></span> 系统日志</a>
+              </li>
+              <li>
+                <a href="admin-container-log.html">
+                  <span class="am-icon-bug"></span> 容器日志</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="admin-table.html">
+              <span class="am-icon-table"></span> 表格</a>
+          </li>
+          <li>
+            <a href="admin-form.html">
+              <span class="am-icon-pencil-square-o"></span> 表单</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="am-icon-sign-out"></span> 注销</a>
+          </li>
+        </ul>
+
+        <div class="am-panel am-panel-default admin-sidebar-panel">
+          <div class="am-panel-bd">
+            <p>
+              <span class="am-icon-bookmark"></span> 公告</p>
+            <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+          </div>
         </div>
-      </div>
 
-      <div class="am-panel am-panel-default admin-sidebar-panel">
-        <div class="am-panel-bd">
-          <p><span class="am-icon-tag"></span> wiki</p>
-          <p>Welcome to the Amaze UI wiki!</p>
+        <div class="am-panel am-panel-default admin-sidebar-panel">
+          <div class="am-panel-bd">
+            <p>
+              <span class="am-icon-tag"></span> wiki</p>
+            <p>Welcome to the Amaze UI wiki!</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- sidebar end -->
+    <!-- sidebar end -->
 
-  <!-- content start -->
-  <div class="admin-content">
-    <div class="admin-content-body">
-      <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf">
-          <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
-          <small>正在运行的容器列表</small>
+    <!-- content start -->
+    <div class="admin-content">
+      <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+          <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
+            <small>正在运行的容器列表</small>
+          </div>
         </div>
-      </div>
 
-      <div class="am-g">
-        <div class="am-u-sm-12">
-          <table class="am-table am-table-bd am-table-striped admin-content-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>容器ID（只显示前20位）</th>
-                <th>源镜像</th>
-                <th>CMD命令</th>
-                <th>创建时间</th>
-                <th>状态</th>
-                <th>端口映射</th>
-                <th>容器名</th>               
-              </tr>
-            </thead>
-            <tbody id="containerlist">
+        <div class="am-g">
+          <div class="am-u-sm-12">
+            <table class="am-table am-table-bd am-table-striped admin-content-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>容器ID（只显示前20位）</th>
+                  <th>源镜像</th>
+                  <th>CMD命令</th>
+                  <th>创建时间</th>
+                  <th>状态</th>
+                  <th>端口映射</th>
+                  <th>容器名</th>
+                </tr>
+              </thead>
+              <tbody id="containerlist">
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
         <div class="am-fl am-cf">
           <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
           <small>日志获取内容设置</small>
         </div>
-      <hr/>
-      <div>
-        <input type="checkbox" id="showstdout" value= "ShowStdout"/>ShowStdout
-        <input type="checkbox" id="showstderr" value= "ShowStderr"/>ShowStderr
-        <input type="checkbox" id="timestamps" value= "Timestamps"/>Timestamps
-        <input type="checkbox" id="details" value= "Details"/>Details
-        <div class="am-cf">
-          <button onclick = "setLogOptions()" class="am-btn am-btn-primary am-btn-sm am-fl">提交设置
-          </button>
+        <hr/>
+        <div>
+          <form>
+            <input type="checkbox" id="showstdout" value="ShowStdout" checked/>ShowStdout
+            <input type="checkbox" id="showstderr" value="ShowStderr" checked/>ShowStderr
+            <input type="checkbox" id="timestamps" value="Timestamps" />Timestamps
+            <input type="checkbox" id="details" value="Details" />Details
+            <div class="am-cf">
+              <button onclick="setLogOptions()" class="am-btn am-btn-primary am-btn-sm am-fl">提交设置
+              </button>
+            </div>
+          </form>
+
         </div>
+      </div>
+
+      <footer class="admin-content-footer">
+        <hr>
+        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+      </footer>
 
     </div>
-    </div>
-
-    <footer class="admin-content-footer">
-      <hr>
-      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
-    </footer>
+    <!-- content end -->
 
   </div>
-  <!-- content end -->
 
-</div>
+  <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
-<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+  <footer>
+    <hr>
+    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+  </footer>
 
-<footer>
-  <hr>
-  <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
-</footer>
-
-<!--[if lt IE 9]>
+  <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
-<!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
-<!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/app.js"></script>
+  <!--[if (gte IE 9)|!(IE)]><!-->
+  <script src="assets/js/jquery.min.js"></script>
+  <!--<![endif]-->
+  <script src="assets/js/amazeui.min.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
+
 </html>
 
 <script>
-    $.getJSON("/api/container/running", function (data) {
+  $.getJSON("/api/container/running", function (data) {
     var htmltext = "";
     $.each(data, function (key, container) {
       htmltext = htmltext + "<tr>" +
@@ -177,9 +235,9 @@
         '<td>' + '<span class="am-badge am-badge-danger">' + container[3] + '</span>' + '</td>' +
         '<td>' + container[4] + '</td>' +
         '<td>' + container[5] + '</td>' +
-        '<td>' + container[6] + '</td>' + '</tr>' + 
+        '<td>' + container[6] + '</td>' + '</tr>' +
         '<tr>' + "容器管理：" +
-        '<button onclick="getLog(this)" data-log-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "查看日志" + 
+        '<button onclick="getLog(this)" data-log-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "查看日志" +
         '</button>' +
         '</tr>';
     })
@@ -189,18 +247,18 @@
   function getLog(log) {
     cid = log.getAttribute("data-log-cid")
     $.ajax({
-      type:"POST",
-      dataType:"json",
-      url:"/api/container/log",
-      contentType:'application/json',
+      type: "POST",
+      dataType: "json",
+      url: "/api/container/log",
+      contentType: 'application/json',
       data: JSON.stringify({
         container_id: cid
       }),
-      success: function(data){
+      success: function (data) {
         console.log(data)
         alert("容器日志加载成功！")
       },
-      error: function(data){
+      error: function (data) {
         console.log(data)
         alert(data.responseJSON.Log)
       }

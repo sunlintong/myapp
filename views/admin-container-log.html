@@ -254,11 +254,11 @@
   })
 
   function getLog(log) {
-    var showstdout = document.getElementById("showstdout").value
-    var showstderr = document.getElementById("showstderr").value
-    var timestamps = document.getElementById("timestamps").value
-    var details = document.getElementById("details").value
-    alert(showstderr)
+    var a = document.getElementById("showstdout").value
+    var b = document.getElementById("showstderr").value
+    var c = document.getElementById("timestamps").value
+    var d = document.getElementById("details").value
+    alert(a,b,c,d)
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",

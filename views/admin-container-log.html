@@ -171,32 +171,37 @@
             </table>
           </div>
         </div>
-        <div class="am-fl am-cf">
-          <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
-          <small>日志获取内容设置</small>
+
+        <div class="am-g">
+          <div class="am-u-sm-12">
+            <strong class="am-text-primary am-text-lg">容器日志管理</strong> /
+            <small>日志获取内容设置</small>
+          </div>
+          <hr/>
+          <fieldset>
+            <legend>选择需要输出的日志内容</legend>
+            <div>
+              <input type="checkbox" id="showstdout" name="logoptions" checked>
+              <label for="showstdout">显示标准输出</label>
+            </div>
+            <div>
+              <input type="checkbox" id="showstderr" name="logoptions" checked>
+              <label for="showstderr">显示标准错误输出</label>
+            </div>
+            <div>
+              <input type="checkbox" id="timestamps" name="logoptions">
+              <label for="timestamps">显示日志时间戳</label>
+            </div>
+            <div>
+              <input type="checkbox" id="details" name="logoptions">
+              <label for="details">显示日志详情</label>
+            </div>
+            <div>
+              <label for="tail">设置需显示的日志最末行数:</label>
+              <input type="text" id="tail" name="logoptions" />
+            </div>
+          </fieldset>
         </div>
-        <hr/>
-
-        <fieldset>
-          <legend>选择需要输出的日志内容</legend>
-          <div>
-            <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
-            <label for="showstdout">ShowStdout</label>
-          </div>
-          <div>
-            <input type="checkbox" id="showstderr" name="logoptions" value="ShowStderr" checked>
-            <label for="showstderr">ShowStderr</label>
-          </div>
-          <div>
-            <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps">
-            <label for="timestamps">Timestamps</label>
-          </div>
-          <div>
-            <input type="checkbox" id="details" name="logoptions" value="Details">
-            <label for="details">Details</label>
-          </div>
-        </fieldset>
-
 
       </div>
 
@@ -258,6 +263,7 @@
     b = document.getElementById("showstderr").checked
     c = document.getElementById("timestamps").checked
     d = document.getElementById("details").checked
+    tail = document.getElementById("tail").value
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",
@@ -269,7 +275,8 @@
         showstdout: a,
         showstderr: b,
         timestamps: c,
-        details: d
+        details: d,
+        tail: tail
       }),
       success: function (data) {
         console.log(data)

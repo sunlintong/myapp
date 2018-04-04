@@ -78,21 +78,48 @@
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
       <div class="am-offcanvas-bar admin-offcanvas-bar">
-          <ul class="am-list admin-sidebar-list">
-              <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
-              <li class="admin-parent">
-                <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 功能模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                  <li><a href="admin-image.html"><span class="am-icon-puzzle-piece"></span> 镜像管理</a></li>
-                  <li><a href="admin-container.html"><span class="am-icon-th"></span> 容器管理</a></li>
-                  <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-                  <li><a href="admin-container-log.html"><span class="am-icon-bug"></span> 容器日志</a></li>
-                </ul>
+        <ul class="am-list admin-sidebar-list">
+          <li>
+            <a href="admin-index.html">
+              <span class="am-icon-home"></span> 首页</a>
+          </li>
+          <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
+              <span class="am-icon-file"></span> 功能模块
+              <span class="am-icon-angle-right am-fr am-margin-right"></span>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+              <li>
+                <a href="admin-image.html">
+                  <span class="am-icon-puzzle-piece"></span> 镜像管理</a>
               </li>
-              <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
-              <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
-              <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+              <li>
+                <a href="admin-container.html">
+                  <span class="am-icon-th"></span> 容器管理</a>
+              </li>
+              <li>
+                <a href="admin-log.html">
+                  <span class="am-icon-calendar"></span> 系统日志</a>
+              </li>
+              <li>
+                <a href="admin-container-log.html">
+                  <span class="am-icon-bug"></span> 容器日志</a>
+              </li>
             </ul>
+          </li>
+          <li>
+            <a href="admin-table.html">
+              <span class="am-icon-table"></span> 表格</a>
+          </li>
+          <li>
+            <a href="admin-form.html">
+              <span class="am-icon-pencil-square-o"></span> 表单</a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="am-icon-sign-out"></span> 注销</a>
+          </li>
+        </ul>
 
         <div class="am-panel am-panel-default admin-sidebar-panel">
           <div class="am-panel-bd">
@@ -152,13 +179,12 @@
           </div>
           <hr/>
           <div>
-              <label for="imageName">镜像名:</label>
-              <input type="text" id="inputValue" name="imageName" />
-              <div class="am-cf">
-                <button onclick = "pullImage()" class="am-btn am-btn-primary am-btn-sm am-fl">确认
-                </button>
-              </div>
-
+            <label for="imageName">镜像名:</label>
+            <input type="text" id="inputValue" name="imageName" />
+            <div class="am-cf">
+              <button onclick="pullImage()" class="am-btn am-btn-primary am-btn-sm am-fl">确认
+              </button>
+            </div>
           </div>
         </div>
 
@@ -257,7 +283,7 @@
 
   function pullImage() {
     var imn = document.getElementById("inputValue").value
-    alert("正在拉取",imn)
+    alert("正在拉取", imn)
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -266,12 +292,12 @@
       data: JSON.stringify({
         image_name: imn
       }),
-      success: function(data) {
+      success: function (data) {
         console.log(data)
         alert("拉取镜像成功!")
         location.reload()
       },
-      error: function(data) {
+      error: function (data) {
         console.log(data)
         alert(data.responseJSON.Log)
       }

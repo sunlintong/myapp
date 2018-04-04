@@ -21,6 +21,7 @@ type ContainerLogRequest struct {
 	ShowStderr   bool   `json:"showstderr"`
 	Timestamps   bool   `json:"timestamps"`
 	Details      bool   `json:"details"`
+	Tail         string `json:"tail"`
 }
 
 // get
@@ -79,6 +80,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 	options.ShowStderr = req.ShowStderr
 	options.Timestamps = req.Timestamps
 	options.Details = req.Details
+	options.Tail = req.Tail
 	out, err := local.GetContainerLog(req.Container_ID, options)
 	defer out.Close()
 	if err != nil {

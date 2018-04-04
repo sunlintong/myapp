@@ -176,28 +176,28 @@
           <small>日志获取内容设置</small>
         </div>
         <hr/>
-        <div>
-          <fieldset>
-            <legend>请选择日志输出选项</legend>
-            <div>
-              <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
-              <label for="ShowStdout">ShowStdout</label>
-            </div>
-            <div>
-              <input type="checkbox" id="showstderr" name="logoptions" value="ShowStderr" checked>
-              <label for="ShowStderr">ShowStderr</label>
-            </div>
-            <div>
-              <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps" checked>
-              <label for="Timestamps">Timestamps</label>
-            </div>
-            <div>
-              <input type="checkbox" id="details" name="logoptions" value="Details" checked>
-              <label for="Details">Details</label>
-            </div>
-          </fieldset>
 
-        </div>
+        <fieldset>
+          <legend>请选择日志输出选项</legend>
+          <div>
+            <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
+            <label for="showStdout">ShowStdout</label>
+          </div>
+          <div>
+            <input type="checkbox" id="showstderr" name="logoptions" value="ShowStderr" checked>
+            <label for="showStderr">ShowStderr</label>
+          </div>
+          <div>
+            <input type="checkbox" id="timestamps" name="logoptions" value="Timestamps" checked>
+            <label for="timestamps">Timestamps</label>
+          </div>
+          <div>
+            <input type="checkbox" id="details" name="logoptions" value="Details" checked>
+            <label for="details">Details</label>
+          </div>
+        </fieldset>
+
+
       </div>
 
       <footer class="admin-content-footer">
@@ -258,7 +258,7 @@
     var b = document.getElementById("showstderr").value
     var c = document.getElementById("timestamps").value
     var d = document.getElementById("details").value
-    alert(a,b,c,d)
+    alert(a, b, c, d)
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",

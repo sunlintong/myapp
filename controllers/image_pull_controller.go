@@ -51,8 +51,9 @@ func (ipc *ImagePullController) PullImage() {
 	}
 
 	msg, err := ioutil.ReadAll(out)
+	str := string(msg)
 	defer out.Close()
-	fmt.Println(msg)
+	fmt.Println(str)
 
 	if err != nil {
 		l.Log = err.Error()
@@ -67,5 +68,5 @@ func (ipc *ImagePullController) PullImage() {
 	db.InsertLog(l)
 	ipc.CheckErr(err)
 	fmt.Println(imageName, l)
-	ipc.Success(l)	
+	ipc.Success(str)	
 }

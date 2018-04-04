@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/docker/docker/api/types"
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"encoding/json"
@@ -72,7 +73,8 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		return
 	}
 	fmt.Println("req----", req)
-	out, err := local.GetContainerLog(req.Container_ID)
+	options := types.ContainerLogsOptions{}
+	out, err := local.GetContainerLog(req.Container_ID, options)
 	defer out.Close()
 	if err != nil {
 		l.Log = err.Error()

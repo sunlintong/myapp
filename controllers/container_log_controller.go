@@ -100,8 +100,3 @@ func (crc *ContainerRunningController) GetContainerLog() {
 	db.InsertLog(l)
 	crc.Success(str)
 }
-
-// put
-func (crc *ContainerRunningController) SetLogOptions() {
-
-}

@@ -178,7 +178,7 @@
         <hr/>
 
         <fieldset>
-          <legend>请选择日志输出选项</legend>
+          <legend>选择需要输出的日志内容</legend>
           <div>
             <input type="checkbox" id="showstdout" name="logoptions" value="ShowStdout" checked>
             <label for="showstdout">ShowStdout</label>
@@ -254,10 +254,10 @@
   })
 
   function getLog(log) {
-    var a = document.getElementById("showstdout").checked
-    var b = document.getElementById("showstderr").checked
-    var c = document.getElementById("timestamps").checked
-    var d = document.getElementById("details").checked
+    a = document.getElementById("showstdout").checked
+    b = document.getElementById("showstderr").checked
+    c = document.getElementById("timestamps").checked
+    d = document.getElementById("details").checked
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",
@@ -265,10 +265,10 @@
       url: "/api/container/log",
       contentType: 'application/json',
       data: JSON.stringify({
-        container_id: cid
-        showstdout: a
-        showstderr: b
-        timestamps: c
+        container_id: cid,
+        showstdout: a,
+        showstderr: b,
+        timestamps: c,
         details: d
       }),
       success: function (data) {

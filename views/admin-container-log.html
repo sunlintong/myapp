@@ -254,6 +254,11 @@
   })
 
   function getLog(log) {
+    var showstdout = document.getElementById("showstdout").value
+    var showstderr = document.getElementById("showstderr").value
+    var timestamps = document.getElementById("timestamps").value
+    var details = document.getElementById("details").value
+    alert(showstdout, showstderr, timestamps, details)
     cid = log.getAttribute("data-log-cid")
     $.ajax({
       type: "POST",
@@ -274,13 +279,5 @@
     })
   }
 
-  function setLogOptions() {
-    var showstdout = document.getElementById("showstdout").value
-    var showstderr = document.getElementById("showstderr").value
-    var timestamps = document.getElementById("timestamps").value
-    var details = document.getElementById("details").value
-    alert(showstdout, showstderr, timestamps, details)
-
-  }
 
 </script>

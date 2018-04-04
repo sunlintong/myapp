@@ -20,7 +20,7 @@ type ContainerLogRequest struct {
 	ShowStdout   bool   `json:"showstdout"`
 	ShowStderr   bool   `json:"showstderr"`
 	Timestamps   bool   `json:"timestamps"`
-	Detail       bool   `jaon:"details"`
+	Details      bool   `jaon:"details"`
 }
 
 // get

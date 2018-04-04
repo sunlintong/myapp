@@ -17,6 +17,11 @@ type ContainerLogRequest struct {
 	Container_ID string `json:"container_id`
 }
 
+type LogOptionsRequest struct {
+	
+}
+
+// get 
 func (crc *ContainerRunningController) GetRunningContainers() {
 	containers, err := local.GetRunningContainers()
 	l := new(db.Log)
@@ -52,6 +57,7 @@ func (crc *ContainerRunningController) GetRunningContainers() {
 	crc.Finish()
 }
 
+// post
 func (crc *ContainerRunningController) GetContainerLog() {
 	var req ContainerLogRequest
 	l := new(db.Log)
@@ -86,4 +92,9 @@ func (crc *ContainerRunningController) GetContainerLog() {
 	l.Log = "get container log success"
 	db.InsertLog(l)
 	crc.Success(str)
+}
+
+// put
+func (crc *ContainerRunningController) SetLogOptions() {
+
 }

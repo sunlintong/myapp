@@ -6,16 +6,10 @@ import (
 	"io"
 )
 
-func GetContainerLog(container_id string) (io.ReadCloser, error) {
+func GetContainerLog(container_id string, options types.ContainerLogsOptions) (io.ReadCloser, error) {
 	ctx := context.Background()
 	cli := GetClient()
 	// 设置为返回stdout的输出流
-	options := types.ContainerLogsOptions{}
-	options.ShowStdout = true
-	options.ShowStderr = true
-	options.Details = true
-//	options.Follow = true
-//	options.Timestamps = true
 	out, err := cli.ContainerLogs(ctx, container_id, options)
 	return out, err
 }

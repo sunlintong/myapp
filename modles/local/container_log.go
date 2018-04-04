@@ -13,9 +13,9 @@ func GetContainerLog(container_id string) (io.ReadCloser, error) {
 	options := types.ContainerLogsOptions{}
 	options.ShowStdout = true
 	options.ShowStderr = true
-//	options.Details = true
+	options.Details = true
 //	options.Follow = true
-	options.Timestamps = true
+//	options.Timestamps = true
 	out, err := cli.ContainerLogs(ctx, container_id, options)
 	return out, err
 }

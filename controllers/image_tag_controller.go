@@ -41,6 +41,10 @@ func (itc *ImageTagController) OperateTag() {
 	case DeleteTag:
 		// 因docker api不全未能实现删除tag
 	case AddTag:
+		if req.Source_Name == "未命名" {
+			err = fmt.Errorf("不能给未命名的镜像打标签")
+			break
+		}
 		err = local.AddTag(req.Source_Name, req.Target_Name)
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)

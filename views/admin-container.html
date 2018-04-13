@@ -241,6 +241,7 @@
 
   function handleStop(stop) {
     cid = stop.getAttribute("data-stop-cid")
+    alert(cid)
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -329,8 +330,8 @@
 
   function handleCommit(commit) {
     cid = commit.getAttribute("data-commit-cid")
-    alert("你要提交的容器ID是：" + cid)
-    var str = prompt("请输入目标镜像名：tag", "如myapp:1.0");
+    alert(cid)
+    var str = prompt("请输入目标镜像名：tag", "myapp:1.0");
     if (str) {
       $.ajax({
       type: "POST",

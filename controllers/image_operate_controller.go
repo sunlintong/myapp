@@ -6,12 +6,15 @@ import (
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
+	//"github.com/docker/docker/api/types"
 )
 
 // 时间类型
 const (
 	Remove = "remove"
 	ForceRemove = "force"
+	RemoveAll = "removeall"
+	ForceAll = "forceall"
 )
 
 type ImageRequest struct {
@@ -105,6 +108,36 @@ func (ic *ImageController) OperateImage() {
 			resp = append(resp, str)
 		}
 
+	case RemoveAll:
+		items, err := local.RemoveImageAndChildren(req.Image_ID)
+		if err != nil {
+			l.Log = err.Error()
+			db.InsertLog(l)
+			ic.ServiceError(l)
+			return
+		}
+		for _, item := range items {
+			str[0] = "DELETE："
+			str[1] = item.Deleted
+			str[2] = item.Untagged
+			resp = append(resp, str)
+		}
+
+	case ForceAll:
+		items, err := local.ForceRemoveImageAndChildren(req.Image_ID)
+		if err != nil {
+			l.Log = err.Error()
+			db.InsertLog(l)
+			ic.ServiceError(l)
+			return
+		}
+		for _, item := range items {
+			str[0] = "DELETE："
+			str[1] = item.Deleted
+			str[2] = item.Untagged
+			resp = append(resp, str)
+		}
+
 	default:
 		err = fmt.Errorf("unknown event %v", req.Event_Type)
 	}
@@ -114,7 +147,7 @@ func (ic *ImageController) OperateImage() {
 		db.InsertLog(l)
 		ic.ServiceError(l)
 	} else {
-		l.Log = fmt.Sprintf("v%", resp)
+		l.Log = fmt.Sprintf("remove image success, request:%+v", req)
 		db.InsertLog(l)
 		ic.Success(resp)
 	}

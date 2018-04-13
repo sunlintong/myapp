@@ -14,8 +14,29 @@ func RemoveImage(image_id string) ([]types.ImageDeleteResponseItem, error){
 	return items, err
 }
 
+// 默认的删除方式，不强制删除，不删除子镜像层
+func RemoveImageAndChildren(image_id string) ([]types.ImageDeleteResponseItem, error){
+	cli := GetClient()
+	ctx := context.Background()
+	options := types.ImageRemoveOptions{}
+	options.PruneChildren = true
+	items, err := cli.ImageRemove(ctx, image_id, options)
+	return items, err
+}
+
+
 // 强制删除，不删除子镜像层
 func ForceRemoveImage(image_id string) ([]types.ImageDeleteResponseItem, error) {
+	cli := GetClient()
+	ctx := context.Background()
+	options := types.ImageRemoveOptions{}
+	options.Force = true
+	items, err := cli.ImageRemove(ctx, image_id, options)
+	return items, err
+}
+
+// 强制删除所有子镜像层
+func ForceRemoveImageAndChildren(image_id string) ([]types.ImageDeleteResponseItem, error) {
 	cli := GetClient()
 	ctx := context.Background()
 	options := types.ImageRemoveOptions{}

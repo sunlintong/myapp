@@ -229,7 +229,9 @@
         '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
         '<td>' +
         '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + '</button>' +
-        '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
+        '<button onclick="handleRemoveAll(this)" data-removeall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "彻底删除" + '</button>' +
+        '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' +
+        '<button onclick="handleForceAll(this)" data-forceall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
         '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
@@ -245,6 +247,29 @@
       data: JSON.stringify({
         image_id: iid,
         event_type: "remove"
+      }),
+      success: function (data) {
+        console.log(data)
+        alert(data)
+        location.reload()
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
+
+  function handleRemoveAll(removeall) {
+    iid = removeall.getAttribute("data-removeall-iid")
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/image/operate",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        image_id: iid,
+        event_type: "removeall"
       }),
       success: function (data) {
         console.log(data)
@@ -281,6 +306,28 @@
     })
   }
 
+  function handleForceall(force) {
+    iid = forceall.getAttribute("data-forceall-iid")
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/image/operate",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        image_id: iid,
+        event_type: "forceall"
+      }),
+      success: function (data) {
+        console.log(data)
+        alert(data)
+        location.reload()
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
   function pullImage() {
     var imn = document.getElementById("inputValue").value
     alert("正在拉取", imn)

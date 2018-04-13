@@ -411,6 +411,25 @@
   function createContainer() {
     iname = document.getElementById("containerImageName").value
     cmd = document.getElementById("containerCreateCmd").value
-    alert(iname, cmd)
+    alert(iname+cmd)
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/container/create",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        image_name: iname,
+        container_cmd: cmd
+      }),
+      success: function (data) {
+        console.log(data)
+        alert("容器创建成功!")
+        location.reload()
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
   }
 </script>

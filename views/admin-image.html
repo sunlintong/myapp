@@ -331,17 +331,18 @@
     })
   }
 
-    function handleDeleteTag(deletetag) {
+  function handleDeleteTag(deletetag) {
     iid = deletetag.getAttribute("data-detetetag-iid")
     iname = deletetag.getAttribute("data-deletetag-iname")
-    confirm("确定要删除镜像" + iid + "\ntag："+ iname + "?")
+    alert(iid,iname)
+    confirm("确定要删除镜像" + iid + "的atag：" + iname + "?")
   }
 
 
 
-    function handleCreate(create) {
+  function handleCreate(create) {
     iid = create.getAttribute("data-create-iid")
-    alert("你正在创建容器:" + cid)
+    alert("你正在创建容器:" + iid)
     var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
     if (str) {
       alert(fuckyou)

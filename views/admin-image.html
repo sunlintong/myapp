@@ -188,6 +188,24 @@
           </div>
         </div>
 
+        <div class="am-cf am-padding am-padding-bottom-0">
+          <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">镜像管理</strong> /
+            <small>创建容器</small>
+          </div>
+          <hr/>
+          <div>
+            <label for="containerimageName">镜像名:</label>
+            <input type="text" id="containerImageName" />
+            <label for="containerCreateCmd">容器命令:</label>
+            <input type="text" id="containerCreateCmd" />
+            <div class="am-cf">
+              <button onclick="createContainer()" class="am-btn am-btn-primary am-btn-sm am-fl">创建
+              </button>
+            </div>
+          </div>
+        </div>
+
         <hr/>
       </div>
 
@@ -233,7 +251,7 @@
         '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' +
         '<button onclick="handleForceAll(this)" data-forceall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
         '<button onclick="handleAddTag(this)" data-addtag-iname=' + image[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "添加tag" + '</button>' +
-        '<input type="submit" onclick="handleCreate(this)" value="创建容器" data-create-iid=' + image[1] + '>' +
+        '<input type="submit" onclick="handleCreate(this)" value="创建容器" data-create-iname=' + image[0] + '>' +
         '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
@@ -359,11 +377,8 @@
 
   }
 
-
-
   function handleCreate(create) {
-    iid = create.getAttribute("data-create-iid")
-    alert("你正在创建容器:" + iid)
+    iname = create.getAttribute("data-create-iname")
     var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
     if (str) {
       alert("fuckyou")
@@ -391,5 +406,11 @@
         alert(data.responseJSON.Log)
       }
     })
+  }
+
+  function createContainer() {
+    iname = document.getElementById("containerImageName").value
+    cmd = document.getElementById("containerCreateCmd").value
+    alert(iname, cmd)
   }
 </script>

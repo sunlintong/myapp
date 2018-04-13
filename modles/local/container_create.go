@@ -5,10 +5,13 @@ import (
 	"golang.org/x/net/context"
 )
 
-
 // 通过配置结构体config创建一个容器
-func CreateContainer(config *container.Config)(container.ContainerCreateCreatedBody, error) {
+func CreateContainer(image_name string, cmd []string) (container.ContainerCreateCreatedBody, error) {
+	ctx := context.Background()
 	cli := GetClient()
-	resp, err := cli.ContainerCreate(context.Background(), config, nil, nil, "")
+	config := new(container.Config)
+	config.Image = image_name
+	config.Cmd = cmd
+	resp, err := cli.ContainerCreate(ctx, config, nil, nil, "")
 	return resp, err
 }

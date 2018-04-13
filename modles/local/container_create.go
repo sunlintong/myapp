@@ -12,6 +12,7 @@ func CreateContainer(image_name string, cmd []string) (container.ContainerCreate
 	config := new(container.Config)
 	config.Image = image_name
 	config.Cmd = cmd
+	config.Tty = true
 	resp, err := cli.ContainerCreate(ctx, config, nil, nil, "")
 	return resp, err
 }

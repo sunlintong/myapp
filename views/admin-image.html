@@ -412,7 +412,6 @@
     iname = document.getElementById("containerImageName").value
     cmd = document.getElementById("containerCreateCmd").value
     confirm("源镜像:" + iname + "\n创建命令" + cmd)
-    alert(iname+cmd)
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -424,7 +423,7 @@
       }),
       success: function (data) {
         console.log(data)
-        alert("容器创建成功,生成容器id为：" + data)
+        alert("容器创建成功,生成容器id为：" + data.Id + "\nwarning:" + data.Warnings)
       },
       error: function (data) {
         console.log(data)

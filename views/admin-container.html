@@ -329,8 +329,7 @@
 
   function handleCommit(commit) {
     cid = commit.getAttribute("data-commit-cid")
-    alert("你正在提交容器:" + cid)
-    var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
+    var str = prompt("你正在提交容器：" + cid + "\n请输入目标 （镜像名:tag, tag默认为latest）", "myapp:1.0");
     if (str) {
       $.ajax({
         type: "POST",

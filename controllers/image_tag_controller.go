@@ -3,7 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"myapp/modles/db"
+	"myapp/modles/local"
 	"time"
+	"fmt"
 )
 
 type ImageTagController struct {
@@ -11,9 +13,9 @@ type ImageTagController struct {
 }
 
 type ImageTagRequest struct {
-	Image_ID   string `json:"image_id'`
-	Image_Name string `json:"image_name"`
-	EventType  string `json:"event_type"`
+	Source_Name string `json:"source_name"`
+	Target_Name string `json:"target_name"`
+	Event_Type   string `json:"event_type"`
 }
 
 const (
@@ -35,10 +37,23 @@ func (itc *ImageTagController) OperateTag() {
 		return
 	}
 
-	switch req.EventType {
+	switch req.Event_Type {
 	case DeleteTag:
-
+		// 因docker api不全未能实现删除tag
 	case AddTag:
+		err = local.AddTag(req.Source_Name, req.Target_Name)
 	default:
+		err = fmt.Errorf("unknown event %v", req.Event_Type)
+	}
+
+	if err != nil {
+		l.Log = err.Error()
+		db.InsertLog(l)
+		itc.ServiceError(l)
+		return
+	}else {
+		l.Log = "add tag succeed"
+		db.InsertLog(l)
+		itc.Success(l)
 	}
 }

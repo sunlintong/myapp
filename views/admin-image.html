@@ -232,7 +232,7 @@
         '<button onclick="handleRemoveAll(this)" data-removeall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "彻底删除" + '</button>' +
         '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' +
         '<button onclick="handleForceAll(this)" data-forceall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
-        '<button onclick="handleDeleteTag(this)" data-deletetag-iid=' + image[1] + 'data-deletetag-iname=' + image[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除tag" + '</button>' +
+        '<button onclick="handleDeleteTag(this)" data-deletetag-iid=' + image[1] + ' data-deletetag-iname=' + image[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除tag" + '</button>' +
         '<input type="submit" onclick="handleCreate(this)" value="创建容器" data-create-iid=' + image[1] + '>' +
         '</td>' + '</tr>'
     })
@@ -335,7 +335,7 @@
     iid = deletetag.getAttribute("data-detetetag-iid")
     iname = deletetag.getAttribute("data-deletetag-iname")
     alert(iid,iname)
-    confirm("确定要删除镜像" + iid + "的atag：" + iname + "?")
+    confirm("确定要删除镜像" + iid + "的atag：" + iname + "吗?")
   }
 
 
@@ -345,7 +345,7 @@
     alert("你正在创建容器:" + iid)
     var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
     if (str) {
-      alert(fuckyou)
+      alert("fuckyou")
     }
   }
 

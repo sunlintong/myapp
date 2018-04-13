@@ -47,7 +47,7 @@ func (ic *ImageController) GetAllImages() {
 		for _, rt := range image.RepoTags {
 			var data [4]string
 			if rt == "<none>:<none>" {
-				data[0] = "none:none"
+				data[0] = "未命名"
 			} else {
 				data[0] = rt
 			}

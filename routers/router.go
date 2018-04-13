@@ -32,5 +32,6 @@ func init() {
 	beego.Router("/api/image", &controllers.ImageController{}, "get:GetAllImages")
 	beego.Router("/api/image/operate", &controllers.ImageController{}, "post:OperateImage")
 	beego.Router("/api/image/pull", &controllers.ImagePullController{}, "post:PullImage")
+	beego.Router("/api/image/tag", controllers.ImageTagController{}, "post:OperateTag")
 	
 }

@@ -331,28 +331,11 @@
   }
 
     function handleCreate(create) {
-    iid = create.getAttribute("data-commit-iid")
-    alert("你正在提交容器:" + cid)
+    iid = create.getAttribute("data-create-iid")
+    alert("你正在创建容器:" + cid)
     var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
     if (str) {
-      $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/api/container/commit",
-        contentType: 'application/json',
-        data: JSON.stringify({
-          container_id: cid,
-          image_name: str
-        }),
-        success: function (data) {
-          console.log(data)
-          alert("提交成功！，目标镜像id为：" + data)
-        },
-        error: function (data) {
-          console.log(data)
-          alert(data.responseJSON.Log)
-        }
-      })
+      alert(fuckyou)
     }
   }
 

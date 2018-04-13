@@ -47,6 +47,7 @@ func (ic *ImageController) GetAllImages() {
 		for _, rt := range image.RepoTags {
 			var data [4]string
 			data[0] = rt
+			fmt.Println(rt)
 			data[1] = image.ID
 			data[2] = ic.GetTimeString(image.Created)
 			data[3] = fmt.Sprintf("%.2f", float64(image.Size)/1000000) + " MB"

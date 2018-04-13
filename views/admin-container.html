@@ -240,7 +240,6 @@
   })
 
   function handleStop(stop) {
-    cid = stop.getAttribute("data-stop-cid")
     alert(cid)
     $.ajax({
       type: "POST",
@@ -330,27 +329,27 @@
 
   function handleCommit(commit) {
     cid = commit.getAttribute("data-commit-cid")
-    alert(cid)
-    var str = prompt("请输入目标镜像名：tag", "myapp:1.0");
+    alert("你正在提交容器:" + cid)
+    var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
     if (str) {
       $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "/api/container/commit",
-      contentType: 'application/json',
-      data: JSON.stringify({
-        container_id: cid,
-        image_name: str
-      }),
-      success: function (data) {
-        console.log(data)
-        alert(data)
-      },
-      error: function (data) {
-        console.log(data)
-        alert(data.responseJSON.Log)
-      }
-    })
+        type: "POST",
+        dataType: "json",
+        url: "/api/container/commit",
+        contentType: 'application/json',
+        data: JSON.stringify({
+          container_id: cid,
+          image_name: str
+        }),
+        success: function (data) {
+          console.log(data)
+          alert("提交成功！，目标镜像id为：" + data)
+        },
+        error: function (data) {
+          console.log(data)
+          alert(data.responseJSON.Log)
+        }
+      })
     }
   }
 </script>

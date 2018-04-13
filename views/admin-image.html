@@ -232,6 +232,7 @@
         '<button onclick="handleRemoveAll(this)" data-removeall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "彻底删除" + '</button>' +
         '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' +
         '<button onclick="handleForceAll(this)" data-forceall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
+        '<input type="submit" onclick="handleCreate(this)" value="创建容器" data-create-iid=' + image[1] + '>' +
         '</td>' + '</tr>'
     })
     document.getElementById("imagelist").innerHTML = htmltext;
@@ -328,6 +329,33 @@
       }
     })
   }
+
+    function handleCreate(create) {
+    iid = create.getAttribute("data-commit-iid")
+    alert("你正在提交容器:" + cid)
+    var str = prompt("请输入目标 镜像名:tag, tag默认为latest", "myapp:1.0");
+    if (str) {
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/api/container/commit",
+        contentType: 'application/json',
+        data: JSON.stringify({
+          container_id: cid,
+          image_name: str
+        }),
+        success: function (data) {
+          console.log(data)
+          alert("提交成功！，目标镜像id为：" + data)
+        },
+        error: function (data) {
+          console.log(data)
+          alert(data.responseJSON.Log)
+        }
+      })
+    }
+  }
+
   function pullImage() {
     var imn = document.getElementById("inputValue").value
     alert("正在拉取", imn)

@@ -48,11 +48,14 @@ func (ic *ImageController) GetAllImages() {
 			var data [4]string
 			if rt == "<none>:<none>" {
 				data[0] = "none:none"
+			} else {
+				data[0] = rt
 			}
 			data[1] = image.ID
 			data[2] = ic.GetTimeString(image.Created)
 			data[3] = fmt.Sprintf("%.2f", float64(image.Size)/1000000) + " MB"
 			ret = append(ret, data)
+			fmt.Println(data[0])
 		}
 	}
 

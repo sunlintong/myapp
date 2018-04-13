@@ -329,10 +329,27 @@
 
   function handleCommit(commit) {
     cid = commit.getAttribute("data-commit-cid")
-    alert(cid)
+    alert("你要提交的容器ID是：" + cid)
     var str = prompt("请输入目标镜像名：tag", "如myapp:1.0");
     if (str) {
-      alert("您刚输入的是：" + str)
+      $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/container/commit",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        container_id: cid,
+        image_name: str
+      }),
+      success: function (data) {
+        console.log(data)
+        alert(data)
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
     }
   }
 </script>

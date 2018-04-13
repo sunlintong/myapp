@@ -71,7 +71,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
-		crc.BadRequest(l)
+		crc.ServiceError(l)
 		return
 	}
 	fmt.Println("req----", req)

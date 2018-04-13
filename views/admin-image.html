@@ -232,6 +232,7 @@
         '<button onclick="handleRemoveAll(this)" data-removeall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "彻底删除" + '</button>' +
         '<button onclick="handleForce(this)" data-force-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制删除" + '</button>' +
         '<button onclick="handleForceAll(this)" data-forceall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制彻底删除" + '</button>' +
+        '<button onclick="handleDeleteTag(this)" data-deletetag-iname=' + image[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除该tag" + '</button>' +
         '<input type="submit" onclick="handleCreate(this)" value="创建容器" data-create-iid=' + image[1] + '>' +
         '</td>' + '</tr>'
     })
@@ -329,6 +330,13 @@
       }
     })
   }
+
+    function handleDeleteTag(deletetag) {
+    iname = deletetag.getAttribute("data-deletetag-iname")
+    confirm("确定要删除镜像tag：" + iname + "?")
+  }
+
+  
 
     function handleCreate(create) {
     iid = create.getAttribute("data-create-iid")

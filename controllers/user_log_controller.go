@@ -3,11 +3,16 @@ package controllers
 import (
 	"myapp/modles/db"
 	"time"
+	"encoding/json"
 	"fmt"
 )
 
 type UserLogController struct {
 	BaseController
+}
+
+type UserLogRequest struct {
+	User_Name string `json:"user_name"`
 }
 
 // get
@@ -51,7 +56,9 @@ func (ulc *UserLogController) GetUserLog() {
 // post 设置用户名
 func (ulc *UserLogController) SetUserSession() {
 	// 若未传name，则说明是admin在看所有用户日志
-	name := ulc.GetString("user_name", "")
-	fmt.Println("nnnnn", name)
-	ulc.SetSession("user_name", name)
+	var req UserLogRequest
+	json.Unmarshal(ulc.Ctx.Input.RequestBody, &req)
+	ulc.SetSession("user_name", req.User_Name)
+	fmt.Println(ulc.CruSession)
+	ulc.Success("set session success")
 }

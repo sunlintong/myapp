@@ -15,6 +15,7 @@
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="assets/css/amazeui.min.css" />
   <link rel="stylesheet" href="assets/css/admin.css">
+  <script src="layer.js"></script>
   <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 
@@ -387,6 +388,12 @@
 
   function pullImage() {
     var imn = document.getElementById("inputValue").value
+    var ms = layer.msg('正在拉取镜像' + imn, {
+      icon: 6,
+      time: 10000000 //100秒关闭（如果不配置，默认是3秒）
+    }, function () {
+      alert("拉取镜像成功!")
+    });
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -397,7 +404,7 @@
       }),
       success: function (data) {
         console.log(data)
-        alert("拉取镜像成功!")
+        layer.close(ms)
       },
       error: function (data) {
         console.log(data)

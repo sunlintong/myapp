@@ -17,6 +17,7 @@ type ContainerCreateRequest struct {
 	Container_Cmd string `json:"container_cmd"`
 }
 
+// post
 func (ccc *ContainerCreateController) CreateContainer() {
 	var req ContainerCreateRequest
 	l := new(db.Log)

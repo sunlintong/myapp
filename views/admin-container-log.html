@@ -281,12 +281,13 @@
       }),
       success: function (data) {
         console.log(data)
-        layer.open({
-          type: 1,
-          title: cid + "的日志",
-          area: '1000px',
-          content: data
-        })
+        alert(data)
+//        layer.open({
+//          type: 1,
+  //        title: cid + "的日志",
+    //      area: '1000px',
+      //    content: data
+        //})
       },
       error: function (data) {
         console.log(data)

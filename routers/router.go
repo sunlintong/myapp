@@ -22,7 +22,8 @@ func init() {
 	// api 路由
 	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")
 
-	beego.Router("/api/log", &controllers.UserLogController{}, "post:GetUserLog")
+	beego.Router("/api/log", &controllers.UserLogController{}, "get:GetUserLog")
+	beego.Router("/api/log", &controllers.UserLogController{}, "post:SetUserSession")
 
 	beego.Router("/api/container", &controllers.ContainerController{}, "get:GetAllContainers")
 	beego.Router("/api/container/operate", &controllers.ContainerController{}, "post:OperateContainer")

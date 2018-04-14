@@ -3,26 +3,24 @@ package controllers
 import (
 	"myapp/modles/db"
 	"time"
+	"fmt"
 )
 
 type UserLogController struct {
 	BaseController
 }
 
-type UserLogRequest struct{
-	User_Name string `json:"user_name"`
-}
-
-// post 根据用户名获取log
-// 若用户名为kong，则获取所有log
+// get
 func (ulc *UserLogController) GetUserLog() {
 	l := new(db.Log)
 	l.Time = time.Now().Unix()
 	l.Name = "admin"
-	// 若未传name，则说明是admin在看所有用户日志
-	name := ulc.GetString("user_name", "")
+
 	var err error
 	var logs []*db.Log
+	// 获取请求用户名，若没有，则设为""
+	name := ulc.GetSession("user_name").(string)
+	ulc.DelSession("user_name")
 	if name == "" {
 		logs, err = db.GetAllLogs()
 	} else {
@@ -45,4 +43,12 @@ func (ulc *UserLogController) GetUserLog() {
 	l.Log = "get log succeed"
 	db.InsertLog(l)
 	ulc.Success(ret)
+}
+
+// post 设置用户名
+func (ulc *UserLogController) SetUserSession() {
+	// 若未传name，则说明是admin在看所有用户日志
+	name := ulc.GetString("user_name", "")
+	fmt.Println("nnnnn", name)
+	ulc.SetSession("user_name", name)
 }

@@ -19,12 +19,15 @@ func (ulc *UserLogController) GetUserLog() {
 	var err error
 	var logs []*db.Log
 	// 获取请求用户名，若没有，则设为""
-	name := ulc.GetSession("user_name").(string)
+	name := ulc.GetSession("user_name")
+	if name == nil {
+		name = ""
+	}
 	ulc.DelSession("user_name")
 	if name == "" {
 		logs, err = db.GetAllLogs()
 	} else {
-		logs, err = db.GetLogsByUser(name)
+		logs, err = db.GetLogsByUser(name.(string))
 	}
 	if err != nil {
 		l.Log = err.Error()

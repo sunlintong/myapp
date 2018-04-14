@@ -285,7 +285,7 @@
           type: 1,
           title: cid + "的日志",
           area: '1000px',
-          content: data.toString().replace(/,/g,"</br>")
+          content: data.toString().replace(/\n/g,"</br>")
         })
       },
       error: function (data) {

@@ -5,6 +5,7 @@ import (
 	"myapp/modles/db"
 	"time"
 	"myapp/types"
+	"github.com/astaxie/beego/orm"
 )
 
 type LoginController struct {
@@ -39,9 +40,10 @@ func (lc *LoginController) Post() {
 	}
 	// 这个err必须处理，因为有可能数据库没有该用户
 	dbuser, err := db.GetUserByName(req.User_Name)
-	if err != nil {
+	// 出现这种错误是因为该用户还未注册
+	if err == orm.ErrNoRows {
 		l.Name = "unknown"
-		l.Log = err.Error()
+		l.Log = "没找到该用户，请先注册"
 		err := db.InsertLog(l)
 		lc.CheckErr(err)
 		lc.BadRequest(l)

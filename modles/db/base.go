@@ -14,7 +14,7 @@ func init() {
 		beego.AppConfig.String("mysqlpassword") + "@tcp(" +
 		beego.AppConfig.String("mysqlhost") + ":" +
 		beego.AppConfig.String("mysqlport") + ")/" +
-		beego.AppConfig.String("mysqldatabase") + "?charset=utf8"
+		beego.AppConfig.String("mysqldatabase") + "?charset=utf8mb4"
 	
 		fmt.Println(sql)
 	orm.RegisterDataBase("default", "mysql", sql, 30)

@@ -178,11 +178,34 @@
         '<td>' + '<a href="#">' + user[1] + '</a>' + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + user[2] + '</span>' + '</td>' +
         '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
-        '<button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle>' + 
+        '<button onclick="getUserLog(this)" data-user-name=' + user[0] + ' class="am-btn am-btn-primary am-btn-sm am-fl">' + "查看该用户操作记录" + '</button>'
+        '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>'+ 删除 + '</button>' + 
         '<span class="am-icon-cog">' + '</span>' + 
         '<span class="am-icon-caret-down">' + '</span>' + 
         '</button>' + '</td>' + '</tr>';
     })
     document.getElementById("userlist").innerHTML = htmltext;
   })
+
+  function getUserLog(user) {
+    var name = user.getAttribute("data-user-name")
+    alert(name)
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/log",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        user_name: name
+      }),
+      success: function (data) {
+        self.location = 'admin-log.html'
+        console.log(data)
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
+      }
+    })
+  }
 </script>

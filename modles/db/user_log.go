@@ -28,3 +28,14 @@ func GetAllLogs() ([]*Log, error) {
 	}
 	return logs, err
 }
+
+// 获取用户log
+func GetLogsByUser(name string) ([]*Log, error) {
+	var logs []*Log
+	o := GetOrmer()
+	_, err := o.QueryTable(new(Log)).Filter("name", name).OrderBy("time").All(&logs)
+	if err == orm.ErrNoRows {
+		return nil, nil
+	}
+	return logs, err
+}

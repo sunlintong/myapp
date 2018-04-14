@@ -280,7 +280,10 @@
       }),
       success: function (data) {
         console.log(data)
-        alert("容器日志加载成功！")
+        layer.open({
+          type: 1,
+          content: data
+        })
       },
       error: function (data) {
         console.log(data)

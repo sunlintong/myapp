@@ -282,12 +282,12 @@
       success: function (data) {
         console.log(data)
         alert(data)
-//        layer.open({
-//          type: 1,
-  //        title: cid + "的日志",
-    //      area: '1000px',
-      //    content: data
-        //})
+        layer.open({
+          type: 1,
+          title: cid + "的日志",
+          area: '1000px',
+          content: '<br>' + data + '</br>'
+        })
       },
       error: function (data) {
         console.log(data)

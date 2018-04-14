@@ -18,6 +18,16 @@ func (u *User) Ileagel() bool {
 	return u.Name == "" || u.Password == "" || u.UserType == ""
 }
 
+// 是否已注册了admin
+func HasAdmin() bool {
+	o := GetOrmer()
+	count, _ := o.QueryTable(new(User)).Filter("userType", "admin").Count()
+	if count > 0 {
+		return true
+	}
+	return false
+}
+
 // 新建用户
 func CreateUser(user *User) error {
 	o := GetOrmer()

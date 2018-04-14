@@ -2,13 +2,25 @@ package routers
 
 import (
 	"myapp/controllers"
-
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 )
 
+// 路由过滤器
+var FilterUser = func(ctx *context.Context) {
+	_, ok := ctx.Input.Session("uname").(string)
+	// 没有session说明用户还未登录，这时如果请求其他页面，则跳转至登录页面
+	if !ok && ctx.Request.RequestURI != "/login" {
+		ctx.Redirect(302, "login")
+	}
+}
+
 func init() {
+	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
+
 	// 登录注册 路由
 	beego.Router("/register", &controllers.RegisterController{})
+	beego.Router("/login", &controllers.LoginController{})
 
 	// 页面 路由
 	beego.Router("/admin-index", &controllers.AdminIndexController{})

@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
@@ -14,7 +15,8 @@ func init() {
 		beego.AppConfig.String("mysqlhost") + ":" +
 		beego.AppConfig.String("mysqlport") + ")/" +
 		beego.AppConfig.String("mysqldatabase") + "?charset=utf8"
-
+	
+		fmt.Println(sql)
 	orm.RegisterDataBase("default", "mysql", sql, 30)
 	orm.RegisterModel(new(User), new(Log))
 	orm.RunSyncdb("default", false, true)

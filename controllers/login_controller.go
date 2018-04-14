@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"encoding/json"
 	"myapp/modles/db"
 	"time"
@@ -33,16 +32,26 @@ func (lc *LoginController) Post() {
 	if req.IsAdmin && db.HasAdmin() {
 		l.Name = "unknown"
 		l.Log = "不能注册管理员，系统已有管理员"
-		db.InsertLog(l)
+		err := db.InsertLog(l)
+		lc.CheckErr(err)
 		lc.BadRequest(l)
 		return
 	}
-	// 这里没有处理数据库err，可能有bug
-	dbuser, _ := db.GetUserByName(req.User_Name)
+	// 这个err必须处理，因为有可能数据库没有该用户
+	dbuser, err := db.GetUserByName(req.User_Name)
+	if err != nil {
+		l.Name = "unknown"
+		l.Log = err.Error()
+		err := db.InsertLog(l)
+		lc.CheckErr(err)
+		lc.BadRequest(l)
+		return
+	}
 	if lc.Encode(req.User_Password) != dbuser.Password {
 		l.Name = req.User_Name
-		l.Log = fmt.Sprintf("密码输错鸟")
-		db.InsertLog(l)
+		l.Log = "密码输错鸟"
+		err := db.InsertLog(l)
+		lc.CheckErr(err)
 		lc.BadRequest(l)
 		return
 	}

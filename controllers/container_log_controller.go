@@ -101,4 +101,5 @@ func (crc *ContainerRunningController) GetContainerLog() {
 	l.Log = "get container log success"
 	db.InsertLog(l)
 	crc.Success(str)
+	crc.Redirect("/api/container/log", 302)
 }

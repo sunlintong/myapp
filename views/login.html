@@ -50,11 +50,6 @@
       <br>
       <label for="password">密码:</label>
       <input type="password" id="password" required="required">
-      <br>
-      <label for="isadmin">
-        <input id="isadmin" type="checkbox">
-        注册为管理员
-      </label>
       <br />
       <div class="am-cf">
         <input type="button" onclick="login()" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
@@ -72,8 +67,6 @@
 function login() {
   var name = document.getElementById("account").value
   var password = document.getElementById("password").value
-  var isadmin = document.getElementById("isadmin").checked
-  alert(name + password)
   $.ajax({
       type: "POST",
       dataType: "json",
@@ -81,8 +74,7 @@ function login() {
       contentType: 'application/json',
       data: JSON.stringify({
         user_name: name,
-        user_password: password,
-        isadmin: isadmin
+        user_password: password
       }),
       success: function (data) {
         console.log(data)

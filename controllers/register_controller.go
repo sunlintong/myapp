@@ -1,53 +1,64 @@
 package controllers
 
 import (
-	"fmt"
 	//	"github.com/astaxie/beego"
 	"myapp/modles/db"
 	"time"
-
-	"github.com/golang/glog"
+	"encoding/json"
 )
 
 type RegisterController struct {
 	BaseController
 }
 
+type RegisterRequest struct {
+	User_Name     string `json:"user_name"`
+	User_Password string `json:"user_password"`
+	IsAdmin bool `json:"isadmin"`
+}
+
 func (rc *RegisterController) Get() {
-	glog.Infoln("a user went into the login and register web UI")
 	rc.TplName = "register.html"
 }
 
 func (rc *RegisterController) Post() {
-	inputs := rc.Input()
-	name := inputs.Get("name")
-	password := rc.Encode(inputs.Get("password"))
-	userType := inputs.Get("userType")
-
-	user := new(db.User)
-	user.Name = name
-	user.Password = password
-	user.UserType = userType
-	user.RegisterTime = time.Now().Unix()
-	fmt.Println(user)
-
+	var req RegisterRequest
 	l := new(db.Log)
-	l.Name = "unknown"
 	l.Time = time.Now().Unix()
-
-	//输入不完整
-	if user.Ileagel() {
-		l.Log = fmt.Sprintf("a user register wrong,his info :%v", user)
-		db.InsertLog(l)
-		//用户名重复
-	} else if u, err := db.GetUserByName(name); u != nil && err == nil {
-		l.Log = fmt.Sprintf("a user register name repeat,his info :%v", user)
-		db.InsertLog(l)
-		//注册信息合法，往数据库添加
-	} else if err := db.CreateUser(user); err != nil {
-	} else {
-		l.Log = fmt.Sprintf("a user register success :%v", user)
-		db.InsertLog(l)
-		rc.Redirect("/admin-index", 302)
+	json.Unmarshal(rc.Ctx.Input.RequestBody, &req)
+	if req.IsAdmin && db.HasAdmin() {
+		l.Name = "unknown"
+		l.Log = "can't register as admin, system has existed an admin"
+		err := db.InsertLog(l)
+		rc.CheckErr(err)
+		rc.BadRequest(l)
+		return
 	}
+	dbuser, err := db.GetUserByName(req.User_Name)
+	rc.CheckErr(err)
+	// 找到该用户，说明用户名重复了
+	if dbuser != nil {
+		l.Name = "unknown"
+		l.Log = "account name repeat, please register another name"
+		err := db.InsertLog(l)
+		rc.CheckErr(err)
+		rc.BadRequest(l)
+		return
+	}
+	user := &db.User{
+		Name: req.User_Name,
+		Password: rc.Encode(req.User_Password),
+		RegisterTime: time.Now().Unix(),
+	}
+	if req.IsAdmin {
+		user.UserType = "admin"
+	} else {
+		user.UserType = "general"
+	}
+	err = db.CreateUser(user)
+	rc.CheckErr(err)
+	l.Name = user.Name
+	l.Log = "register succeed"
+	db.InsertLog(l)
+	rc.Redirect("/login", 302)
 }

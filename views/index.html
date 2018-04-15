@@ -135,16 +135,12 @@
         </div>
       </div>
     </div>
-
-    <footer class="admin-content-footer">
-      <hr>
-      <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
-    </footer>
   </div>
   <!-- content end -->
-
-  </div>
-
+  <footer class="admin-content-footer">
+    <hr>
+    <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
+  </footer>
   <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
   <script src="assets/js/amazeui.min.js"></script>
@@ -205,24 +201,24 @@
     })
   }
 
-    function logout() {
-    if (confirm("确定退出登录吗？")){
+  function logout() {
+    if (confirm("确定退出登录吗？")) {
       $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "/api/user",
-      contentType: "application/json",
-      data: JSON.stringify(""),
-      success: function (data) {
-        console.log(data)
-        alert("成功退出")
-        location.reload()
-      },
-      error: function (data) {
-        console.log(data)
-        alert(data.responseJSON.Log)
-      }
-    })
+        type: "POST",
+        dataType: "json",
+        url: "/api/user",
+        contentType: "application/json",
+        data: JSON.stringify(""),
+        success: function (data) {
+          console.log(data)
+          alert("成功退出")
+          location.reload()
+        },
+        error: function (data) {
+          console.log(data)
+          alert(data.responseJSON.Log)
+        }
+      })
     }
   }
 

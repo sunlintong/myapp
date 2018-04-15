@@ -23,8 +23,12 @@ var FilterUser = func(ctx *context.Context) {
 	fmt.Printf("url: %s, session: %+v, 通过: %v\n", url, user, ok)
 	l.Log = fmt.Sprintf("url: %s, session: %+v, pass?: %v", url, user, ok)
 	db.InsertLog(l)
+
 	// 没有session说明用户还未登录，这时如果请求其他页面，则跳转至登录页面
 	if !ok && url != "/login" {
+		if url == "/register" {
+			return
+		}
 		ctx.Redirect(302, "login")
 	}
 }

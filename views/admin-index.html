@@ -217,12 +217,13 @@
       contentType: "application/json",
       data: JSON.stringify(""),
       success: function(data){
+        console.Log(data)
         alert("成功退出")
         location.reload()
       },
       error: function(data) {
         console.log(data)
-        alert(data)
+        alert(data.responseJSON.Log)
       }
     })
   }

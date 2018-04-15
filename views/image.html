@@ -72,7 +72,7 @@
                 <a href="log.html">
                   <span class="am-icon-calendar"></span> 系统日志</a>
               </li>
-              <li>
+              <li onclick="logout()">
                 <a href="log.html">
                   <span class="am-icon-bug"></span> 容器日志</a>
               </li>
@@ -411,6 +411,26 @@
       error: function (data) {
         console.log(data)
         alert(data.responseJSON)
+      }
+    })
+  }
+
+    function logout() {
+    confirm("确定退出登录吗？")
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/user",
+      contentType: "application/json",
+      data: JSON.stringify(""),
+      success: function (data) {
+        console.log(data)
+        alert("成功退出")
+        location.reload()
+      },
+      error: function (data) {
+        console.log(data)
+        alert(data.responseJSON.Log)
       }
     })
   }

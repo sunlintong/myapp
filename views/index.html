@@ -50,7 +50,7 @@
       <div class="am-offcanvas-bar admin-offcanvas-bar">
         <ul class="am-list admin-sidebar-list">
           <li>
-            <a href="admin-index.html">
+            <a href="index.html">
               <span class="am-icon-home"></span> 首页</a>
           </li>
           <li class="admin-parent">
@@ -60,34 +60,26 @@
             </a>
             <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
               <li>
-                <a href="admin-image.html">
+                <a href="image.html">
                   <span class="am-icon-puzzle-piece"></span> 镜像管理</a>
               </li>
               <li>
-                <a href="admin-container.html">
+                <a href="container.html">
                   <span class="am-icon-th"></span> 容器管理</a>
               </li>
               <li>
-                <a href="admin-log.html">
+                <a href="log.html">
                   <span class="am-icon-calendar"></span> 系统日志</a>
               </li>
               <li>
-                <a href="admin-container-log.html">
+                <a href="containerLog.html">
                   <span class="am-icon-bug"></span> 容器日志</a>
               </li>
             </ul>
           </li>
-          <li>
-            <a href="admin-table.html">
-              <span class="am-icon-table"></span> 表格</a>
-          </li>
-          <li>
-            <a href="admin-form.html">
-              <span class="am-icon-pencil-square-o"></span> 表单</a>
-          </li>
           <li onclick="logout()">
             <a href="#">
-              <span class="am-icon-sign-out"></span> 注销</a>
+              <span class="am-icon-sign-out"></span> 退出平台</a>
           </li>
         </ul>
 
@@ -173,10 +165,9 @@
         '<td>' + key + '</td>' +
         '<td>' + user[0] + '</td>' +
         '<td>' + '<a href="#">' + user[1] + '</a>' + '</td>' +
-        '<td>' + '<span class="am-badge am-badge-danger">' + user[2] + '</span>' + '</td>' +
-        '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>' +
+        '<td>' + '<span class="am-badge am-badge-success">' + user[2] + '</span>' + '</td>' +
         '<button onclick="getUserLog(this)" data-user-name=' + user[0] + ' class="am-btn am-btn-primary am-btn-sm am-fl">' + "查看该用户操作记录" + '</button>'
-      '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>' + "删除" + '</button>' +
+        '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>' + "删除" + '</button>' +
         '<span class="am-icon-cog">' + '</span>' +
         '<span class="am-icon-caret-down">' + '</span>' +
         '</button>' + '</td>' + '</tr>';

@@ -48,5 +48,5 @@ func (udc *UserDataController) GetUserData() {
 
 func (udc *UserDataController) Logout() {
 	udc.DelSession("user")
-	log.Println("user %s logout", udc.User.Name)
+	log.Printf("user %s logout", udc.User.Name)
 }

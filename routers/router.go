@@ -1,29 +1,18 @@
 package routers
 
 import (
-	"fmt"
-	"myapp/controllers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
+	"log"
+	"myapp/controllers"
 	"myapp/types"
-	"myapp/modles/db"
-	"time"
 )
 
 // 路由过滤器
 var FilterUser = func(ctx *context.Context) {
-	l := new(db.Log)
-	l.Time = time.Now().Unix()
-	l.Name = "unknown"
 	user, ok := ctx.Input.Session("user").(types.User)
-	if user.Name != "" {
-		l.Name = user.Name
-	}
 	url := ctx.Request.RequestURI
-	fmt.Printf("url: %s, session: %+v, 通过: %v\n", url, user, ok)
-	l.Log = fmt.Sprintf("url: %s, session: %+v, pass?: %v", url, user, ok)
-	db.InsertLog(l)
-
+	log.Printf("url: %s, session: %+v, 通过: %v\n", url, user, ok)
 	// 没有session说明用户还未登录，这时如果请求其他页面，则跳转至登录页面
 	if !ok && url != "/login" {
 		if url == "/register" {
@@ -47,8 +36,6 @@ func init() {
 	beego.Router("/admin-container-log", &controllers.AdminContainerLogController{})
 	beego.Router("/admin-log", &controllers.AdminLogController{})
 
-	
-
 	// api 路由
 	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")
 
@@ -66,5 +53,5 @@ func init() {
 	beego.Router("/api/image/operate", &controllers.ImageController{}, "post:OperateImage")
 	beego.Router("/api/image/pull", &controllers.ImagePullController{}, "post:PullImage")
 	beego.Router("/api/image/tag", &controllers.ImageTagController{}, "post:OperateTag")
-	
+
 }

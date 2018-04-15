@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	//	"github.com/astaxie/beego"
 	"myapp/modles/db"
 	"time"
@@ -35,9 +36,10 @@ func (rc *RegisterController) Post() {
 		return
 	}
 	dbuser, err := db.GetUserByName(req.User_Name)
+	fmt.Println(dbuser)
 	rc.CheckErr(err)
 	// 找到该用户，说明用户名重复了
-	if dbuser != nil {
+	if err == nil {
 		l.Name = "unknown"
 		l.Log = "account name repeat, please register another name"
 		err := db.InsertLog(l)

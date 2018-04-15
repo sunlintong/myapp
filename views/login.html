@@ -62,11 +62,12 @@
         <div class="am-cf">
           <input type="button" onclick="login()" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
           <input type="button" onclick="forget()" value="忘记密码 ^_^? " class="am-btn am-btn-default am-btn-sm am-fr">
-          <br />
+        </div>
+        <div class="am-cf">
           <input type="button" onclick="register()" value=" 还没有账号?注册一个 " class="am-btn am-btn-default am-btn-sm am-fr">
         </div>
       </form>
-      
+
       <hr>
       <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
     </div>
@@ -78,7 +79,15 @@
 <script>
   function login() {
     var name = document.getElementById("account").value
+    if (name == "") {
+      alert("用户名不能为空！")
+      return
+    }
     var password = document.getElementById("password").value
+    if (password == "") {
+      alert("密码不能为空！")
+      return
+    }
     $.ajax({
       type: "POST",
       dataType: "json",

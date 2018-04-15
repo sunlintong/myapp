@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"fmt"
-	//	"github.com/astaxie/beego"
 	"myapp/modles/db"
 	"time"
 	"encoding/json"
@@ -27,6 +25,8 @@ func (rc *RegisterController) Post() {
 	l := new(db.Log)
 	l.Time = time.Now().Unix()
 	json.Unmarshal(rc.Ctx.Input.RequestBody, &req)
+
+	// 判断是否能注册admin
 	if req.IsAdmin && db.HasAdmin() {
 		l.Name = "unknown"
 		l.Log = "can't register as admin, system has existed an admin"
@@ -35,8 +35,11 @@ func (rc *RegisterController) Post() {
 		rc.BadRequest(l)
 		return
 	}
-	dbuser, err := db.GetUserByName(req.User_Name)
-	fmt.Println(dbuser)
+
+	// 判断用户名是否重复
+	// 注意这里，就算数据库里没有匹配的用户，但queryseter.One()还是会返回一个初始化了的user
+	// 所以不能通过dbuser == nil 来判断
+	_, err := db.GetUserByName(req.User_Name)
 	rc.CheckErr(err)
 	// 找到该用户，说明用户名重复了
 	if err == nil {
@@ -47,6 +50,8 @@ func (rc *RegisterController) Post() {
 		rc.BadRequest(l)
 		return
 	}
+
+	// 注册用户和session
 	user := &db.User{
 		Name: req.User_Name,
 		Password: rc.Encode(req.User_Password),

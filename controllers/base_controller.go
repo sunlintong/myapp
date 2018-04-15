@@ -5,7 +5,6 @@ import (
 	"crypto/md5"
 	"github.com/astaxie/beego"
 	"time"
-	"log"
 	"myapp/types"
 	"github.com/golang/glog"
 	"net/http"
@@ -32,7 +31,7 @@ func (bc *BaseController) GetTimeString(now int64) string {
 // 错误处理
 func(bc *BaseController) CheckErr(err error) {
 	if err != nil {
-		log.Println(err)
+		glog.V(2).Infoln(err)
 	}
 }
 

@@ -75,7 +75,7 @@ function register() {
   $.ajax({
       type: "POST",
       dataType: "json",
-      url: "/login",
+      url: "/register",
       contentType: 'application/json',
       data: JSON.stringify({
         user_name: name,
@@ -84,8 +84,7 @@ function register() {
       }),
       success: function (data) {
         console.log(data)
-        alert("注册成功！")
-        self.location = "/login"
+        confirm("注册成功，跳转至登录？")
       },
       error: function (data) {
         console.log(data)

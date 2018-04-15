@@ -50,12 +50,15 @@ func DeleteUser(user *User) error {
 }
 
 // 由用户名找出用户
-func GetUserByName(name string) (*User, error) {
-	user := new(User)
+func GetUserByName(name string) ([]*User, error) {
+	var users []*User
 	o := GetOrmer()
 	qs := o.QueryTable(new(User))
-	err := qs.Filter("name", name).One(user)
-	return user, err
+	_, err := qs.Filter("name", name).All(&users)
+	if err == orm.ErrNoRows {
+		return nil, nil
+	}
+	return users, err
 }
 
 // 获取所有用户信息

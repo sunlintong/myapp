@@ -5,6 +5,7 @@ import (
 	"myapp/modles/db"
 	"time"
 	"log"
+	"fmt"
 )
 
 type UserLogController struct {
@@ -17,12 +18,11 @@ type UserLogRequest struct {
 
 // get
 func (ulc *UserLogController) GetUserLog() {
+	var err error
+	var logs []*db.Log
 	l := new(db.Log)
 	l.Time = time.Now().Unix()
 	l.Name = "admin"
-
-	var err error
-	var logs []*db.Log
 	// 获取请求用户名，若没有，则设为""
 	name := ulc.GetSession("user_name")
 	if name == nil {
@@ -30,18 +30,20 @@ func (ulc *UserLogController) GetUserLog() {
 	}
 	ulc.DelSession("user_name")
 
-	// 先判断是否允许当前用户权限
-	// 若当前用户不是admin确请求查看其它用户日志，不允许
-	if !ulc.User.IsAdmin && name != ulc.User.Name {
-		log.Printf("current_user:%+v, request user name:%s", ulc.User, name)
-		ulc.BadRequest("cant request others log")
-		return
-	}
-
+	// 请求为空说明是直接get日志展示界面，根据权限进行展示
 	if name == "" {
-		logs, err = db.GetAllLogs()
+		if ulc.User.IsAdmin {
+			logs, err = db.GetAllLogs()
+		}else {
+			logs, err = db.GetLogsByUser(name.(string))
+		}
 	} else {
+		// 用户为admin或请求当前用户的日志时才允许
+		if ulc.User.IsAdmin || name == ulc.User.Name {
 		logs, err = db.GetLogsByUser(name.(string))
+		} else {
+			err = fmt.Errorf("you can't request other's log")
+		}
 	}
 	if err != nil {
 		l.Log = err.Error()

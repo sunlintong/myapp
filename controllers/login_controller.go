@@ -30,7 +30,8 @@ func (lc *LoginController) Post() {
 
 	json.Unmarshal(lc.Ctx.Input.RequestBody, &req)
 	// 这个err必须处理，因为有可能数据库没有该用户
-	dbuser, err := db.GetUserByName(req.User_Name)
+	dbusers, err := db.GetUserByName(req.User_Name)
+	dbuser := dbusers[0]
 	// 出现这种错误是因为该用户还未注册
 	if err == orm.ErrNoRows {
 		l.Name = "unknown"

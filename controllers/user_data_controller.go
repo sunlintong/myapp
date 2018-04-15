@@ -3,7 +3,6 @@ package controllers
 import (
 	"fmt"
 	"myapp/modles/db"
-	"github.com/golang/glog"
 	"time"
 	"log"
 )
@@ -14,19 +13,22 @@ type UserDataController struct {
 
 // 获取用户信息
 func (udc *UserDataController) GetUserData() {
-	users, err := db.GetAllUsers()
-	if err != nil {
-		glog.V(3).Infoln(err)
+	var users []*db.User
+	var err error
+	l := new(db.Log)
+	l.Time = time.Now().Unix() 
+	l.Name = udc.User.Name
+	// 非admin只能看到自己
+	if !udc.User.IsAdmin {
+		users, err = db.GetUserByName(udc.User.Name)
+	}else {
+		users, err = db.GetAllUsers()
 	}
-
-	// 生成log
-	log := new(db.Log)
-	log.Time = time.Now().Unix() 
-	log.Name = "admin"
-	log.Log = "see user's infomation"
-	err = db.InsertLog(log)
 	if err != nil {
-		glog.V(3).Infoln(err)
+		l.Log = err.Error()
+		db.InsertLog(l)
+		udc.BadRequest(l)
+		return
 	}
 
 	var ret [][3]string
@@ -40,10 +42,7 @@ func (udc *UserDataController) GetUserData() {
 		fmt.Println(user.ID, data)
 	}
 
-	udc.Data["json"] = ret
-	glog.V(1).Infoln(udc.Data)
-	udc.ServeJSON()
-	udc.Finish()
+	udc.Success(ret)
 }
 
 func (udc *UserDataController) Logout() {

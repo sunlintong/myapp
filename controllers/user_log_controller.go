@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"myapp/modles/db"
-	"time"
 	"encoding/json"
 	"fmt"
+	"myapp/modles/db"
+	"time"
 )
 
 type UserLogController struct {
@@ -29,6 +29,14 @@ func (ulc *UserLogController) GetUserLog() {
 		name = ""
 	}
 	ulc.DelSession("user_name")
+
+	// 先判断是否允许当前用户权限
+	// 若当前用户不是admin确请求查看其它用户日志，不允许
+	if !ulc.User.IsAdmin && name != ulc.User.Name {
+		ulc.BadRequest("cant request others log")
+		return
+	}
+
 	if name == "" {
 		logs, err = db.GetAllLogs()
 	} else {
@@ -40,7 +48,7 @@ func (ulc *UserLogController) GetUserLog() {
 		ulc.ServiceError(l.Log)
 		return
 	}
-	var ret [][3] string
+	var ret [][3]string
 	for _, log := range logs {
 		var data [3]string
 		data[0] = "[" + ulc.GetTimeString(log.Time) + "]"

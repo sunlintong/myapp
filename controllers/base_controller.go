@@ -8,6 +8,7 @@ import (
 	"myapp/types"
 	"github.com/golang/glog"
 	"net/http"
+	"log"
 )
 
 type BaseController struct {
@@ -19,11 +20,12 @@ type BaseController struct {
 func (b *BaseController) Prepare() {
 	user, ok := b.GetSession("user").(types.User)
 	if !ok {
-		glog.V(2).Infoln("controller prepare get session failed!")
+	 	log.Println("controller prepare get session failed!")
 		return
 	}
 	b.User.Name = user.Name
 	b.User.IsAdmin = user.IsAdmin
+	log.Printf("controller prepare: %+v", b.User)
 }
 
 // 密码加密函数，将密码加盐再MD5

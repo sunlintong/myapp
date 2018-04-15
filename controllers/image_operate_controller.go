@@ -55,7 +55,6 @@ func (ic *ImageController) GetAllImages() {
 			data[2] = ic.GetTimeString(image.Created)
 			data[3] = fmt.Sprintf("%.2f", float64(image.Size)/1000000) + " MB"
 			ret = append(ret, data)
-			fmt.Println(data[0])
 		}
 	}
 

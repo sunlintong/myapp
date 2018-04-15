@@ -2,10 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"myapp/modles/db"
 	"time"
-	"github.com/golang/glog"
+	"log"
 )
 
 type UserLogController struct {
@@ -34,7 +33,7 @@ func (ulc *UserLogController) GetUserLog() {
 	// 先判断是否允许当前用户权限
 	// 若当前用户不是admin确请求查看其它用户日志，不允许
 	if !ulc.User.IsAdmin && name != ulc.User.Name {
-		glog.V(2).Infof("current_user:%+v, request user name:%s", ulc.User, name)
+		log.Printf("current_user:%+v, request user name:%s", ulc.User, name)
 		ulc.BadRequest("cant request others log")
 		return
 	}
@@ -69,6 +68,6 @@ func (ulc *UserLogController) SetUserSession() {
 	var req UserLogRequest
 	json.Unmarshal(ulc.Ctx.Input.RequestBody, &req)
 	ulc.SetSession("user_name", req.User_Name)
-	fmt.Println(ulc.CruSession)
+	log.Println(ulc.CruSession)
 	ulc.Success("set session success")
 }

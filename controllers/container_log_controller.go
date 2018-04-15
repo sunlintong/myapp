@@ -7,6 +7,7 @@ import (
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
+	"log"
 
 	"github.com/docker/docker/api/types"
 )
@@ -74,7 +75,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		crc.ServiceError(l)
 		return
 	}
-	fmt.Println("req----", req)
+	log.Println("req----", req)
 	options := types.ContainerLogsOptions{}
 	options.ShowStdout = req.ShowStdout
 	options.ShowStderr = req.ShowStderr
@@ -97,7 +98,7 @@ func (crc *ContainerRunningController) GetContainerLog() {
 		crc.ServiceError(l)
 		return
 	}
-	fmt.Println("msg----", str)
+	log.Println("msg----", str)
 	l.Log = "get container log success"
 	db.InsertLog(l)
 	crc.Success(str)

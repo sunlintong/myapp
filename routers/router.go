@@ -3,7 +3,7 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
-	"github.com/golang/glog"
+	"log"
 	"myapp/controllers"
 	"myapp/types"
 )
@@ -12,7 +12,7 @@ import (
 var FilterUser = func(ctx *context.Context) {
 	user, ok := ctx.Input.Session("user").(types.User)
 	url := ctx.Request.RequestURI
-	glog.V(4).Infof("url: %s, session: %+v, pass?: %v\n", url, user, ok)
+	log.Printf("url: %s, session: %+v, pass?: %v\n", url, user, ok)
 	// 没有session说明用户还未登录，这时如果请求其他页面，则跳转至登录页面
 	if !ok && url != "/login" {
 		if url == "/register" {

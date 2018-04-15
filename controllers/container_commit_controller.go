@@ -5,6 +5,7 @@ import (
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
+	"log"
 	"fmt"
 )
 
@@ -30,7 +31,7 @@ func (ccc *ContainerCommitController) Commit() {
 		ccc.ServiceError(l)
 		return
 	}
-	fmt.Println("req----", req)
+	log.Println("req----", req)
 
 	image_id, err := local.CommitContainer(req.Container_ID, req.Image_Name)
 	if err != nil {
@@ -39,7 +40,7 @@ func (ccc *ContainerCommitController) Commit() {
 		ccc.ServiceError(l)
 		return
 	}
-	fmt.Println("NEW IMAGE :", image_id)
+	log.Println("NEW IMAGE :", image_id)
 	l.Log = fmt.Sprintf("commit container succeed, new image id : %s", image_id)
 	db.InsertLog(l)
 	ccc.Success(image_id)

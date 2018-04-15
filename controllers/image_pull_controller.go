@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	"log"
 	"myapp/modles/local"
 	"myapp/modles/db"
 	"time"
@@ -36,7 +36,7 @@ func (ipc *ImagePullController) PullImage() {
 		err := db.InsertLog(l)
 		ipc.CheckErr(err)
 		ipc.BadRequest(l)
-		fmt.Println(imageName, l)
+		log.Println(imageName, l)
 		return
 	}
 
@@ -46,27 +46,27 @@ func (ipc *ImagePullController) PullImage() {
 		db.InsertLog(l)
 		ipc.CheckErr(err)
 		ipc.BadRequest(l)
-		fmt.Println(imageName, l)
+		log.Println(imageName, l)
 		return
 	}
 
 	msg, err := ioutil.ReadAll(out)
 	str := string(msg)
 	defer out.Close()
-	fmt.Println(str)
+	log.Println(str)
 
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)
 		ipc.CheckErr(err)
 		ipc.BadRequest(l)
-		fmt.Println(imageName, l)
+		log.Println(imageName, l)
 		return
 	}
 	// 只保存前250
 	l.Log = string(msg[:250])
 	db.InsertLog(l)
 	ipc.CheckErr(err)
-	fmt.Println(imageName, l)
+	log.Println(imageName, l)
 	ipc.Success(str)	
 }

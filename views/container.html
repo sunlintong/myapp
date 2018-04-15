@@ -19,10 +19,6 @@
 </head>
 
 <body>
-  <!--[if lte IE 9]>
-<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
-  以获得更好的体验！</p>
-<![endif]-->
 
   <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
@@ -30,39 +26,14 @@
       <small>docker管理平台</small>
     </div>
 
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
-      <span class="am-sr-only">导航切换</span>
-      <span class="am-icon-bars"></span>
-    </button>
-
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
       <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-        <li>
-          <a href="javascript:;">
-            <span class="am-icon-envelope-o"></span> 收件箱
-            <span class="am-badge am-badge-warning">5</span>
-          </a>
-        </li>
         <li class="am-dropdown" data-am-dropdown>
-          <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-            <span class="am-icon-users"></span> 管理员
+          <a id ="currentusername" class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            <span class="am-icon-users"></span>
             <span class="am-icon-caret-down"></span>
           </a>
-          <ul class="am-dropdown-content">
-            <li>
-              <a href="#">
-                <span class="am-icon-user"></span> 资料</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="am-icon-cog"></span> 设置</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="am-icon-power-off"></span> 退出</a>
-            </li>
-          </ul>
         </li>
         <li class="am-hide-sm-only">
           <a href="javascript:;" id="admin-fullscreen">
@@ -80,52 +51,47 @@
       <div class="am-offcanvas-bar admin-offcanvas-bar">
         <ul class="am-list admin-sidebar-list">
           <li>
-            <a href="admin-index.html">
+            <a href="index.html">
               <span class="am-icon-home"></span> 首页</a>
           </li>
-          <li class="admin-parent">
+          <li class="parent">
             <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
               <span class="am-icon-file"></span> 功能模块
               <span class="am-icon-angle-right am-fr am-margin-right"></span>
             </a>
             <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
               <li>
-                <a href="admin-image.html">
+                <a href="image.html">
                   <span class="am-icon-puzzle-piece"></span> 镜像管理</a>
               </li>
               <li>
-                <a href="admin-container.html">
+                <a href="container.html">
                   <span class="am-icon-th"></span> 容器管理</a>
               </li>
               <li>
-                <a href="admin-log.html">
+                <a href="log.html">
                   <span class="am-icon-calendar"></span> 系统日志</a>
               </li>
               <li>
-                <a href="admin-container-log.html">
+                <a href="containerLog.html">
                   <span class="am-icon-bug"></span> 容器日志</a>
               </li>
             </ul>
           </li>
-          <li>
-            <a href="admin-table.html">
-              <span class="am-icon-table"></span> 表格</a>
-          </li>
-          <li>
-            <a href="admin-form.html">
-              <span class="am-icon-pencil-square-o"></span> 表单</a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="am-icon-sign-out"></span> 注销</a>
-          </li>
+          <li onclick="logout()">
+              <a href="#">
+                <span class="am-icon-sign-out"></span> 退出平台</a>
+            </li>
         </ul>
 
         <div class="am-panel am-panel-default admin-sidebar-panel">
           <div class="am-panel-bd">
             <p>
               <span class="am-icon-bookmark"></span> 公告</p>
-            <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+              <p>
+                  代码请见
+                  <a href="https://github.com/sunlintong/myapp" target="_blank">https://github.com/sunlintong/myapp</a>
+                </p>
           </div>
         </div>
 
@@ -133,7 +99,7 @@
           <div class="am-panel-bd">
             <p>
               <span class="am-icon-tag"></span> wiki</p>
-            <p>Welcome to the Amaze UI wiki!</p>
+            <p>欢迎使用myapp docker管理平台</p>
           </div>
         </div>
       </div>
@@ -177,30 +143,14 @@
 
       <footer class="admin-content-footer">
         <hr>
-        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
       </footer>
 
     </div>
     <!-- content end -->
-
-
   </div>
 
   <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
-
-  <footer>
-    <hr>
-    <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
-  </footer>
-
-  <!--[if lt IE 9]>
-<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-
-  <!--[if (gte IE 9)|!(IE)]><!-->
-  <script src="assets/js/jquery.min.js"></script>
   <!--<![endif]-->
   <script src="assets/js/amazeui.min.js"></script>
   <script src="assets/js/app.js"></script>
@@ -227,7 +177,7 @@
         '<tr>' + "容器管理：" +
         '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止（stop）" +
         '</button>' +
-        '<button onclick="handleStart(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "启动（start）" +
+        '<button onclick="handleStart(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-success am-dropdown-toggle" data-am-dropdown-toggle>' + "启动（start）" +
         '</button>' +
         '<button onclick="handleKill(this)" data-kill-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制终止（kill）" +
         '</button>' +
@@ -350,4 +300,40 @@
       })
     }
   }
+
+    $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/user/name",
+    contentType: 'application/json',
+    success: function (data) {
+      console.log(data)
+      var name = data
+      var oDiv = document.getElementById("currentusername")
+      oDiv.innerHTML = name
+    }
+  })
+
+    function logout() {
+    if (confirm("确定退出登录吗？")) {
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/api/user",
+        contentType: "application/json",
+        data: JSON.stringify(""),
+        success: function (data) {
+          console.log(data)
+          alert("成功退出")
+          location.reload()
+        },
+        error: function (data) {
+          console.log(data)
+          alert(data.responseJSON.Log)
+        }
+      })
+    }
+  }
+
+
 </script>

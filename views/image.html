@@ -72,13 +72,13 @@
                 <a href="log.html">
                   <span class="am-icon-calendar"></span> 系统日志</a>
               </li>
-              <li onclick="logout()">
+              <li>
                 <a href="log.html">
                   <span class="am-icon-bug"></span> 容器日志</a>
               </li>
             </ul>
           </li>
-          <li>
+          <li onclick="logout()">
             <a href="#">
               <span class="am-icon-sign-out"></span> 退出平台</a>
           </li>
@@ -207,10 +207,10 @@
     $.each(data, function (key, image) {
       htmltext = htmltext + "<tr>" +
         '<td>' + key + '</td>' +
-        '<td>' + image[0] + '</td>' +
-        '<td>' + '<a href="#">' + image[1].slice(7, 27) + '</a>' + '</td>' +
+        '<td>' + '<span class="am-badge am-badge-danger">' + image[0] + '</span>' + '</td>' +
+        '<td>' + image[1].slice(7, 27) + '</td>' +
         '<td>' + image[2] + '</td>' +
-        '<td>' + '<span class="am-badge am-badge-danger">' + image[3] + '</span>' + '</td>' +
+        '<td>' + image[3] + '</td>' +
         '<td>' +
         '<button onclick="handleRemove(this)" data-remove-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除" + '</button>' +
         '<button onclick="handleRemoveAll(this)" data-removeall-iid=' + image[1] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "彻底删除" + '</button>' +
@@ -416,8 +416,8 @@
   }
 
     function logout() {
-    confirm("确定退出登录吗？")
-    $.ajax({
+    if (confirm("确定退出登录吗？")){
+      $.ajax({
       type: "POST",
       dataType: "json",
       url: "/api/user",
@@ -433,5 +433,6 @@
         alert(data.responseJSON.Log)
       }
     })
+    }
   }
 </script>

@@ -1,16 +1,30 @@
 package routers
 
 import (
+	"fmt"
 	"myapp/controllers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
+	"myapp/types"
+	"myapp/modles/db"
+	"time"
 )
 
 // 路由过滤器
 var FilterUser = func(ctx *context.Context) {
-	_, ok := ctx.Input.Session("uname").(string)
+	l := new(db.Log)
+	l.Time = time.Now().Unix()
+	l.Name = "unknown"
+	user, ok := ctx.Input.Session("user").(types.User)
+	if user.Name != "" {
+		l.Name = user.Name
+	}
+	url := ctx.Request.RequestURI
+	fmt.Printf("url: %s, session: %+v, 通过: %v\n", url, user, ok)
+	l.Log = fmt.Sprintf("url: %s, session: %+v, pass?: %v", url, user, ok)
+	db.InsertLog(l)
 	// 没有session说明用户还未登录，这时如果请求其他页面，则跳转至登录页面
-	if !ok && ctx.Request.RequestURI != "/login" {
+	if !ok && url != "/login" {
 		ctx.Redirect(302, "login")
 	}
 }

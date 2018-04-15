@@ -32,7 +32,7 @@ func (ic BaseController) Get() {
 
 func (ic *ImageController) GetAllImages() {
 	l := new(db.Log)
-	l.Name = "Unknown"
+	l.Name = ic.User.Name
 	l.Time = time.Now().Unix()
 	images, err := local.GetImages()
 	if err != nil {
@@ -67,7 +67,7 @@ func (ic *ImageController) GetAllImages() {
 func (ic *ImageController) OperateImage() {
 	var req ImageRequest
 	l := new(db.Log)
-	l.Name = "unknown"
+	l.Name = ic.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(ic.Ctx.Input.RequestBody, &req)

@@ -21,7 +21,7 @@ type ContainerCommitRequest struct {
 func (ccc *ContainerCommitController) Commit() {
 	var req ContainerCommitRequest
 	l := new(db.Log)
-	l.Name = "admin"
+	l.Name = ccc.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(ccc.Ctx.Input.RequestBody, &req)

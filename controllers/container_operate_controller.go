@@ -30,7 +30,7 @@ type ContainerRequest struct {
 func (cc *ContainerController) GetAllContainers() {
 	containers, err := local.GetAllContainers()
 	l := new(db.Log)
-	l.Name = "unknown"
+	l.Name = cc.User.Name
 	l.Time = time.Now().Unix()
 	if err != nil {
 		l.Log = fmt.Sprint("get all containers failed, %v", err)
@@ -64,7 +64,7 @@ func (cc *ContainerController) GetAllContainers() {
 func (cc *ContainerController) OperateContainer() {
 	var req ContainerRequest
 	l := new(db.Log)
-	l.Name = "unknown"
+	l.Name = cc.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(cc.Ctx.Input.RequestBody, &req)

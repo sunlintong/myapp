@@ -26,7 +26,7 @@ const (
 func (itc *ImageTagController) OperateTag() {
 	var req ImageTagRequest
 	l := new(db.Log)
-	l.Name = "admin"
+	l.Name = itc.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(itc.Ctx.Input.RequestBody, &req)

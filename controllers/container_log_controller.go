@@ -29,7 +29,7 @@ type ContainerLogRequest struct {
 func (crc *ContainerRunningController) GetRunningContainers() {
 	containers, err := local.GetRunningContainers()
 	l := new(db.Log)
-	l.Name = "admin"
+	l.Name = crc.User.Name
 	l.Time = time.Now().Unix()
 	if err != nil {
 		l.Log = fmt.Sprint("get all running containers failed, %v", err)
@@ -65,7 +65,7 @@ func (crc *ContainerRunningController) GetRunningContainers() {
 func (crc *ContainerRunningController) GetContainerLog() {
 	var req ContainerLogRequest
 	l := new(db.Log)
-	l.Name = "unknown"
+	l.Name = crc.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(crc.Ctx.Input.RequestBody, &req)

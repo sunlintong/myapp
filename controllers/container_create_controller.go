@@ -21,7 +21,7 @@ type ContainerCreateRequest struct {
 func (ccc *ContainerCreateController) CreateContainer() {
 	var req ContainerCreateRequest
 	l := new(db.Log)
-	l.Name = "admin"
+	l.Name = ccc.User.Name
 	l.Time = time.Now().Unix()
 
 	err := json.Unmarshal(ccc.Ctx.Input.RequestBody, &req)

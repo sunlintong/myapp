@@ -20,7 +20,7 @@ type ImagePullReq struct {
 func (ipc *ImagePullController) PullImage() {
 	var req ImagePullReq
 	l := new(db.Log)
-	l.Name = "unknown"
+	l.Name = ipc.User.Name
 	l.Time = time.Now().Unix()
 	err := json.Unmarshal(ipc.Ctx.Input.RequestBody, &req)
 	if err != nil {

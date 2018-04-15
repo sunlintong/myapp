@@ -60,5 +60,5 @@ func (rc *RegisterController) Post() {
 	l.Name = user.Name
 	l.Log = "register succeed"
 	db.InsertLog(l)
-	rc.Redirect("/login", 302)
+	rc.Success(l)
 }

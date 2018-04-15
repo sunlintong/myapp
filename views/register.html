@@ -84,6 +84,8 @@ function register() {
       }),
       success: function (data) {
         console.log(data)
+        alert("注册成功！")
+        self.location = "/login"
       },
       error: function (data) {
         console.log(data)

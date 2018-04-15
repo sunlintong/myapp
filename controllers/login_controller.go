@@ -60,5 +60,5 @@ func (lc *LoginController) Post() {
 	l.Name = user.Name
 	l.Log = "login succeed"
 	db.InsertLog(l)
-	lc.Redirect("/admin-index", 302)
+	lc.Success(l)
 }

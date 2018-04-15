@@ -22,43 +22,24 @@
   <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
       <strong>myapp</strong>
-      <small>容器管理平台</small>
+      <small>docker管理平台</small>
     </div>
-
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}">
-      <span class="am-sr-only">导航切换</span>
-      <span class="am-icon-bars"></span>
-    </button>
 
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
-      <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-        <li>
-          <a href="javascript:;">
-            <span class="am-icon-envelope-o"></span> 用户操作记录
-            <span class="am-badge am-badge-warning">5</span>
-          </a>
-        </li>
+      <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">  
         <li class="am-dropdown" data-am-dropdown>
-          <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-            <span class="am-icon-users"></span> 管理员
+          <a value="atongmu" class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            <span class="am-icon-users"></span>
             <span class="am-icon-caret-down"></span>
           </a>
-          <ul class="am-dropdown-content">
-            <li>
-              <a href="#">
-                <span class="am-icon-user"></span> 资料</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="am-icon-cog"></span> 设置</a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="am-icon-power-off"></span> 退出</a>
-            </li>
-          </ul>
         </li>
+        <li class="am-hide-sm-only">
+            <a href="javascript:;" id="admin-fullscreen">
+              <span class="am-icon-arrows-alt"></span>
+              <span class="admin-fullText">开启全屏</span>
+            </a>
+          </li>
       </ul>
     </div>
   </header>
@@ -87,7 +68,9 @@
           <div class="am-panel-bd">
             <p>
               <span class="am-icon-bookmark"></span> 公告</p>
-            <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+            <p>
+              代码请见<a href="https://github.com/sunlintong/myapp" target="_blank">Visit W3School!</a>
+            </p>
           </div>
         </div>
 
@@ -95,7 +78,7 @@
           <div class="am-panel-bd">
             <p>
               <span class="am-icon-tag"></span> wiki</p>
-            <p>Welcome to the Amaze UI wiki!</p>
+            <p>欢迎使用myapp docker管理平台</p>
           </div>
         </div>
       </div>
@@ -137,7 +120,7 @@
 
       <footer class="admin-content-footer">
         <hr>
-        <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
       </footer>
     </div>
     <!-- content end -->

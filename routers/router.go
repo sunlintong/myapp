@@ -30,11 +30,11 @@ func init() {
 	beego.Router("/login", &controllers.LoginController{})
 
 	// 页面 路由
-	beego.Router("/admin-index", &controllers.AdminIndexController{})
-	beego.Router("/admin-image", &controllers.AdminImageController{})
-	beego.Router("/admin-container", &controllers.AdminContainerController{})
-	beego.Router("/admin-container-log", &controllers.AdminContainerLogController{})
-	beego.Router("/admin-log", &controllers.AdminLogController{})
+	beego.Router("/index", &controllers.AdminIndexController{})
+	beego.Router("/image", &controllers.AdminImageController{})
+	beego.Router("/container", &controllers.AdminContainerController{})
+	beego.Router("/containerlog", &controllers.AdminContainerLogController{})
+	beego.Router("/log", &controllers.AdminLogController{})
 
 	// api 路由
 	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")

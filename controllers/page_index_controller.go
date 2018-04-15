@@ -10,6 +10,6 @@ type AdminIndexController struct {
 
 // Get ...
 func (ac *AdminIndexController) Get() {
-	ac.TplName = "admin-index.html"
+	ac.TplName = "index.html"
 }
 

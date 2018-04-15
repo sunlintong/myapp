@@ -10,6 +10,6 @@ type AdminContainerController struct {
 
 // Get ...
 func (ac *AdminContainerController) Get() {
-	ac.TplName = "admin-container.html"
+	ac.TplName = "container.html"
 }
 

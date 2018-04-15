@@ -10,6 +10,6 @@ type AdminImageController struct {
 
 // Get ...
 func (ac *AdminImageController) Get() {
-	ac.TplName = "admin-image.html"
+	ac.TplName = "image.html"
 }
 

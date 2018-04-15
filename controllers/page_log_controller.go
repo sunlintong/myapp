@@ -7,6 +7,6 @@ type AdminLogController struct {
 
 // Get ...
 func (ac *AdminLogController) Get() {
-	ac.TplName = "admin-log.html"
+	ac.TplName = "log.html"
 }
 

@@ -51,7 +51,7 @@ func (udc *UserDataController) Logout() {
 	l.Time = time.Now().Unix()
 	l.Name = udc.User.Name
 	udc.DelSession("user")
-	l.Log = fmt.Sprintf("user %s logout", udc.User.Name())
+	l.Log = fmt.Sprintf("user %s logout", udc.User.Name)
 	log.Printf(l.Log)
 	err := db.InsertLog(l)
 	if err != nil {

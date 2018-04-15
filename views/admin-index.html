@@ -209,6 +209,20 @@
   }
 
   function logout() {
-    
+    confirm("确定退出登录吗？")
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "/api/user",
+      contentType: "application/json",
+      success: function(data){
+        alert("成功退出")
+        location.reload()
+      },
+      error: function(data) {
+        console.log(data)
+        alert(data.responseJSON)
+      }
+    })
   }
 </script>

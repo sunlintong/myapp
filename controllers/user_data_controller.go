@@ -5,6 +5,7 @@ import (
 	"myapp/modles/db"
 	"github.com/golang/glog"
 	"time"
+	"log"
 )
 
 type UserDataController struct {
@@ -43,4 +44,9 @@ func (udc *UserDataController) GetUserData() {
 	glog.V(1).Infoln(udc.Data)
 	udc.ServeJSON()
 	udc.Finish()
+}
+
+func (udc *UserDataController) Logout() {
+	udc.DelSession("user")
+	log.Println("user %s logout", udc.User.Name)
 }

@@ -27,19 +27,19 @@
 
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
-      <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">  
+      <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
         <li class="am-dropdown" data-am-dropdown>
-          <a value="atongmu" class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+          <a id="currentusername" class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
             <span class="am-icon-users"></span>
             <span class="am-icon-caret-down"></span>
           </a>
         </li>
         <li class="am-hide-sm-only">
-            <a href="javascript:;" id="admin-fullscreen">
-              <span class="am-icon-arrows-alt"></span>
-              <span class="admin-fullText">开启全屏</span>
-            </a>
-          </li>
+          <a href="javascript:;" id="admin-fullscreen">
+            <span class="am-icon-arrows-alt"></span>
+            <span class="admin-fullText">开启全屏</span>
+          </a>
+        </li>
       </ul>
     </div>
   </header>
@@ -48,28 +48,56 @@
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
       <div class="am-offcanvas-bar admin-offcanvas-bar">
-          <ul class="am-list admin-sidebar-list">
-              <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
-              <li class="admin-parent">
-                <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 功能模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
-                  <li><a href="admin-image.html"><span class="am-icon-puzzle-piece"></span> 镜像管理</a></li>
-                  <li><a href="admin-container.html"><span class="am-icon-th"></span> 容器管理</a></li>
-                  <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
-                  <li><a href="admin-container-log.html"><span class="am-icon-bug"></span> 容器日志</a></li>
-                </ul>
+        <ul class="am-list admin-sidebar-list">
+          <li>
+            <a href="admin-index.html">
+              <span class="am-icon-home"></span> 首页</a>
+          </li>
+          <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
+              <span class="am-icon-file"></span> 功能模块
+              <span class="am-icon-angle-right am-fr am-margin-right"></span>
+            </a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+              <li>
+                <a href="admin-image.html">
+                  <span class="am-icon-puzzle-piece"></span> 镜像管理</a>
               </li>
-              <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
-              <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
-              <li onclick="logout()"><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+              <li>
+                <a href="admin-container.html">
+                  <span class="am-icon-th"></span> 容器管理</a>
+              </li>
+              <li>
+                <a href="admin-log.html">
+                  <span class="am-icon-calendar"></span> 系统日志</a>
+              </li>
+              <li>
+                <a href="admin-container-log.html">
+                  <span class="am-icon-bug"></span> 容器日志</a>
+              </li>
             </ul>
+          </li>
+          <li>
+            <a href="admin-table.html">
+              <span class="am-icon-table"></span> 表格</a>
+          </li>
+          <li>
+            <a href="admin-form.html">
+              <span class="am-icon-pencil-square-o"></span> 表单</a>
+          </li>
+          <li onclick="logout()">
+            <a href="#">
+              <span class="am-icon-sign-out"></span> 注销</a>
+          </li>
+        </ul>
 
         <div class="am-panel am-panel-default admin-sidebar-panel">
           <div class="am-panel-bd">
             <p>
               <span class="am-icon-bookmark"></span> 公告</p>
             <p>
-              代码请见<a href="https://github.com/sunlintong/myapp" target="_blank">Visit W3School!</a>
+              代码请见
+              <a href="https://github.com/sunlintong/myapp" target="_blank">https://github.com/sunlintong/myapp</a>
             </p>
           </div>
         </div>
@@ -114,16 +142,16 @@
           </div>
         </div>
 
- 
-        </div>
-      </div>
 
-      <footer class="admin-content-footer">
-        <hr>
-        <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
-      </footer>
+      </div>
     </div>
-    <!-- content end -->
+
+    <footer class="admin-content-footer">
+      <hr>
+      <p class="am-padding-left"> © myapp,developed by sunlintong scu.</p>
+    </footer>
+  </div>
+  <!-- content end -->
 
   </div>
 
@@ -146,15 +174,29 @@
         '<td>' + user[0] + '</td>' +
         '<td>' + '<a href="#">' + user[1] + '</a>' + '</td>' +
         '<td>' + '<span class="am-badge am-badge-danger">' + user[2] + '</span>' + '</td>' +
-        '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>'+ 
+        '<td>' + '<div class="am-dropdown" data-am-dropdown>' + '</div>' +
         '<button onclick="getUserLog(this)" data-user-name=' + user[0] + ' class="am-btn am-btn-primary am-btn-sm am-fl">' + "查看该用户操作记录" + '</button>'
-        '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>'+ "删除" + '</button>' + 
-        '<span class="am-icon-cog">' + '</span>' + 
-        '<span class="am-icon-caret-down">' + '</span>' + 
+      '<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span>' + "删除" + '</button>' +
+        '<span class="am-icon-cog">' + '</span>' +
+        '<span class="am-icon-caret-down">' + '</span>' +
         '</button>' + '</td>' + '</tr>';
     })
     document.getElementById("userlist").innerHTML = htmltext;
   })
+
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "/api/user/name",
+    contentType: 'application/json',
+    success: function (data) {
+      console.log(data)
+      var name = data.responseJSON
+      var oDiv = document.getElementById("currentusername")
+      oDiv.innerHTML = name
+    }
+  })
+
 
   function getUserLog(user) {
     var name = user.getAttribute("data-user-name")
@@ -185,15 +227,16 @@
       url: "/api/user",
       contentType: "application/json",
       data: JSON.stringify(""),
-      success: function(data){
+      success: function (data) {
         console.log(data)
         alert("成功退出")
         location.reload()
       },
-      error: function(data) {
+      error: function (data) {
         console.log(data)
         alert(data.responseJSON.Log)
       }
     })
   }
+
 </script>

@@ -39,6 +39,7 @@ func init() {
 	// api 路由
 	beego.Router("/api/user", &controllers.UserDataController{}, "get:GetUserData")
 	beego.Router("/api/user", &controllers.UserDataController{}, "post:Logout")
+	beego.Router("/api/user/name", &controllers.UserNameController{}, "get:GetName")
 
 	beego.Router("/api/log", &controllers.UserLogController{}, "get:GetUserLog")
 	beego.Router("/api/log", &controllers.UserLogController{}, "post:SetUserSession")

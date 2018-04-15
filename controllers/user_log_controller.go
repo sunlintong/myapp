@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"myapp/modles/db"
 	"time"
+	"github.com/golang/glog"
 )
 
 type UserLogController struct {
@@ -33,6 +34,7 @@ func (ulc *UserLogController) GetUserLog() {
 	// 先判断是否允许当前用户权限
 	// 若当前用户不是admin确请求查看其它用户日志，不允许
 	if !ulc.User.IsAdmin && name != ulc.User.Name {
+		glog.V(2).Infof("current_user:%+v, request user name:%s", ulc.User, name)
 		ulc.BadRequest("cant request others log")
 		return
 	}

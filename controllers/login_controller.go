@@ -6,6 +6,7 @@ import (
 	"time"
 	"myapp/types"
 	"github.com/astaxie/beego/orm"
+	"log"
 )
 
 type LoginController struct {
@@ -31,6 +32,7 @@ func (lc *LoginController) Post() {
 	json.Unmarshal(lc.Ctx.Input.RequestBody, &req)
 	// 这个err必须处理，因为有可能数据库没有该用户
 	dbusers, err := db.GetUserByName(req.User_Name)
+	log.Println("获取用户：%+v, err : v%", dbusers, err)
 	// 出现这种错误是因为该用户还未注册
 	if err == orm.ErrNoRows {
 		l.Name = "unknown"

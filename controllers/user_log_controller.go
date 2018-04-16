@@ -41,7 +41,6 @@ func (ulc *UserLogController) GetUserLog() {
 			logs, err = db.GetAllLogs()
 		}else {
 			logs, err = db.GetLogsByUser(ulc.User.Name)
-			log.Println("logs:", logs)
 		}
 	} else {
 		// 用户为admin或请求当前用户的日志时才允许

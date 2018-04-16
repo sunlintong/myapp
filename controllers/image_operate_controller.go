@@ -34,7 +34,9 @@ func (ic *ImageController) GetAllImages() {
 	l := new(db.Log)
 	l.Name = ic.User.Name
 	l.Time = time.Now().Unix()
-	images, err := local.GetImages()
+	ids, err := db.GetImageIdsByUser(ic.User)
+	ic.CheckErr(err)
+	images, err := local.GetImageByImageIds(ids)
 	if err != nil {
 		l.Log = fmt.Sprintf("get all images failed, %v", err)
 	} else {

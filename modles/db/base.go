@@ -18,8 +18,10 @@ func init() {
 	
 		fmt.Println(sql)
 	orm.RegisterDataBase("default", "mysql", sql, 30)
-	orm.RegisterModel(new(User), new(Log))
+	orm.RegisterModel(new(User), new(Log), new(Container), new(Image))
 	orm.RunSyncdb("default", false, true)
+
+	InitImageTable()
 }
 
 var (

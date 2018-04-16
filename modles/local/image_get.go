@@ -3,6 +3,7 @@ package local
 import (
 	"github.com/docker/docker/api/types"
 	"golang.org/x/net/context"
+	"log"
 )
 
 // 获取镜像列表, 不获取镜像相关操作
@@ -21,4 +22,19 @@ func GetImage(image_id string) (types.ImageSummary, error) {
 		}
 	}
 	return types.ImageSummary{}, err
+}
+
+// 由image_id数组获取images
+func GetImageByImageIds(ids []string) ([]types.ImageSummary, error) {
+	var err error
+	images := make([]types.ImageSummary, len(ids))
+	for _, id := range ids {
+		image, err := GetImage(id)
+		if err != nil {
+			log.Printf("由id获取镜像err：", err)
+			continue
+		}
+		images = append(images, image)
+	}
+	return images, err
 }

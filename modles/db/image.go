@@ -17,13 +17,20 @@ const PublicImageGroup = "public"
 
 // 由用户获取image_id数组
 func GetImageIdsByUser(user types.User) ([]string, error){
-	var ids []string
+	var images []*Image
 	var err error
 	o := GetOrmer()
+	// 管理员看所有
+	// 普通用户看public和自己的
 	if user.IsAdmin {
-		_, err = o.QueryTable(new(Image)).All(&ids)
+		_, err = o.QueryTable(new(Image)).All(&images)
 	}else {
-		_, err = o.QueryTable(new(Image)).Filter("name", user.Name).All(&ids)
+		_, err = o.QueryTable(new(Image)).Filter("name__in", user.Name, "public").All(&images)
+	}
+	ids := make([]string, len(images))
+	for _, image := range images {
+		id := image.Image_ID
+		ids = append(ids, id)
 	}
 	return ids, err
 }

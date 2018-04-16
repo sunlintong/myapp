@@ -55,3 +55,9 @@ func GetContainerIdsByUser(user types.User) ([]string, error) {
 	log.Println("cid:", len(ids), ids)
 	return ids, err
 }
+
+func InsertContainer(c *Container) error {
+	o := GetOrmer()
+	_, err := o.Insert(c)
+	return err
+}

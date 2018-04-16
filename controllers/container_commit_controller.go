@@ -2,11 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
-	"log"
-	"fmt"
 )
 
 type ContainerCommitController struct {
@@ -15,7 +15,7 @@ type ContainerCommitController struct {
 
 type ContainerCommitRequest struct {
 	Container_ID string `json:"container_id"`
-	Image_Name string `json:"image_name"`
+	Image_Name   string `json:"image_name"`
 }
 
 func (ccc *ContainerCommitController) Commit() {
@@ -34,6 +34,11 @@ func (ccc *ContainerCommitController) Commit() {
 	log.Println("req----", req)
 
 	image_id, err := local.CommitContainer(req.Container_ID, req.Image_Name)
+	dbimage := &db.Image{
+		Image_ID: image_id,
+		Group:    ccc.User.Name,
+	}
+	db.InsertImage(dbimage)
 	if err != nil {
 		l.Log = err.Error()
 		db.InsertLog(l)

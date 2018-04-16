@@ -54,3 +54,9 @@ func GetImageIdsByUser(user types.User) ([]string, error) {
 	log.Println("镜像ids:", len(ids), ids)
 	return ids, err
 }
+
+func InsertImage(i *Image) error {
+	o := GetOrmer()
+	_, err := o.Insert(i)
+	return err
+}

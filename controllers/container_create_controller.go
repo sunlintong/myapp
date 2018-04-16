@@ -40,6 +40,11 @@ func (ccc *ContainerCreateController) CreateContainer() {
 		return
 	}
 	l.Log = "create container succeed"
+	dbcontainer := &db.Container{
+		Container_ID: body.ID,
+		Group: ccc.User.Name,
+	}
+	db.InsertContainer(dbcontainer)
 	db.InsertLog(l)
 	ccc.Success(body)
 }

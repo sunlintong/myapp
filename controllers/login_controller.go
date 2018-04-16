@@ -31,7 +31,6 @@ func (lc *LoginController) Post() {
 	json.Unmarshal(lc.Ctx.Input.RequestBody, &req)
 	// 这个err必须处理，因为有可能数据库没有该用户
 	dbusers, err := db.GetUserByName(req.User_Name)
-	dbuser := dbusers[0]
 	// 出现这种错误是因为该用户还未注册
 	if err == orm.ErrNoRows {
 		l.Name = "unknown"
@@ -42,6 +41,7 @@ func (lc *LoginController) Post() {
 		lc.Redirect("/register", 302)
 		return
 	}
+	dbuser := dbusers[0]
 	if lc.Encode(req.User_Password) != dbuser.Password {
 		l.Name = req.User_Name
 		l.Log = "input error"

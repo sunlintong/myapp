@@ -25,6 +25,7 @@ func (ulc *UserLogController) GetUserLog() {
 	l.Name = "admin"
 	// 获取请求用户名，若没有，则设为""
 	name := ulc.GetSession("user_name")
+	log.Println("user_name:", name)
 	if name == nil {
 		name = ""
 	}
@@ -36,6 +37,7 @@ func (ulc *UserLogController) GetUserLog() {
 			logs, err = db.GetAllLogs()
 		}else {
 			logs, err = db.GetLogsByUser(name.(string))
+			log.Println("logs:", logs)
 		}
 	} else {
 		// 用户为admin或请求当前用户的日志时才允许

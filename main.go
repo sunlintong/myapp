@@ -5,11 +5,17 @@ import (
 
 	"github.com/astaxie/beego"
 	"myapp/modles/db"
+	"time"
 	//	"myapp/test"
 )
 
 
 func main() {
-	go db.SyncContainers()
+	go func() {
+		ticker := time.NewTicker(15 * time.Second)
+		for range ticker.C {
+			db.SyncContainers()
+		}
+	}()
 	beego.Run()
 }

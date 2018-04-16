@@ -16,7 +16,7 @@ const PublicContainerGroup = "public"
 
 func init() {
 	o := GetOrmer()
-	o.Raw("DROP TABLE `image`").Exec()
+	o.Raw("DROP TABLE `container`").Exec()
 	containers, err := local.GetAllContainers()
 	if err != nil {
 		log.Println(err)

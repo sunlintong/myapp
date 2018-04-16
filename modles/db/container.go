@@ -31,6 +31,7 @@ func GetContainerIdsByUser(user types.User) ([]string, error) {
 		id := container.Container_ID
 		ids = append(ids, id)
 	}
+	log.Println("cid:", len(ids), ids)
 	return ids, err
 }
 
@@ -52,5 +53,4 @@ func InitContainerTable() {
 		c.Group = PublicContainerGroup
 		InsertContainer(c)
 	}
-
 }

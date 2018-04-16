@@ -53,6 +53,9 @@ func GetUserByName(name string) ([]*User, error) {
 	var users []*User
 	o := GetOrmer()
 	qs := o.QueryTable(new(User))
+	// All()和One()区别很大，All()没找到时返回err为nil
+	// One()返回的是err no row
+	// 这里坑死我了
 	_, err := qs.Filter("name", name).All(&users)
 	return users, err
 }

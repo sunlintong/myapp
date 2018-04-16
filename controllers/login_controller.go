@@ -5,7 +5,6 @@ import (
 	"myapp/modles/db"
 	"time"
 	"myapp/types"
-	"github.com/astaxie/beego/orm"
 	"log"
 )
 
@@ -32,9 +31,8 @@ func (lc *LoginController) Post() {
 	json.Unmarshal(lc.Ctx.Input.RequestBody, &req)
 	// 这个err必须处理，因为有可能数据库没有该用户
 	dbusers, err := db.GetUserByName(req.User_Name)
-	log.Println("获取用户：%+v, err : v%", dbusers, err)
-	// 出现这种错误是因为该用户还未注册
-	if err == orm.ErrNoRows {
+	log.Println("获取用户：%+v, err : %v", dbusers, err)
+	if len(dbusers) <= 0 {
 		l.Name = "unknown"
 		l.Log = "user not found, please register first"
 		err := db.InsertLog(l)

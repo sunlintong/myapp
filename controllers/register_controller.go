@@ -37,12 +37,11 @@ func (rc *RegisterController) Post() {
 	}
 
 	// 判断用户名是否重复
-	// 注意这里，就算数据库里没有匹配的用户，但queryseter.One()还是会返回一个初始化了的user
-	// 所以不能通过dbuser == nil 来判断
-	_, err := db.GetUserByName(req.User_Name)
+	// 注意这里，数据库里没有匹配的用户，queryseter.One()会返回一个长度为0的切片
+	dbusers, err := db.GetUserByName(req.User_Name)
 	rc.CheckErr(err)
 	// 找到该用户，说明用户名重复了
-	if err == nil {
+	if len(dbusers) == 0 {
 		l.Name = "unknown"
 		l.Log = "account name repeat, please register another name"
 		err := db.InsertLog(l)

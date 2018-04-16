@@ -41,7 +41,7 @@ func (rc *RegisterController) Post() {
 	dbusers, err := db.GetUserByName(req.User_Name)
 	rc.CheckErr(err)
 	// 找到该用户，说明用户名重复了
-	if len(dbusers) == 0 {
+	if len(dbusers) > 0 {
 		l.Name = "unknown"
 		l.Log = "account name repeat, please register another name"
 		err := db.InsertLog(l)

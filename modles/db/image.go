@@ -23,7 +23,6 @@ func init() {
 	for _, i := range is {
 		 o.Delete(i)
 	}
-
 	images, err := local.GetImages()
 	if err != nil {
 		log.Println(err)
@@ -32,8 +31,8 @@ func init() {
 		i := new(Image)
 		i.Image_ID = image.ID
 		i.Group = PublicImageGroup
+		o.Insert(i)
 	}
-
 }
 
 // 由用户获取image_id数组
@@ -55,10 +54,4 @@ func GetImageIdsByUser(user types.User) ([]string, error) {
 	}
 	log.Println("镜像ids:", len(ids), ids)
 	return ids, err
-}
-
-func InsertImage(image *Image) error {
-	o := GetOrmer()
-	_, err := o.Insert(image)
-	return err
 }

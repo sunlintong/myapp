@@ -33,7 +33,7 @@ func init() {
 	beego.Router("/index", &controllers.AdminIndexController{})
 	beego.Router("/image", &controllers.AdminImageController{})
 	beego.Router("/container", &controllers.AdminContainerController{})
-	beego.Router("/containerlog", &controllers.AdminContainerLogController{})
+	beego.Router("/containerLog", &controllers.AdminContainerLogController{})
 	beego.Router("/log", &controllers.AdminLogController{})
 
 	// api 路由

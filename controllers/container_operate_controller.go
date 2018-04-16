@@ -28,7 +28,9 @@ type ContainerRequest struct {
 
 // GetAllContainers HTTP GET
 func (cc *ContainerController) GetAllContainers() {
-	containers, err := local.GetAllContainers()
+	ids, err := db.GetContainerIdsByUser(cc.User)
+	cc.CheckErr(err)
+	containers, err := local.GetAllContainersGrepIds(ids)
 	l := new(db.Log)
 	l.Name = cc.User.Name
 	l.Time = time.Now().Unix()

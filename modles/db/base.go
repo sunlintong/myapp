@@ -22,6 +22,7 @@ func init() {
 	orm.RunSyncdb("default", false, true)
 
 	InitImageTable()
+	InitContainerTable()
 }
 
 var (

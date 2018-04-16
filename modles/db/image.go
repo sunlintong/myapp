@@ -1,22 +1,21 @@
 package db
 
 import (
-	"myapp/types"
-	"myapp/modles/local"
 	"log"
+	"myapp/modles/local"
+	"myapp/types"
 )
 
 type Image struct {
-	ID         int    `orm:"column(id);pk;auto"`
-	Name       string `orm:"column(name)"`	//所属用户名
-	Image_ID   string `orm:"column(image_id)"`
-	Image_Name string `orm:"column(image_name)"`
+	ID        int    `orm:"column(id);pk;auto"`
+	Group string `orm:"column(group)"` //所属用户名
+	Image_ID  string `orm:"column(image_id)"`
 }
 
 const PublicImageGroup = "public"
 
 // 由用户获取image_id数组
-func GetImageIdsByUser(user types.User) ([]string, error){
+func GetImageIdsByUser(user types.User) ([]string, error) {
 	var images []*Image
 	var err error
 	o := GetOrmer()
@@ -24,8 +23,8 @@ func GetImageIdsByUser(user types.User) ([]string, error){
 	// 普通用户看public和自己的
 	if user.IsAdmin {
 		_, err = o.QueryTable(new(Image)).All(&images)
-	}else {
-		_, err = o.QueryTable(new(Image)).Filter("name__in", user.Name, "public").All(&images)
+	} else {
+		_, err = o.QueryTable(new(Image)).Filter("group__in", user.Name, "public").All(&images)
 	}
 	ids := make([]string, len(images))
 	for _, image := range images {
@@ -48,14 +47,9 @@ func InitImageTable() {
 		log.Println(err)
 	}
 	for _, image := range images {
-		for _, rt := range image.RepoTags {
-			i := new(Image)
-			i.Image_Name = rt
-			i.Image_ID = image.ID
-			i.Name = PublicImageGroup
-			InsertImage(i)
-		}
+		i := new(Image)
+		i.Image_ID = image.ID
+		i.Group = PublicImageGroup
 	}
 
 }
-

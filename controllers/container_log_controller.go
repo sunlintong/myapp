@@ -27,7 +27,9 @@ type ContainerLogRequest struct {
 
 // get
 func (crc *ContainerRunningController) GetRunningContainers() {
-	containers, err := local.GetRunningContainers()
+	ids, err := db.GetContainerIdsByUser(crc.User)
+	crc.CheckErr(err)
+	containers, err := local.GetRunningContainersGrepIds(ids)
 	l := new(db.Log)
 	l.Name = crc.User.Name
 	l.Time = time.Now().Unix()

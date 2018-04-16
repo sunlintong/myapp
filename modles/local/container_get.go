@@ -22,3 +22,29 @@ func GetAllContainers() ([]types.Container, error) {
 	containers, err := cli.ContainerList(context.Background(), options)
 	return containers, err
 }
+
+func GetAllContainersGrepIds(ids []string) ([]types.Container, error) {
+	c := make([]types.Container, len(ids))
+	containers, err := GetAllContainers()
+	for _, id := range ids {
+		for _, container := range containers {
+			if container.ID == id {
+				c = append(c, container)
+			}
+		}
+	}
+	return c, err
+}
+
+func GetRunningContainersGrepIds(ids []string) ([]types.Container, error) {
+	c := make([]types.Container, len(ids))
+	containers, err := GetRunningContainers()
+	for _, id := range ids {
+		for _, container := range containers {
+			if container.ID == id {
+				c = append(c, container)
+			}
+		}
+	}
+	return c, err
+}

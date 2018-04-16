@@ -4,6 +4,7 @@ import (
 	"log"
 	"myapp/modles/local"
 	"myapp/types"
+	"time"
 )
 
 type Container struct {
@@ -21,7 +22,20 @@ func init() {
 	for _, i := range is {
 		 o.Delete(i)
 	}
-	SyncContainers()
+	containers, err := local.GetAllContainers()
+	if err != nil {
+		log.Println(err)
+	}
+	// 检测本地是否新增了容器，若有，添至数据库
+	for _, container := range containers {
+		if !o.QueryTable(new(Container)).Filter("container_id", container.ID).Exist() {
+			c := &Container{
+				Group: PublicContainerGroup,
+				Container_ID: container.ID,
+			}
+			InsertContainer(c)
+		}
+	}
 }
 
 // 由用户获取image_id数组
@@ -54,36 +68,39 @@ func InsertContainer(c *Container) error {
 // 同步数据库与本地container
 func SyncContainers() {
 	o := GetOrmer()
-	containers, err := local.GetAllContainers()
-	if err != nil {
+	ticker := time.NewTicker(15 * time.Second)
+	for range ticker.C {
+		containers, err := local.GetAllContainers()
+		if err != nil {
+			log.Println(err)
+		}
+		// 检测本地是否新增了容器，若有，添至数据库
+		for _, container := range containers {
+			if !o.QueryTable(new(Container)).Filter("container_id", container.ID).Exist() {
+				c := &Container{
+					Group: PublicContainerGroup,
+					Container_ID: container.ID,
+				}
+				InsertContainer(c)
+			}
+		}
+		// 检测平台容器是否被删除，若是，从数据库中删除
+		u := types.User{
+			Name: "admin",
+			IsAdmin: true,
+		}
+		ids, err := GetContainerIdsByUser(u)
 		log.Println(err)
-	}
-	// 检测本地是否新增了容器，若有，添至数据库
-	for _, container := range containers {
-		if !o.QueryTable(new(Container)).Filter("container_id", container.ID).Exist() {
-			c := &Container{
-				Group: PublicContainerGroup,
-				Container_ID: container.ID,
+		for _, id := range ids {
+			Here: 
+			for _, c := range containers {
+				if c.ID == id {
+					goto Here
+				}
 			}
-			InsertContainer(c)
+			// 运行到这里，说明找到了待删除的id
+			num, _ := o.Delete(&Container{Container_ID: id})
+			log.Printf("删除container 第 %d 行", num)
 		}
-	}
-	// 检测平台容器是否被删除，若是，从数据库中删除
-	u := types.User{
-		Name: "admin",
-		IsAdmin: true,
-	}
-	ids, err := GetContainerIdsByUser(u)
-	log.Println(err)
-	for _, id := range ids {
-		Here: 
-		for _, c := range containers {
-			if c.ID == id {
-				goto Here
-			}
-		}
-		// 运行到这里，说明找到了待删除的id
-		num, _ := o.Delete(&Container{Container_ID: id})
-		log.Printf("删除container 第 %d 行", num)
 	}
 }

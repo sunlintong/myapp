@@ -50,6 +50,6 @@ func InitImageTable() {
 		i := new(Image)
 		i.Image_ID = image.ID
 		i.Group = PublicImageGroup
-	}
+	}	
 
 }

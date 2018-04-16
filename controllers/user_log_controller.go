@@ -28,7 +28,7 @@ func (ulc *UserLogController) GetUserLog() {
 	log.Println("user_name:", name)
 	var req_name string
 	n, ok := name.(string)
-	log.Panicln(n, ok)
+	log.Println(n, ok)
 	if ok {
 		req_name = n
 	} else {

@@ -26,23 +26,28 @@ func (ulc *UserLogController) GetUserLog() {
 	// 获取请求用户名，若没有，则设为""
 	name := ulc.GetSession("user_name")
 	log.Println("user_name:", name)
-	if name == nil {
-		name = ""
+	var req_name string
+	n, ok := name.(string)
+	log.Panicln(n, ok)
+	if ok {
+		req_name = n
+	} else {
+		req_name = ""
 	}
 	ulc.DelSession("user_name")
 
 	// 请求为空说明是直接get日志展示界面，根据权限进行展示
-	if name == "" {
+	if req_name == "" {
 		if ulc.User.IsAdmin {
 			logs, err = db.GetAllLogs()
 		}else {
-			logs, err = db.GetLogsByUser(name.(string))
+			logs, err = db.GetLogsByUser(req_name)
 			log.Println("logs:", logs)
 		}
 	} else {
 		// 用户为admin或请求当前用户的日志时才允许
 		if ulc.User.IsAdmin || name == ulc.User.Name {
-		logs, err = db.GetLogsByUser(name.(string))
+		logs, err = db.GetLogsByUser(req_name)
 		} else {
 			err = fmt.Errorf("you can't request other's log")
 		}

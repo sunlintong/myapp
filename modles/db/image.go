@@ -17,7 +17,13 @@ const PublicImageGroup = "public"
 // 初始化Image表
 func init() {
 	o := GetOrmer()
-	o.Raw("DROP TABLE `image`").Exec()
+	// 先清空
+	var is []*Image
+	o.QueryTable(new(Image)).All(&is)
+	for _, i := range is {
+		 o.Delete(i)
+	}
+
 	images, err := local.GetImages()
 	if err != nil {
 		log.Println(err)

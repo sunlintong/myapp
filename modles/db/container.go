@@ -16,7 +16,13 @@ const PublicContainerGroup = "public"
 
 func init() {
 	o := GetOrmer()
-	o.Raw("DROP TABLE `container`").Exec()
+	// 清空
+	var is []*Container
+	o.QueryTable(new(Container)).All(&is)
+	for _, i := range is {
+		 o.Delete(i)
+	}
+
 	containers, err := local.GetAllContainers()
 	if err != nil {
 		log.Println(err)

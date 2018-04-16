@@ -14,6 +14,21 @@ type Image struct {
 
 const PublicImageGroup = "public"
 
+func init() {
+	o := GetOrmer()
+	o.Raw("DROP TABLE `image`").Exec()
+	images, err := local.GetImages()
+	if err != nil {
+		log.Println(err)
+	}
+	for _, image := range images {
+		i := new(Image)
+		i.Image_ID = image.ID
+		i.Group = PublicImageGroup
+	}	
+
+}
+
 // 由用户获取image_id数组
 func GetImageIdsByUser(user types.User) ([]string, error) {
 	var images []*Image
@@ -38,18 +53,4 @@ func InsertImage(image *Image) error {
 	o := GetOrmer()
 	_, err := o.Insert(image)
 	return err
-}
-
-// 初始化，插入已有镜像,名为public
-func InitImageTable() {
-	images, err := local.GetImages()
-	if err != nil {
-		log.Println(err)
-	}
-	for _, image := range images {
-		i := new(Image)
-		i.Image_ID = image.ID
-		i.Group = PublicImageGroup
-	}	
-
 }

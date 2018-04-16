@@ -14,6 +14,21 @@ type Container struct {
 
 const PublicContainerGroup = "public"
 
+func init() {
+	o := GetOrmer()
+	o.Raw("DROP TABLE `image`").Exec()
+	containers, err := local.GetAllContainers()
+	if err != nil {
+		log.Println(err)
+	}
+	for _, container := range containers {
+		c := new(Container)
+		c.Container_ID = container.ID
+		c.Group = PublicContainerGroup
+		InsertContainer(c)
+	}
+}
+
 // 由用户获取image_id数组
 func GetContainerIdsByUser(user types.User) ([]string, error) {
 	var containers []*Container
@@ -39,18 +54,4 @@ func InsertContainer(container *Container) error {
 	o := GetOrmer()
 	_, err := o.Insert(container)
 	return err
-}
-
-// 初始化，插入已有镜像,名为public
-func InitContainerTable() {
-	containers, err := local.GetAllContainers()
-	if err != nil {
-		log.Println(err)
-	}
-	for _, container := range containers {
-		c := new(Container)
-		c.Container_ID = container.ID
-		c.Group = PublicContainerGroup
-		InsertContainer(c)
-	}
 }

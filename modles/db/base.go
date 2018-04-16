@@ -20,12 +20,6 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", sql, 30)
 	orm.RegisterModel(new(User), new(Log), new(Container), new(Image))
 	orm.RunSyncdb("default", false, true)
-	
-	o := GetOrmer()
-	o.Raw("DROP TABLE `image`").Exec()
-	o.Raw("DROP TABLE `container`").Exec()
-	InitImageTable()
-	InitContainerTable()
 }
 
 var (

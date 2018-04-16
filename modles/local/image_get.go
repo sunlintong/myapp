@@ -28,15 +28,13 @@ func GetImage(image_id string) (types.ImageSummary, error) {
 func GetImagesByImageIds(ids []string) ([]types.ImageSummary, error) {
 	var err error
 	images := make([]types.ImageSummary, len(ids))
-	for _, id := range ids {
+	for i, id := range ids {
 		image, err := GetImage(id)
 		if err != nil {
 			log.Printf("由id获取镜像err：", err)
 			continue
 		}
-		for i := range images {
-			images[i] = image
-		}
+		images[i] = image
 	}
 	log.Println("image:", len(images))
 	return images, err

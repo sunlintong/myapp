@@ -26,10 +26,10 @@ func GetAllContainers() ([]types.Container, error) {
 func GetAllContainersGrepIds(ids []string) ([]types.Container, error) {
 	c := make([]types.Container, len(ids))
 	containers, err := GetAllContainers()
-	for _, id := range ids {
+	for i, id := range ids {
 		for _, container := range containers {
 			if container.ID == id {
-				c = append(c, container)
+				c[i] = container
 				break
 			}
 		}
@@ -40,10 +40,10 @@ func GetAllContainersGrepIds(ids []string) ([]types.Container, error) {
 func GetRunningContainersGrepIds(ids []string) ([]types.Container, error) {
 	c := make([]types.Container, len(ids))
 	containers, err := GetRunningContainers()
-	for _, id := range ids {
+	for i, id := range ids {
 		for _, container := range containers {
 			if container.ID == id {
-				c = append(c, container)
+				c[i] = container
 				// 每匹配一个便跳出内循环
 				break
 			}

@@ -49,10 +49,8 @@ func GetContainerIdsByUser(user types.User) ([]string, error) {
 	}
 	log.Println("ccccc", len(containers), containers)
 	ids := make([]string, len(containers))
-	for _, container := range containers {
-		for i := range ids {
-			ids[i] = container.Container_ID
-		}
+	for i, container := range containers {
+		ids[i] = container.Container_ID
 	}
 	log.Println("cid:", len(ids), ids)
 	return ids, err

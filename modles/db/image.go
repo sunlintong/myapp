@@ -48,10 +48,8 @@ func GetImageIdsByUser(user types.User) ([]string, error) {
 		_, err = o.QueryTable(new(Image)).Filter("group__in", user.Name, "public").All(&images)
 	}
 	ids := make([]string, len(images))
-	for _, image := range images {
-		for i := range ids {
-			ids[i] = image.Image_ID
-		}
+	for i, image := range images {
+		ids[i] = image.Image_ID
 	}
 	log.Println("镜像ids:", len(ids), ids)
 	return ids, err

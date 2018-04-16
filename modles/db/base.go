@@ -32,3 +32,8 @@ func GetOrmer() orm.Ormer {
 	})
 	return globalOrm
 }
+
+// 每十五秒更新一次数据库,更新public image和container
+func UpdateDB() {
+	
+}

@@ -25,7 +25,7 @@ func GetImage(image_id string) (types.ImageSummary, error) {
 }
 
 // 由image_id数组获取images
-func GetImageByImageIds(ids []string) ([]types.ImageSummary, error) {
+func GetImagesByImageIds(ids []string) ([]types.ImageSummary, error) {
 	var err error
 	images := make([]types.ImageSummary, len(ids))
 	for _, id := range ids {
@@ -36,5 +36,6 @@ func GetImageByImageIds(ids []string) ([]types.ImageSummary, error) {
 		}
 		images = append(images, image)
 	}
+	log.Println("image:", len(images))
 	return images, err
 }

@@ -7,13 +7,14 @@ import (
 )
 
 type Image struct {
-	ID        int    `orm:"column(id);pk;auto"`
-	Group string `orm:"column(group)"` //所属用户名
-	Image_ID  string `orm:"column(image_id)"`
+	ID       int    `orm:"column(id);pk;auto"`
+	Group    string `orm:"column(group)"`
+	Image_ID string `orm:"column(image_id)"`
 }
 
 const PublicImageGroup = "public"
 
+// 初始化Image表
 func init() {
 	o := GetOrmer()
 	o.Raw("DROP TABLE `image`").Exec()
@@ -25,7 +26,7 @@ func init() {
 		i := new(Image)
 		i.Image_ID = image.ID
 		i.Group = PublicImageGroup
-	}	
+	}
 
 }
 
@@ -46,6 +47,7 @@ func GetImageIdsByUser(user types.User) ([]string, error) {
 		id := image.Image_ID
 		ids = append(ids, id)
 	}
+	log.Println("镜像ids:", len(ids), ids)
 	return ids, err
 }
 

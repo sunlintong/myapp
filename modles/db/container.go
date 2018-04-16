@@ -1,7 +1,6 @@
 package db
 
 import (
-	"fmt"
 	"log"
 	"myapp/modles/local"
 	"myapp/types"
@@ -48,11 +47,12 @@ func GetContainerIdsByUser(user types.User) ([]string, error) {
 	} else {
 		_, err = o.QueryTable(new(Container)).Filter("group__in", user.Name, "public").All(&containers)
 	}
-	fmt.Println("ccccc", len(containers), containers)
+	log.Println("ccccc", len(containers), containers)
 	ids := make([]string, len(containers))
 	for _, container := range containers {
-		id := container.Container_ID
-		ids = append(ids, id)
+		for i := range ids {
+			ids[i] = container.Container_ID
+		}
 	}
 	log.Println("cid:", len(ids), ids)
 	return ids, err

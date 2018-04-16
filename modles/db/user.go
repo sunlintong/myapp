@@ -1,7 +1,6 @@
 package db
 
 import (
-	"github.com/astaxie/beego/orm"
 )
 
 // 用户的数据库表
@@ -55,9 +54,6 @@ func GetUserByName(name string) ([]*User, error) {
 	o := GetOrmer()
 	qs := o.QueryTable(new(User))
 	_, err := qs.Filter("name", name).All(&users)
-	if err == orm.ErrNoRows {
-		return nil, nil
-	}
 	return users, err
 }
 
@@ -66,10 +62,6 @@ func GetAllUsers() ([]*User, error) {
 	var users []*User
 	o := GetOrmer()
 	_, err := o.QueryTable(new(User)).OrderBy("id").All(&users)
-	// 没有用户也不返回err
-	if err == orm.ErrNoRows {
-		return nil, nil
-	}
-	return users, nil
+	return users, err
 }
 

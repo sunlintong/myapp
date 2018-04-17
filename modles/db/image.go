@@ -65,6 +65,7 @@ func InsertImage(i *Image) error {
 
 // 同步数据库与本地image
 func SyncImages() {
+	log.Println("syncimage")
 	o := GetOrmer()
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {

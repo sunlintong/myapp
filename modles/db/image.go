@@ -101,7 +101,7 @@ func SyncImages() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			num, _ = o.Delete(&Image{Image_ID: id})
-			log.Printf("image 第 %d 行", num)
+			log.Printf("镜像 %s 不见了，删除数据库中image 第 %d 行", id, num)
 
 			Here: 
 			log.Println("外循环：", ii)

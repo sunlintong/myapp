@@ -71,7 +71,6 @@ func SyncContainers() {
 	o := GetOrmer()
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {
-		log.Println("同步容器。。。。。。。")
 		containers, err := local.GetAllContainers()
 		if err != nil {
 			log.Println(err)
@@ -94,7 +93,7 @@ func SyncContainers() {
 		}
 		ids, err := GetContainerIdsByUser(u)
 		log.Println(err)
-		for index, id := range ids {
+		for _, id := range ids {
 			var num int64
 			for _, c := range containers {
 				if c.ID == id {
@@ -103,9 +102,8 @@ func SyncContainers() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			num, _ = o.Delete(&Container{Container_ID: id})
-			log.Printf("删除container 第 %d 行", num)
+			log.Printf("container %s 不见了，删除数据库中container 第 %d 行", id, num)
 			Here: 
-			log.Println("外循环index：", index)
 		}
 	}
 }

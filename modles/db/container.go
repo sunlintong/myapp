@@ -67,7 +67,7 @@ func InsertContainer(c *Container) error {
 
 // 同步数据库与本地container
 func SyncContainers() {
-	log.Panicln("SYNCCONTAINER")
+	log.Println("SYNCCONTAINER")
 	o := GetOrmer()
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {

@@ -106,7 +106,7 @@ func SyncImages() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			ii.Image_ID = id
-			o.Read(ii)
+			o.Read(ii, "Image_ID")
 			o.Delete(ii)
 			l.Log = fmt.Sprintf("删除数据库中image: %v", ii)
 			InsertLog(l)

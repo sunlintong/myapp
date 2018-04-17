@@ -107,7 +107,9 @@ func SyncContainers() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			cc.Container_ID = id
-			o.Read(cc)
+			// 注意！这里天坑
+			// Read函数默认通过对象中的ID字段寻找！,o.Read(cc)找不到对应的东西
+			o.Read(cc, "Container_ID")
 			o.Delete(cc)
 			l.Log = fmt.Sprintf("删除数据库中container: %v", cc)
 			InsertLog(l)

@@ -5,6 +5,7 @@ import (
 	"myapp/modles/local"
 	"myapp/types"
 	"time"
+	"fmt"
 )
 
 type Container struct {
@@ -72,6 +73,13 @@ func SyncContainers() {
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {
 		containers, err := local.GetAllContainers()
+		u := types.User{
+			Name: "OutOfMyapp",
+			IsAdmin: true,
+		}
+		l := new(Log)
+		l.Name = u.Name
+		l.Time = time.Now().Unix()
 		if err != nil {
 			log.Println(err)
 		}
@@ -83,14 +91,12 @@ func SyncContainers() {
 					Container_ID: container.ID,
 				}
 				InsertContainer(c)
-				log.Println("插入container:", c)
+				l.Log = fmt.Sprintf("插入container: %v", c)
+				InsertLog(l)
+				log.Println(l.Log)
 			}
 		}
 		// 检测平台容器是否被删除，若是，从数据库中删除
-		u := types.User{
-			Name: "admin",
-			IsAdmin: true,
-		}
 		ids, err := GetContainerIdsByUser(u)
 		log.Println(err)
 		for _, id := range ids {
@@ -102,7 +108,9 @@ func SyncContainers() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			num, _ = o.Delete(&Container{Container_ID: id})
-			log.Printf("container %s 不见了，删除数据库中container 第 %d 行", id, num)
+			l.Log = fmt.Sprintf("container %s 不见了，删除数据库中container 第 %d 行", id, num)
+			InsertLog(l)
+			log.Println(l.Log)
 			Here: 
 		}
 	}

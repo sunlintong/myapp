@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"log"
 	"myapp/modles/local"
 	"myapp/types"
@@ -65,12 +66,17 @@ func InsertImage(i *Image) error {
 
 // 同步数据库与本地image
 func SyncImages() {
-	log.Println("syncimage")
 	o := GetOrmer()
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {
-		log.Println("同步镜像。。。。。。。")
 		images, err := local.GetImages()
+		u := types.User{
+			Name: "OutOfMyapp",
+			IsAdmin: true,
+		}
+		l := new(Log)
+		l.Name = u.Name
+		l.Time = time.Now().Unix()
 		if err != nil {
 			log.Println(err)
 		}
@@ -82,17 +88,15 @@ func SyncImages() {
 					Image_ID: image.ID,
 				}
 				InsertImage(i)
-				log.Println("插入新镜像:", i)
+				l.Log = fmt.Sprintf("插入新镜像: %v", i)
+				InsertLog(l)
+				log.Println(l.Log)
 			}
 		}
 		// 检测平台容器是否被删除，若是，从数据库中删除
-		u := types.User{
-			Name: "admin",
-			IsAdmin: true,
-		}
 		ids, err := GetImageIdsByUser(u)
 		log.Println(err)
-		for ii, id := range ids {
+		for _, id := range ids {
 			var num int64
 			for _, i := range images {
 				if i.ID == id {
@@ -101,10 +105,10 @@ func SyncImages() {
 			}
 			// 运行到这里，说明找到了待删除的id
 			num, _ = o.Delete(&Image{Image_ID: id})
-			log.Printf("镜像 %s 不见了，删除数据库中image 第 %d 行", id, num)
-
+			l.Log = fmt.Sprintf("镜像 %s 不见了，删除数据库中image 第 %d 行", id, num)
+			InsertLog(l)
+			log.Println(l.Log)
 			Here: 
-			log.Println("外循环：", ii)
 		}
 	}
 }

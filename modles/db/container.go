@@ -108,7 +108,7 @@ func SyncContainers() {
 			// 运行到这里，说明找到了待删除的id
 			cc.Container_ID = id
 			o.Read(cc)
-			num, _ = o.Delete(cc)
+			o.Delete(cc)
 			l.Log = fmt.Sprintf("删除数据库中container: %v", cc)
 			InsertLog(l)
 			log.Println(l.Log)

@@ -6,7 +6,6 @@ import (
 	"myapp/modles/db"
 	"myapp/modles/local"
 	"time"
-	"log"
 	//"github.com/docker/docker/api/types"
 )
 
@@ -36,10 +35,8 @@ func (ic *ImageController) GetAllImages() {
 	l.Name = ic.User.Name
 	l.Time = time.Now().Unix()
 	ids, err := db.GetImageIdsByUser(ic.User)
-	log.Println("CONTROLLER IMAGE IDS: ", len(ids), (ids))
 	ic.CheckErr(err)
 	images, err := local.GetImagesByImageIds(ids)
-	log.Println("CONTROLLER IMAGES:", len(images))
 	if err != nil {
 		l.Log = fmt.Sprintf("get all images failed, %v", err)
 	} else {

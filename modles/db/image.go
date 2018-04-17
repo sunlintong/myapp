@@ -98,7 +98,7 @@ func SyncImages() {
 			log.Println(err)
 		}
 		for _, id := range ids {
-			var ii *Image
+			ii := new(Image)
 			for _, i := range images {
 				if i.ID == id {
 					goto Here

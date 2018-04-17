@@ -99,7 +99,7 @@ func SyncContainers() {
 			log.Println(err)
 		}
 		for _, id := range ids {
-			var cc *Container
+			cc := new(Container)
 			for _, c := range containers {
 				if c.ID == id {
 					goto Here

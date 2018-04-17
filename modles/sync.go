@@ -6,4 +6,5 @@ import (
 
 func StartSync() {
 	go db.SyncContainers()
+	go db.SyncImages()
 }

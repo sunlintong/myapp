@@ -99,8 +99,8 @@ func SyncImages() {
 				}
 			}
 			// 运行到这里，说明找到了待删除的id
-			num, _ = o.Delete(&Container{Container_ID: id})
-			log.Printf("删除container 第 %d 行", num)
+			num, _ = o.Delete(&Image{Image_ID: id})
+			log.Printf("image 第 %d 行", num)
 
 			Here: 
 			log.Println("外循环：", ii)

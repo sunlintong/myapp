@@ -83,6 +83,7 @@ func SyncContainers() {
 					Container_ID: container.ID,
 				}
 				InsertContainer(c)
+				log.Println("插入container:", c)
 			}
 		}
 		// 检测平台容器是否被删除，若是，从数据库中删除
@@ -92,16 +93,18 @@ func SyncContainers() {
 		}
 		ids, err := GetContainerIdsByUser(u)
 		log.Println(err)
-		for _, id := range ids {
-			Here: 
+		for index, id := range ids {
+			var num int64
 			for _, c := range containers {
 				if c.ID == id {
 					goto Here
 				}
 			}
 			// 运行到这里，说明找到了待删除的id
-			num, _ := o.Delete(&Container{Container_ID: id})
+			num, _ = o.Delete(&Container{Container_ID: id})
 			log.Printf("删除container 第 %d 行", num)
+			Here: 
+			log.Println("外循环index：", index)
 		}
 	}
 }

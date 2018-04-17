@@ -176,11 +176,9 @@
         '<td>' + container[6] + '</td>' + '</tr>' +
         '<tr>' + 
         '<td>' + '<button onclick="handleStart(this)" data-start-cid=' + container[0] + ' class="am-badge am-badge-success am-dropdown-toggle" data-am-dropdown-toggle>' + "启动（start）" + '</button>' + '</td>' +
-        '<td>' + '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止（stop）" + '</button>' +
-        '<button onclick="handleKill(this)" data-kill-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制终止（kill）" + '</td>' +
-        '<td>' + '</button>' +
-        '<button onclick="handleRemove(this)" data-remove-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除（remove）" +
-        '</button>' + '</td>' +
+        '<td>' + '<button onclick="handleStop(this)" data-stop-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "停止（stop）" + '</button>' + '</td>'
+        '<td>' + '<button onclick="handleKill(this)" data-kill-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "强制终止（kill）" + '</button>' + '</td>' +
+        '<td>' + '<button onclick="handleRemove(this)" data-remove-cid=' + container[0] + ' class="am-badge am-badge-danger am-dropdown-toggle" data-am-dropdown-toggle>' + "删除（remove）" + '</button>' + '</td>' +
         '<td>' + '<input type="submit" onclick="handleCommit(this)" value="提交（生成镜像）" data-commit-cid=' + container[0] + '>' +
         '</td>' + '</tr>';
     })

@@ -39,11 +39,13 @@ func GetAllContainersGrepIds(ids []string) ([]types.Container, error) {
 
 func GetRunningContainersGrepIds(ids []string) ([]types.Container, error) {
 	containers, err := GetRunningContainers()
-	c := make([]types.Container, len(containers))
-	for i, cc := range containers {
+	// 长度为containers与ids的交集，小于等于其中任一个
+	// 长度不定，初始为0，逐个append
+	c := make([]types.Container, 0, len(ids))
+	for _, cc := range containers {
 		for _, id := range ids {
 			if cc.ID == id {
-				c[i] = cc
+				c = append(c, cc)
 				// 每匹配一个便跳出内循环
 				break
 			}

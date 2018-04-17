@@ -95,7 +95,9 @@ func SyncContainers() {
 		}
 		// 检测平台容器是否被删除，若是，从数据库中删除
 		ids, err := GetContainerIdsByUser(u)
-		log.Println(err)
+		if err != nil {
+			log.Println(err)
+		}
 		for _, id := range ids {
 			var num int64
 			for _, c := range containers {

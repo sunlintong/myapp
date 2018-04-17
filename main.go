@@ -9,6 +9,6 @@ import (
 
 
 func main() {
-	beego.Run()
 	modles.StartSync()
+	beego.Run()
 }

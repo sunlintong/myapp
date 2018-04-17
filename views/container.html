@@ -188,6 +188,7 @@
   })
 
   function handleStop(stop) {
+    cid = stop.getAttribute("data-stop-cid")
     $.ajax({
       type: "POST",
       dataType: "json",

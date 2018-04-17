@@ -87,7 +87,7 @@ func SyncImages() {
 					Image_ID: image.ID,
 				}
 				InsertImage(i)
-				l.Log = fmt.Sprintf("插入新镜像: %v", i)
+				l.Log = fmt.Sprintf("insert new image to database:  %v", i)
 				InsertLog(l)
 				log.Println(l.Log)
 			}
@@ -108,7 +108,7 @@ func SyncImages() {
 			ii.Image_ID = id
 			o.Read(ii, "Image_ID")
 			o.Delete(ii)
-			l.Log = fmt.Sprintf("删除数据库中image: %v", ii)
+			l.Log = fmt.Sprintf("remove image in database:  %v", ii)
 			InsertLog(l)
 			log.Println(l.Log)
 			Here: 

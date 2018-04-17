@@ -88,7 +88,7 @@ func SyncContainers() {
 					Container_ID: container.ID,
 				}
 				InsertContainer(c)
-				l.Log = fmt.Sprintf("插入container: %v", c)
+				l.Log = fmt.Sprintf("insert container to database: %v", c)
 				InsertLog(l)
 				log.Println(l.Log)
 			}
@@ -111,7 +111,7 @@ func SyncContainers() {
 			// Read函数默认通过对象中的ID字段寻找！,o.Read(cc)找不到对应的东西
 			o.Read(cc, "Container_ID")
 			o.Delete(cc)
-			l.Log = fmt.Sprintf("删除数据库中container: %v", cc)
+			l.Log = fmt.Sprintf("remove container in database: %v", cc)
 			InsertLog(l)
 			log.Println(l.Log)
 			Here: 

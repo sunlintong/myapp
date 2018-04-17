@@ -51,12 +51,10 @@ func GetContainerIdsByUser(user types.User) ([]string, error) {
 	} else {
 		_, err = o.QueryTable(new(Container)).Filter("group__in", user.Name, "public").All(&containers)
 	}
-	log.Println("ccccc", len(containers), containers)
 	ids := make([]string, len(containers))
 	for i, container := range containers {
 		ids[i] = container.Container_ID
 	}
-	log.Println("cid:", len(ids), ids)
 	return ids, err
 }
 
@@ -68,7 +66,6 @@ func InsertContainer(c *Container) error {
 
 // 同步数据库与本地container
 func SyncContainers() {
-	log.Println("SYNCCONTAINER")
 	o := GetOrmer()
 	ticker := time.NewTicker(5 * time.Second)
 	for range ticker.C {

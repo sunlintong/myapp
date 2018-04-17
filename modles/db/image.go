@@ -53,7 +53,6 @@ func GetImageIdsByUser(user types.User) ([]string, error) {
 	for i, image := range images {
 		ids[i] = image.Image_ID
 	}
-	log.Println("镜像ids:", len(ids), ids)
 	return ids, err
 }
 

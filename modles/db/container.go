@@ -99,15 +99,17 @@ func SyncContainers() {
 			log.Println(err)
 		}
 		for _, id := range ids {
-			var num int64
+			var cc *Container
 			for _, c := range containers {
 				if c.ID == id {
 					goto Here
 				}
 			}
 			// 运行到这里，说明找到了待删除的id
-			num, _ = o.Delete(&Container{Container_ID: id})
-			l.Log = fmt.Sprintf("container %s 不见了，删除数据库中container 第 %d 行", id, num)
+			cc.Container_ID = id
+			o.Read(cc)
+			num, _ = o.Delete(cc)
+			l.Log = fmt.Sprintf("删除数据库中container: %v", cc)
 			InsertLog(l)
 			log.Println(l.Log)
 			Here: 

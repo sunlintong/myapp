@@ -98,15 +98,17 @@ func SyncImages() {
 			log.Println(err)
 		}
 		for _, id := range ids {
-			var num int64
+			var ii *Image
 			for _, i := range images {
 				if i.ID == id {
 					goto Here
 				}
 			}
 			// 运行到这里，说明找到了待删除的id
-			num, _ = o.Delete(&Image{Image_ID: id})
-			l.Log = fmt.Sprintf("镜像 %s 不见了，删除数据库中image 第 %d 行", id, num)
+			ii.Image_ID = id
+			o.Read(ii)
+			o.Delete(ii)
+			l.Log = fmt.Sprintf("删除数据库中image: %v", ii)
 			InsertLog(l)
 			log.Println(l.Log)
 			Here: 

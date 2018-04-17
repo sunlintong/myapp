@@ -38,8 +38,8 @@ func GetAllContainersGrepIds(ids []string) ([]types.Container, error) {
 }
 
 func GetRunningContainersGrepIds(ids []string) ([]types.Container, error) {
-	c := make([]types.Container, len(ids))
 	containers, err := GetRunningContainers()
+	c := make([]types.Container, len(containers))
 	for i, id := range ids {
 		for _, container := range containers {
 			if container.ID == id {

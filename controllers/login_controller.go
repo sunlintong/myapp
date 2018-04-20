@@ -38,7 +38,6 @@ func (lc *LoginController) Post() {
 		err := db.InsertLog(l)
 		lc.CheckErr(err)
 		lc.BadRequest(l)
-		lc.Redirect("/register", 302)
 		return
 	}
 	dbuser := dbusers[0]

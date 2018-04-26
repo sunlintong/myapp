@@ -12,7 +12,7 @@ import (
 const (
 	stopEvent   = "stop"   // 停止容器
 	startEvent  = "start"  // 启动容器
-	killEvent   = "kill"   //强制终止容器
+	killEvent   = "kill"   // 强制终止容器
 	removeEvent = "remove" // 删除容器
 	runEvent    = "run"    // 运行一个新的容器
 )

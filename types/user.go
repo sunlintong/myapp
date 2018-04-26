@@ -2,6 +2,6 @@ package types
 
 // User 存至session及BaseController
 type User struct {
-	Name string
+	Name    string
 	IsAdmin bool
 }

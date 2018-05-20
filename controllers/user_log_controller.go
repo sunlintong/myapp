@@ -22,7 +22,7 @@ func (ulc *UserLogController) GetUserLog() {
 	var logs []*db.Log
 	l := new(db.Log)
 	l.Time = time.Now().Unix()
-	l.Name = "admin"
+	l.Name = ulc.User.Name
 	// 获取请求用户名，若没有，则设为""
 	name := ulc.GetSession("user_name")
 	log.Println("user_name:", name)
@@ -64,8 +64,6 @@ func (ulc *UserLogController) GetUserLog() {
 		data[2] = "---" + log.Log
 		ret = append(ret, data)
 	}
-	l.Log = "get log succeed"
-	db.InsertLog(l)
 	ulc.Success(ret)
 }
 

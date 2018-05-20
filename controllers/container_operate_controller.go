@@ -31,15 +31,16 @@ func (cc *ContainerController) GetAllContainers() {
 	ids, err := db.GetContainerIdsByUser(cc.User)
 	cc.CheckErr(err)
 	containers, err := local.GetAllContainersGrepIds(ids)
-	l := new(db.Log)
-	l.Name = cc.User.Name
-	l.Time = time.Now().Unix()
+
 	if err != nil {
+		l := new(db.Log)
+		l.Name = cc.User.Name
+		l.Time = time.Now().Unix()
 		l.Log = fmt.Sprint("get all containers failed, %v", err)
-	} else {
-		l.Log = "get all containers succeed"
-	}
-	_ = db.InsertLog(l)
+		db.InsertLog(l)
+		cc.BadRequest(l)
+		return
+	} 
 
 	var ret [][7]string
 	for _, container := range containers {

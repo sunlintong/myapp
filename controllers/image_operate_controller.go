@@ -28,18 +28,18 @@ type ImageController struct {
 
 
 func (ic *ImageController) GetAllImages() {
-	l := new(db.Log)
-	l.Name = ic.User.Name
-	l.Time = time.Now().Unix()
 	ids, err := db.GetImageIdsByUser(ic.User)
 	ic.CheckErr(err)
 	images, err := local.GetImagesByImageIds(ids)
 	if err != nil {
+		l := new(db.Log)
+		l.Name = ic.User.Name
+		l.Time = time.Now().Unix()
 		l.Log = fmt.Sprintf("get all images failed, %v", err)
-	} else {
-		l.Log = "get all images succeed"
+		db.InsertLog(l)
+		ic.BadRequest(l)
+		return
 	}
-	_ = db.InsertLog(l)
 
 	var ret [][4]string
 	for _, image := range images {

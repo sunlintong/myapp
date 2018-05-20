@@ -96,8 +96,11 @@ function register() {
       }),
       success: function (data) {
         console.log(data)
-        confirm("注册成功，跳转至登录？")
-        self.location = "/login"
+        if (confirm("注册成功，跳转至登录？")) {
+          self.location = "/login"
+        } else {
+          location.reload()
+        }
       },
       error: function (data) {
         console.log(data)
